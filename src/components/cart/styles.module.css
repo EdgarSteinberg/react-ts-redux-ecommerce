@@ -1,0 +1,9 @@
+
+.img{
+    width: 100px;
+}
+
+.cardContainer{
+    display: flex;
+    align-items: center;
+}
