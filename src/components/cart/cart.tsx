@@ -37,19 +37,28 @@ const Cart = () => {
             );
             const data = await response.json();
             console.log(data.payload);
+            fetchCart()
         } catch (error) {
             console.error(error);
         }
     };
 
+    const fetchCart = async () => {
+        try {
+            const response = await fetch(
+                `http://localhost:8080/api/carts/${cid}`
+            );
+            const data: ApiResponse<MongoCart> = await response.json();
+            setCart(data.payload);
+            console.table(data.payload);
+        } catch (error) {
+            console.error(error);
+        }
+    };
     useEffect(() => {
-        fetch(`http://localhost:8080/api/carts/${cid}`)
-            .then(res => res.json())
-            .then((data: ApiResponse<MongoCart>) => {
-                setCart(data.payload);
-                console.table(data.payload);
-            });
+        fetchCart()
     }, [cid]);
+
 
     return (
         <>
@@ -63,6 +72,9 @@ const Cart = () => {
                             <Card.Img variant="top" src={item.product.mainImage?.[0]} alt={item.product.title} className={styles.img} />
                             <Card.Title>{item.product.shortDescription}</Card.Title>
                             <Card.Text>Cantidad: {item.quantity}</Card.Text>
+                            <Card.Text>Precio unitario: {item.product.price}</Card.Text>
+                            <Card.Text>Total: {item.quantity * item.product.price}</Card.Text>
+
                             <FaRegTrashAlt
 
                                 onClick={() => deleteProduct(item.product._id)}

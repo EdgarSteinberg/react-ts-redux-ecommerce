@@ -6,7 +6,8 @@ import Counter from "../counter/counter";
 import { addItems } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { useCounter } from "../../hooks/useCounter";
- 
+import { useNavigate } from "react-router-dom";
+
 
 interface ProductItemProps {
     product: Product;
@@ -14,6 +15,7 @@ interface ProductItemProps {
 
 const ProductItem = ({ product }: ProductItemProps) => {
     const dispatch = useDispatch();
+    const navigate = useNavigate();
 
     const { count, increment, decrement } = useCounter(1, product.stock);
 
@@ -21,6 +23,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
     const handleAddToCart = async () => {
         dispatch(addItems({ product, quantity: count }));
         await addProductInCart(cartId, product._id, count);
+        alert("Producto agregado al carrito");
+        navigate("/cart");  
     };
 
 
@@ -41,7 +45,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
             const data = await response.json();
             console.log("Producto agregado al carrito:", data.payload);
-            alert(`Producto Agregado al carrito`);
+
         } catch (error) {
             console.error(error);
         }
@@ -83,7 +87,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                             decrement={decrement}
                         />
 
-                        <Button variant="success" onClick={handleAddToCart}>comprar</Button>
+                        <Button variant="success" onClick={handleAddToCart} >comprar</Button>
                     </Card.Body>
                 </div>
             </Card>
