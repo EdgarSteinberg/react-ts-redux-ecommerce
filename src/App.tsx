@@ -14,6 +14,8 @@ import NotFound from './components/notFound/notFound';
 import NavBar from './components/navBar/navBar';
 import ProductItemContainer from './components/productDetailContainer/productDetailContainer';
 import Cart from './components/cart/cart';
+import CreateProduct from './admin/products/createProduct';
+import GetProducts from './admin/products/getProducts';
 
 
 function App() {
@@ -26,11 +28,16 @@ function App() {
         <BrowserRouter>
           <NavBar />
           <Routes>
+            {/* rutas públicas */}
             <Route path='/' element={<ProductsListContainer />} />
             <Route path='categories/:category' element={<ProductsListContainer />} />
             <Route path='/products/:pid' element={<ProductItemContainer />} />
-            <Route path='/cart' element={<Cart/>}/>
+            <Route path='/cart' element={<Cart />} />
             <Route path='*' element={<NotFound />} />
+
+            {/* rutas admin */}
+            <Route path='/admin/products' element={<GetProducts/>} />
+            <Route path='/admin/products/create' element={<CreateProduct />} />
           </Routes>
 
         </BrowserRouter>
