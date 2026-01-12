@@ -1,22 +1,18 @@
 import { Form, FormGroup, FormControl, FormLabel, Button, Alert, Spinner } from "react-bootstrap";
+import type { ProductFormData } from "../../hooks/useProductForm";
 
-import type { Product } from "../../types/products";
 
-type CreateProductData = Omit<Product, "_id" | "mainImage"> & {
-    mainImage: File[];
-};
-
-type CreateProductFormProps = {
-    data: CreateProductData;
+type ProductFormDataProps = {
+    data: ProductFormData;
+    setData: React.Dispatch<React.SetStateAction<ProductFormData>>;
     loading: boolean;
     message: { type: "success" | "error"; text: string } | null;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    handleTagsChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
     handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const CreateProductForm = ({ data, loading, message, handleOnChange, handleTagsChange, handleImageChange, handleOnSubmit }: CreateProductFormProps) => {
+const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange, handleOnSubmit, setData }: ProductFormDataProps) => {
     return (
         <Form onSubmit={handleOnSubmit}>
             {message && (
@@ -93,11 +89,29 @@ const CreateProductForm = ({ data, loading, message, handleOnChange, handleTagsC
                     onChange={handleOnChange} />
             </FormGroup>
 
+            {/* <FormGroup>
+                <FormLabel>Tags</FormLabel>
+                <FormControl
+                    name="tags"
+                    value={data.tags}
+                    onChange={handleOnChange}
+                    placeholder="ropa, verano, oferta"
+                />
+            </FormGroup> */}
+
             <FormGroup>
                 <FormLabel>Tags</FormLabel>
                 <FormControl
-                    value={data.tags}
-                    onChange={handleTagsChange}
+                    value={data.tags.join(", ")} // muestra como string separado por comas
+                    onChange={e =>
+                        setData(prev => ({
+                            ...prev,
+                            tags: e.target.value
+                                .split(",")
+                                .map(t => t.trim())
+                                .filter(Boolean)
+                        }))
+                    }
                     placeholder="ropa, verano, oferta"
                 />
             </FormGroup>
@@ -117,4 +131,4 @@ const CreateProductForm = ({ data, loading, message, handleOnChange, handleTagsC
     );
 };
 
-export default CreateProductForm;
+export default ProductForm;

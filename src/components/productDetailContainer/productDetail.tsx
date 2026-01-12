@@ -24,7 +24,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
         dispatch(addItems({ product, quantity: count }));
         await addProductInCart(cartId, product._id, count);
         alert("Producto agregado al carrito");
-        navigate("/cart");  
+        navigate("/cart");
     };
 
 
@@ -51,8 +51,14 @@ const ProductItem = ({ product }: ProductItemProps) => {
         }
     };
 
+    // Devuelve la URL correcta de la imagen (externa o local)
+    const getImageSrc = (image?: string) => {
+        if (!image) return undefined;
 
-
+        return image.startsWith("http")
+            ? image
+            : `http://localhost:8080/img/${image}`;
+    };
 
 
     return (
@@ -60,7 +66,12 @@ const ProductItem = ({ product }: ProductItemProps) => {
             <Card style={{ display: 'flex', flexDirection: 'row', width: '80%' }}>
                 <div style={{ flex: 1 }}>
 
-                    <Card.Img variant="top" src={product.mainImage?.[0]} alt={product.title} />
+                    {/* <Card.Img variant="top" src={product.mainImage?.[0]} alt={product.title} /> */}
+                    <Card.Img
+                        variant="top"
+                        src={getImageSrc(product.mainImage?.[0])}
+                        alt={product.title}
+                    />
                 </div>
                 <div style={{ flex: 1 }}>
 

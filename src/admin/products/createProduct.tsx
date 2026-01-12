@@ -1,52 +1,12 @@
-import { useState } from "react";
-import type { Product } from "../../types/products";
-import CreateProductForm from "./createProductForm";
+
+import ProductForm from "./productForm";
 import Loading from "../../components/loading/loading";
 import { createProduct } from "../service/product_service";
+import { useProductForm } from "../../hooks/useProductForm";
 
-// Usa Product como base, pero adapta mainImage a File[] porque en el formulario aún no son URLs ademas omite _id y mainImage
-type CreateProductData = Omit<Product, "_id" | "mainImage"> & {
-  mainImage: File[];
-};
 
 const CreateProduct = () => {
-  const [data, setData] = useState<CreateProductData>({
-    title: "", shortDescription: "", longDescription: "", price: 0, stock: 0, brand: "", category: "", discount: 0, tags: [], mainImage: []
-  });
-
-  type Message = { type: "success" | "error"; text: string; };
-
-  const [message, setMessage] = useState<Message | null>(null);
-  const [loading, setLoading] = useState(false);
-
-
-  // Inputs texto y números
-  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value, type } = e.target;
-    setData(prev => ({
-      ...prev,
-      [name]: type === "number" ? Number(value) : value
-    }));
-  };
-
-  // Tags separados por coma
-  const handleTagsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setData(prev => ({
-      ...prev,
-      tags: e.target.value.split(",").map(t => t.trim())
-    }));
-  };
-
-  // Imágenes
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const files = e.target.files;
-    if (!files) return;
-
-    setData(prev => ({
-      ...prev,
-      mainImage: Array.from(files)
-    }));
-  };
+  const { data, setData, loading, setLoading, message, setMessage, handleOnChange, handleImageChange } = useProductForm();
 
 
   // Submit
@@ -67,7 +27,11 @@ const CreateProduct = () => {
     formData.append("brand", data.brand);
     formData.append("category", data.category);
     formData.append("discount", String(data.discount));
-    formData.append("tags", JSON.stringify(data.tags));
+
+    // data.tags ya es un string[]
+    data.tags.forEach(tag => {
+      formData.append("tags", tag); // agrega cada tag como un campo separado
+    });
 
     data.mainImage.forEach(file => {
       formData.append("mainImage", file);
@@ -88,6 +52,7 @@ const CreateProduct = () => {
     } catch (error) {
       console.error(error);
       setMessage({ type: "error", text: "Error al crear el producto" });
+
     } finally {
       setLoading(false);
     }
@@ -97,12 +62,12 @@ const CreateProduct = () => {
 
   return (
 
-    <CreateProductForm
+    <ProductForm
       loading={loading}
       message={message}
       data={data}
+      setData={setData}
       handleOnChange={handleOnChange}
-      handleTagsChange={handleTagsChange}
       handleImageChange={handleImageChange}
       handleOnSubmit={handleOnSubmit}
     />

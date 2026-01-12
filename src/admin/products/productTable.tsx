@@ -1,42 +1,35 @@
-import { useEffect, useState } from "react"
-import type { Product } from "../../types/products"
 import Table from 'react-bootstrap/Table';
-import { Button } from "react-bootstrap";
-import { getProducts } from "../service/product_service";
-import Loading from "../../components/loading/loading";
-
-const GetProducts = () => {
-    const [products, setProducts] = useState<Product[]>([])
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState<string | null>(null);
+import { Button, Alert } from "react-bootstrap";
+import type { Product } from '../../types/products';
+import { Link } from 'react-router-dom';
 
 
-    useEffect(() => {
-        
-        const loadProducts = async () => {
-            try {
-                setLoading(true);
-                const data = await getProducts();
-                setProducts(data);
-            } catch (err) {
-                console.error(err);
-                setError("No se pudieron cargar los productos");
-            } finally {
-                setLoading(false);
-            }
-        };
+type Message = {
+    type: "success" | "error";
+    text: string;
+};
 
-        loadProducts();
-    }, []);
 
-    if (loading) return <Loading />
-    if (error) return <p>{error}</p>;
+interface ProductTableProps {
+    products: Product[];
+    message: Message | null;
+    handleDelete: (id: string) => void;
+}
+
+const ProductTable = ({ message, products, handleDelete }: ProductTableProps) => {
+
 
     return (
         <>
+            {message && (
+                <Alert variant={message.type === "success" ? "success" : "danger"}>
+                    {message.text}
+                </Alert>
+            )}
             {
                 products.length > 0 ? (
                     <Table striped bordered hover>
+
                         <thead>
                             <tr>
                                 <th>#</th>
@@ -57,8 +50,13 @@ const GetProducts = () => {
                                     <td>{pr.stock}</td>
                                     <td>{pr.category}</td>
                                     <td>
-                                        <Button variant="danger">Eliminar</Button>
-                                        <Button variant="secondary">Editar</Button>
+                                        <Button variant="danger" onClick={() => { handleDelete(pr._id) }}>Eliminar</Button>
+                                        {/* <Button variant="secondary" as={Link} to={`/admin/products/${pr._id}/edit`}>Editar</Button> */}
+                                        <Link to={`/admin/products/${pr._id}/edit`}>
+                                            <Button variant="secondary">
+                                                Editar
+                                            </Button>
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}
@@ -73,4 +71,4 @@ const GetProducts = () => {
     )
 }
 
-export default GetProducts;
+export default ProductTable;

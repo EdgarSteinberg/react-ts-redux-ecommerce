@@ -15,8 +15,8 @@ import NavBar from './components/navBar/navBar';
 import ProductItemContainer from './components/productDetailContainer/productDetailContainer';
 import Cart from './components/cart/cart';
 import CreateProduct from './admin/products/createProduct';
-import GetProducts from './admin/products/getProducts';
-
+import ProductList from './admin/products/productList';
+import EditProduct from './admin/products/editProduct';
 
 function App() {
 
@@ -36,8 +36,9 @@ function App() {
             <Route path='*' element={<NotFound />} />
 
             {/* rutas admin */}
-            <Route path='/admin/products' element={<GetProducts/>} />
-            <Route path='/admin/products/create' element={<CreateProduct />} />
+            <Route path='/admin/products' element={<ProductList />} />
+            <Route path='/admin/products/new' element={<CreateProduct />} />
+            <Route path="/admin/products/:pid/edit" element={<EditProduct />} />
           </Routes>
 
         </BrowserRouter>
