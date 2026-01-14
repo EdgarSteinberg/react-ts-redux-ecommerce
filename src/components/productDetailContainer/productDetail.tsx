@@ -19,7 +19,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     const { count, increment, decrement } = useCounter(1, product.stock);
 
-    const cartId = `687e6bb659f847c04bfaee64`;
+    const cartId = `69614fb4e1257780b08c2e6d`;
     const handleAddToCart = async () => {
         dispatch(addItems({ product, quantity: count }));
         await addProductInCart(cartId, product._id, count);

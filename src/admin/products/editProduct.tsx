@@ -109,6 +109,7 @@ const EditProduct = () => {
             handleOnChange={handleOnChange}
             handleImageChange={handleImageChange}
             handleOnSubmit={handleOnSubmit}
+            setData={setData}
         />
     );
 };

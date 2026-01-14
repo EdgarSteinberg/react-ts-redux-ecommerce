@@ -22,7 +22,7 @@ const Cart = () => {
     // 🔧 ACÁ estaba el error principal
     const [cart, setCart] = useState<MongoCart | null>(null);
 
-    const cid = "687e6bb659f847c04bfaee64";
+    const cid = "69614fb4e1257780b08c2e6d";
 
     const deleteProduct = async (id: string) => {
         dispatch(removeItem(id));
@@ -76,18 +76,19 @@ const Cart = () => {
                             <Card.Text>Total: {item.quantity * item.product.price}</Card.Text>
 
                             <FaRegTrashAlt
-
+                                color="red"
+                                size={18}
+                                style={{ cursor: "pointer" }}
                                 onClick={() => deleteProduct(item.product._id)}
-                            >
-                                Eliminar
-                            </FaRegTrashAlt>
+                            />
+                            
 
-                        </Card.Body>
-                    </Card>
+                    </Card.Body>
+                </Card>
                 </div >
             ))}
 
-            <p>${total}</p>
+<p>${total}</p>
         </>
     );
 };

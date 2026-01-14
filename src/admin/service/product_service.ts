@@ -37,7 +37,7 @@ export const createProduct = async (formData: FormData) => {
 };
 
 
-export const updateProduct = async (pid: string, formData: FormData) => {
+/* export const updateProduct = async (pid: string, formData: FormData) => {
   const response = await fetch(`${API_URL}/${pid}`, {
     method: "PUT",
     body: formData
@@ -50,6 +50,21 @@ export const updateProduct = async (pid: string, formData: FormData) => {
 
   return response.json();
 };
+ */
+export const updateProduct = async (pid: string, formData: FormData) => {
+  const response = await fetch(`${API_URL}/${pid}`, {
+    method: "PUT",
+    body: formData
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json().catch(() => null);
+    throw new Error(errorData?.message || "Error al actualizar el producto");
+  }
+
+  return response.json();
+};
+
 
 
 export const getProductById = async (pid: string) => {

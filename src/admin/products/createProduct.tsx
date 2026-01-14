@@ -27,11 +27,7 @@ const CreateProduct = () => {
     formData.append("brand", data.brand);
     formData.append("category", data.category);
     formData.append("discount", String(data.discount));
-
-    // data.tags ya es un string[]
-    data.tags.forEach(tag => {
-      formData.append("tags", tag); // agrega cada tag como un campo separado
-    });
+    formData.append("tags", JSON.stringify(data.tags));
 
     data.mainImage.forEach(file => {
       formData.append("mainImage", file);

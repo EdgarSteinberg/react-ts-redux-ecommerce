@@ -98,24 +98,21 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
                     placeholder="ropa, verano, oferta"
                 />
             </FormGroup> */}
+            <FormControl
+                value={data.tags.join(", ")}
+                onChange={(e) => {
+                    const tags = e.target.value
+                        .split(",")
+                        .map(t => t.trim())
+                        .filter(Boolean);
 
-            <FormGroup>
-                <FormLabel>Tags</FormLabel>
-                <FormControl
-                    value={data.tags.join(", ")} // muestra como string separado por comas
-                    onChange={e =>
-                        setData(prev => ({
-                            ...prev,
-                            tags: e.target.value
-                                .split(",")
-                                .map(t => t.trim())
-                                .filter(Boolean)
-                        }))
-                    }
-                    placeholder="ropa, verano, oferta"
-                />
-            </FormGroup>
-
+                    setData(prev => ({
+                        ...prev,
+                        tags
+                    }));
+                }}
+                placeholder="ropa, verano, oferta"
+            />
             <FormGroup>
                 <FormLabel>Imágenes</FormLabel>
                 <FormControl
