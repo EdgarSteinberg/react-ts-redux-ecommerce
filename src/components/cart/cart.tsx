@@ -1,25 +1,21 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import type { RootState, AppDispatch } from "../../store";
-
-
-import Card from "react-bootstrap/Card";
-import { FaRegTrashAlt } from "react-icons/fa";
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 import type { ApiResponse } from "../../types/products";
 import type { MongoCart } from "../../types/cart/mongoCart";
 
 import { removeItem } from "../../features/cart/cartSlice";
+import CartItemCart from "./cartItemCard";
+
+
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
 
-    const total = useSelector(
-        (state: RootState) => state.cartReducer.total
-    );
-
-    // 🔧 ACÁ estaba el error principal
+    /*  const total = useSelector((state: RootState) => state.cartReducer.total);
+     console.log(total) */
     const [cart, setCart] = useState<MongoCart | null>(null);
 
     const cid = "69614fb4e1257780b08c2e6d";
@@ -55,40 +51,21 @@ const Cart = () => {
             console.error(error);
         }
     };
+
     useEffect(() => {
         fetchCart()
     }, [cid]);
 
+    //👉 El precio no está en el item, está dentro de product.
+    const total = cart?.products.reduce((acc, item) => acc + item.quantity * item.product.price, 0) ?? 0;
 
     return (
         <>
-            <h1>Carrito</h1>
+            <h1 className={styles.cardTitle}>Carrito 🛒</h1>
 
-            {cart?.products.map(item => (
-                <div key={item.product._id}>
-                    <Card>
-                        <Card.Header>{item.product.title}</Card.Header>
-                        <Card.Body className={styles.cardContainer}>
-                            <Card.Img variant="top" src={item.product.mainImage?.[0]} alt={item.product.title} className={styles.img} />
-                            <Card.Title>{item.product.shortDescription}</Card.Title>
-                            <Card.Text>Cantidad: {item.quantity}</Card.Text>
-                            <Card.Text>Precio unitario: {item.product.price}</Card.Text>
-                            <Card.Text>Total: {item.quantity * item.product.price}</Card.Text>
+            <CartItemCart cart={cart} deleteProduct={deleteProduct} />
 
-                            <FaRegTrashAlt
-                                color="red"
-                                size={18}
-                                style={{ cursor: "pointer" }}
-                                onClick={() => deleteProduct(item.product._id)}
-                            />
-                            
-
-                    </Card.Body>
-                </Card>
-                </div >
-            ))}
-
-<p>${total}</p>
+            <h2 className={styles.cardTitle}>Total de la compra: ${total}</h2>
         </>
     );
 };

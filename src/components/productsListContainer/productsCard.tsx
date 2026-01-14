@@ -2,7 +2,7 @@ import type { Product } from "../../types/products";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
-
+import styles from './styles.module.css'
 
 interface ProductsCardProps {
     product: Product;
@@ -19,17 +19,18 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
     };
 
     return (
-        <>
-            <Card style={{ width: '18rem' }}>
+        <div className={styles.itemContainer}>
+            <Card style={{ width: '18rem', display: 'flex', alignItems: 'center' }}>
                 {/*  <Card.Img variant="top" src={product.mainImage?.[0]} alt={product.title} /> */}
                 <Card.Img
                     variant="top"
                     src={getImageSrc(product.mainImage?.[0])}
                     alt={product.title}
+                    className={styles.imgContainer}
                 />
                 <Card.Body>
-                    <Card.Title>{product.title}</Card.Title>
-                    <Card.Text>
+                    <Card.Title className={styles.description}>{product.title}</Card.Title>
+                    <Card.Text className={styles.description}>
                         {product.shortDescription}
                     </Card.Text>
                     <Link to={`/products/${product._id}`}>
@@ -40,7 +41,7 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
                 </Card.Body>
             </Card>
 
-        </>
+        </div>
     )
 }
 

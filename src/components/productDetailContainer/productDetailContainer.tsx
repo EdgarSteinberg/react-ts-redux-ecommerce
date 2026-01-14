@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import Loading from "../loading/loading";
 import ProductDetail from "./productDetail";
 
+
 const ProductItemContainer = () => {
     const { pid } = useParams<{ pid: string }>();
 

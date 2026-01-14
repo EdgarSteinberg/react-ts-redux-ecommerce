@@ -2,6 +2,7 @@ import type { Product } from "../../types/products";
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import Counter from "../counter/counter";
+import styles from './styles.module.css'
 
 import { addItems } from "../../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
@@ -28,11 +29,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
     };
 
 
-    const addProductInCart = async (
-        cid: string,
-        pid: string,
-        quantity: number
-    ) => {
+    const addProductInCart = async (cid: string, pid: string, quantity: number) => {
         try {
             const response = await fetch(
                 `http://localhost:8080/api/carts/${cid}/product/${pid}`,
@@ -62,19 +59,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
 
     return (
-        <>
+        <div className={styles.divContainer}>
             <Card style={{ display: 'flex', flexDirection: 'row', width: '80%' }}>
                 <div style={{ flex: 1 }}>
-
-                    {/* <Card.Img variant="top" src={product.mainImage?.[0]} alt={product.title} /> */}
-                    <Card.Img
-                        variant="top"
-                        src={getImageSrc(product.mainImage?.[0])}
-                        alt={product.title}
-                    />
+                    <Card.Img variant="top" src={getImageSrc(product.mainImage?.[0])} alt={product.title} className={styles.imgContainer} />
                 </div>
-                <div style={{ flex: 1 }}>
 
+                <div style={{ flex: 1 }}>
                     <Card.Body>
                         <Card.Title>{product.title}</Card.Title>
                         <Card.Subtitle >{product.longDescription} </Card.Subtitle >
@@ -92,7 +83,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                             ))}
                         </Card.Text>
 
-                        <Counter
+                        <Counter // componentes contador
                             count={count}
                             increment={increment}
                             decrement={decrement}
@@ -102,7 +93,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                     </Card.Body>
                 </div>
             </Card>
-        </>
+        </div>
     );
 };
 

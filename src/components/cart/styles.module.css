@@ -5,5 +5,21 @@
 
 .cardContainer{
     display: flex;
-    align-items: center;
+     align-items: center;
+     justify-content: space-between;
+}
+
+.cardTitle{
+    text-align: center;
+    margin-top: 10px;
+}
+
+.cardText{
+    margin-top: 0;
+}
+
+.ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

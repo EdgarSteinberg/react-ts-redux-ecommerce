@@ -12,7 +12,7 @@ const CartWidget = () => {
         (acc, item) => acc + item.quantity, 0);
 
     return (
-        <Link to="/cart" style={{ position: "relative" }}>
+        <Link to="/cart" style={{ position: "relative", display: 'flex', alignItems: 'center' }}>
             <TiShoppingCart size={24} />
             {totalQuantity > 0 && (
                 <span

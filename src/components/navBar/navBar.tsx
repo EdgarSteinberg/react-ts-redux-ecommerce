@@ -9,29 +9,20 @@ const NavBar = () => {
     const arrayCategories = [  "coleccionables","comics", "consolas","eventos","gadgets","hardware","portátiles", "ropa-y-accesorios" ]
 
     return (
-        <>
-            <Navbar bg="dark" data-bs-theme="dark">
+        <div >
+            <Navbar bg="dark" data-bs-theme="dark" style={{display:'flex', flexWrap: 'wrap'}}>
                 <Container>
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/">
-                            <img
-                                src="/image.png"
-                                alt="Pedi dos ya"
-                                style={{ width: '70px', borderRadius: '5px' }}
-                            />
+                           inicio
                         </Nav.Link>
                         {arrayCategories.map((c) => (
-                            <Nav.Link
-                                key={c}
-                                as={Link}
-                                to={`/categories/${c}`}
-                            >
+                            <Nav.Link key={c}as={Link} to={`/categories/${c}`}>
                                 {c}
                             </Nav.Link>
                         ))}
 
-                        <CartWidget />
-
+                        <CartWidget />{/*  componete */}
 
                     </Nav>
                     <Nav className="me-auto">
@@ -41,7 +32,7 @@ const NavBar = () => {
                     </Nav>
                 </Container>
             </Navbar>
-        </>
+        </div>
     )
 }
 
