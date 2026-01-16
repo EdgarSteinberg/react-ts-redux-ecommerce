@@ -17,6 +17,8 @@ import Cart from './components/cart/cart';
 import CreateProduct from './admin/products/createProduct';
 import ProductList from './admin/products/productList';
 import EditProduct from './admin/products/editProduct';
+import Register from './components/register/register';
+import Login from './components/login/login';
 
 function App() {
 
@@ -33,6 +35,8 @@ function App() {
             <Route path='categories/:category' element={<ProductsListContainer />} />
             <Route path='/products/:pid' element={<ProductItemContainer />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/register' element={<Register />} />
+            <Route path='/login' element={<Login />} />
             <Route path='*' element={<NotFound />} />
 
             {/* rutas admin */}

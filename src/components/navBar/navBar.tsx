@@ -6,18 +6,18 @@ import CartWidget from '../cartWidget/cartWidget';
 
 const NavBar = () => {
 
-    const arrayCategories = [  "coleccionables","comics", "consolas","eventos","gadgets","hardware","portátiles", "ropa-y-accesorios" ]
+    const arrayCategories = ["coleccionables", "comics", "consolas", "eventos", "gadgets", "hardware", "portátiles", "ropa-y-accesorios"]
 
     return (
         <div >
-            <Navbar bg="dark" data-bs-theme="dark" style={{display:'flex', flexWrap: 'wrap'}}>
+            <Navbar bg="dark" data-bs-theme="dark" style={{ display: 'flex', flexWrap: 'wrap' }}>
                 <Container>
                     <Nav className="me-auto">
                         <Nav.Link as={Link} to="/">
-                           inicio
+                            inicio
                         </Nav.Link>
                         {arrayCategories.map((c) => (
-                            <Nav.Link key={c}as={Link} to={`/categories/${c}`}>
+                            <Nav.Link key={c} as={Link} to={`/categories/${c}`}>
                                 {c}
                             </Nav.Link>
                         ))}
@@ -26,6 +26,8 @@ const NavBar = () => {
 
                     </Nav>
                     <Nav className="me-auto">
+                        <Nav.Link as={Link} to={'/register'}>Registro</Nav.Link>
+                        <Nav.Link as={Link} to={'/login'}>Login</Nav.Link>
                         <Nav.Link as={Link} to={'/admin/products'}>getProducts</Nav.Link>
                         <Nav.Link as={Link} to={'/admin/products/new'}>postProduct</Nav.Link>
                         <Nav.Link href="#pricing">Pricing</Nav.Link>

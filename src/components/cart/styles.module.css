@@ -2,16 +2,21 @@
 .img{
     width: 100px;
 }
+.card{
+    margin-top: 10px;
+}
 
 .cardContainer{
     display: flex;
      align-items: center;
      justify-content: space-between;
+    background-color: yellow;
 }
 
 .cardTitle{
     text-align: center;
     margin-top: 10px;
+ 
 }
 
 .cardText{
@@ -22,4 +27,5 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+ 
 }

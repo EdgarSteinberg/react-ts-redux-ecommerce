@@ -1,6 +1,6 @@
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import type { RootState, AppDispatch } from "../../store";
+import type { AppDispatch } from "../../store";
 import styles from './styles.module.css';
 
 import type { ApiResponse } from "../../types/products";
@@ -65,7 +65,7 @@ const Cart = () => {
 
             <CartItemCart cart={cart} deleteProduct={deleteProduct} />
 
-            <h2 className={styles.cardTitle}>Total de la compra: ${total}</h2>
+            <h2 className={styles.cardTitle} style={{color: 'green'}}>Total de la compra: ${total}</h2>
         </>
     );
 };
