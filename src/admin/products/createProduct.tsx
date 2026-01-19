@@ -42,7 +42,7 @@ const CreateProduct = () => {
       setMessage({ type: "success", text: "Producto creado con éxito" });
 
       setData({
-        title: "", shortDescription: "", longDescription: "", price: 0, stock: 0, brand: "", category: "", discount: 0, tags: [], mainImage: []
+        title: "", shortDescription: "", longDescription: "", price: '', stock:  '', brand: "", category: "", discount: '', tags: [], mainImage: []
       });
 
     } catch (error) {

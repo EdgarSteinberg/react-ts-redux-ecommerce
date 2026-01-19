@@ -30,6 +30,8 @@ const NavBar = () => {
                         <Nav.Link as={Link} to={'/login'}>Login</Nav.Link>
                         <Nav.Link as={Link} to={'/admin/products'}>getProducts</Nav.Link>
                         <Nav.Link as={Link} to={'/admin/products/new'}>postProduct</Nav.Link>
+                        <Nav.Link as={Link} to={'/admin/users'}>getUsers</Nav.Link>
+
                         <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                 </Container>

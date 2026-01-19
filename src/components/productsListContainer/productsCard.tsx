@@ -28,13 +28,13 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
                     alt={product.title}
                     className={styles.imgContainer}
                 />
-                <Card.Body>
+                <Card.Body style={{width: '100%'}}>
                     <Card.Title className={styles.description}>{product.title}</Card.Title>
                     <Card.Text className={styles.description}>
                         {product.shortDescription}
                     </Card.Text>
                     <Link to={`/products/${product._id}`}>
-                        <Button variant="primary">
+                        <Button variant="warning" style={{width: '100%'}}>
                             Ver más
                         </Button>
                     </Link>

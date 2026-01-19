@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RegisterUser } from "../../types/users";
+import type { RegisterUser, RegisterPayload } from "../../types/users";
 import type { Message } from "../../types/message";
 import RegisterForm from "./registerForm";
 
@@ -12,7 +12,7 @@ const Register = () => {
         first_name: '',
         last_name: '',
         email: '',
-        age: 0,
+        age: '',
         password: ''
     };
 
@@ -23,14 +23,14 @@ const Register = () => {
 
         setRegister(prev => ({
             ...prev,
-            [name]: name === "age" ? Number(value) : value
+            [name]: value
         }));
     };
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        if (!register.email.trim() || !register.password.trim() || !register.first_name.trim() || !register.last_name.trim() || !register.age) {
+        if (!register.email.trim() || !register.password.trim() || !register.first_name.trim() || !register.last_name.trim() || !register.age.trim()) {
             setMessage({
                 type: 'error',
                 text: 'Todos los campos son obligatorios'
@@ -38,7 +38,16 @@ const Register = () => {
 
             return;
         }
-        setLoading(true);
+
+        setLoading(true); // componente Loading
+
+        const payload: RegisterPayload = {
+            first_name: register.first_name,
+            last_name: register.last_name,
+            email: register.email,
+            age: Number(register.age),
+            password: register.password
+        };
 
         try {
             const response = await fetch("http://localhost:8080/api/users/register", {
@@ -46,16 +55,16 @@ const Register = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify(register),
-               
+                body: JSON.stringify(payload),
+
             });
 
             const data = await response.json();
-            
+
             if (!response.ok) {
                 throw new Error(data.message || 'Error al registrarse');
             }
-       
+
             setMessage({
                 type: 'success',
                 text: 'Usuario registrado correctamente'

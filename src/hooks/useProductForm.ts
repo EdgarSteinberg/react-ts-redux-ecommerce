@@ -1,15 +1,23 @@
 import { useState } from "react";
 import type { Product } from "../types/products";
 
-export type ProductFormData = Omit<Product, "_id" | "mainImage" | "tags"> & {
+/* export type ProductFormData = Omit<Product, "_id" | "mainImage" | "tags"> & {
     tags: string[];       
+    mainImage: File[];
+}; */
+
+export type ProductFormData = Omit<Product, "_id" | "mainImage" | "tags" | "price" | "stock" | "discount"> & {
+    price: string;        // 👈 string para el form
+    stock: string;        // 👈 string
+    discount: string;     // 👈 string
+    tags: string[];
     mainImage: File[];
 };
 
 const initialState: ProductFormData = {
     title: "", shortDescription: "", longDescription: "",
-    price: 0, stock: 0, brand: "",
-    category: "", discount: 0, tags: [],
+    price: "", stock: "", brand: "",
+    category: "", discount: "", tags: [],
     mainImage: []
 };
 

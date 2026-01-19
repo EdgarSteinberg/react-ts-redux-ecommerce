@@ -21,6 +21,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
     const { count, increment, decrement } = useCounter(1, product.stock);
 
     const cartId = `69614fb4e1257780b08c2e6d`;
+    
     const handleAddToCart = async () => {
         dispatch(addItems({ product, quantity: count }));
         await addProductInCart(cartId, product._id, count);
@@ -60,7 +61,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     return (
         <div className={styles.divContainer}>
-            <Card style={{ display: 'flex', flexDirection: 'row', width: '80%' }}>
+            <Card style={{ display: 'flex', flexDirection: 'row', maxWidth: '70%', alignItems: "center", gap: '20px' }}>
                 <div style={{ flex: 1 }}>
                     <Card.Img variant="top" src={getImageSrc(product.mainImage?.[0])} alt={product.title} className={styles.imgContainer} />
                 </div>
@@ -82,6 +83,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                                 <span key={index}> {tag}</span>
                             ))}
                         </Card.Text>
+                        <Card.Text>Precio: ${product.price}</Card.Text>
 
                         <Counter // componentes contador
                             count={count}
@@ -89,7 +91,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
                             decrement={decrement}
                         />
 
-                        <Button variant="success" onClick={handleAddToCart} >comprar</Button>
+                        <Button variant="success" onClick={handleAddToCart} style={{width: '100%'}}>comprar</Button>
                     </Card.Body>
                 </div>
             </Card>

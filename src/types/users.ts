@@ -2,6 +2,20 @@ export interface RegisterUser {
   first_name: string;
   last_name: string;
   email: string;
-  age: number;
+  age: string;
   password: string;
+}
+
+export interface RegisterPayload {
+  _id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  age: number; // 👈 backend
+  password: string;
+}
+
+
+export interface UsersResponse {
+  payload: RegisterPayload[];
 }
