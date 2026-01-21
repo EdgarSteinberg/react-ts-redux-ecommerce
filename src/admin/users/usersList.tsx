@@ -5,6 +5,7 @@ import type { Message } from "../../types/message";
 import { Alert, Button } from "react-bootstrap";
 import { getAllUsers, deleteUser } from "../service/users_service";
 
+
 const UsersList = () => {
     const [users, setUsers] = useState<RegisterPayload[]>([]);
     const [loading, setLoading] = useState(false);

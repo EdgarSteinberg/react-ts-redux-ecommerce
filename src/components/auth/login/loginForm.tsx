@@ -1,7 +1,8 @@
 import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
-import type { Message } from "../../types/message";
-import type { LoginUser } from "../../types/login";
+import type { Message } from "../../../types/message";
+import type { LoginUser } from "../../../types/login";
 import { Link } from "react-router-dom";
+import styles from '../styles.module.css';
 
 type LoginFormProp = {
     message: Message | null,
@@ -13,8 +14,8 @@ type LoginFormProp = {
 const LoginForm = ({ user, message, handleOnchage, handleSubmit }: LoginFormProp) => {
 
     return (
-        <div style={{ width: '50%', margin: '0 auto', marginTop: '20px', border: '1px solid #dee2e6', borderRadius: '8px',padding: '20px' }}>
-            <h1 style={{ textAlign: 'center' }}>Iniciar sesión</h1>
+        <div className={styles.divContainer}>
+            <h1 className={styles.h1title}>Iniciar sesión</h1>
             <Form onSubmit={handleSubmit}>
                 {
                     message && (
@@ -40,10 +41,14 @@ const LoginForm = ({ user, message, handleOnchage, handleSubmit }: LoginFormProp
                     />
                 </FormGroup>
 
-                <Button type="submit" style={{ width: '100%', marginTop: '10px' }}>Enviar</Button>
+                <Button type="submit" className={styles.btn}>Enviar</Button>
 
-                <Link to="/register" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-                    ¿No tenés una cuenta? Creá una
+                <Link to="/register"  className={styles.link}>
+                    ¿No tenés una cuenta? Creá una.
+                </Link>
+
+                <Link to="/sendResetEmail" className={styles.link}>
+                    ¿Olvidaste tu contraseña? Hacé click para recuperarla
                 </Link>
             </Form>
         </div>

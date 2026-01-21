@@ -1,0 +1,26 @@
+/* width: '50%', margin: '0 auto', marginTop: '20px', border: '1px solid #dee2e6', borderRadius: '8px', padding: '20px' */
+
+
+.divContainer{
+width: 50%;
+margin: 0 auto;
+margin-top: 20px;
+border: 1px solid #dee2e6;
+border-radius: 8px;
+padding: 20px;
+}
+
+.h1title{
+    text-align: center;
+}
+
+.btn{
+    width: 100%;
+    margin-top: 10px;
+}
+
+.link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

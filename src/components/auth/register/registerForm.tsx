@@ -1,7 +1,8 @@
 import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
-import type { Message } from "../../types/message";
-import type { RegisterUser } from "../../types/users";
+import type { RegisterUser } from "../../../types/users";
+import type { Message } from "../../../types/message";
 import { Link } from "react-router-dom";
+import styles from '../styles.module.css';
 
 type RegisterFormProps = {
     register: RegisterUser;
@@ -15,8 +16,8 @@ const RegisterForm = ({ register, message, loading, handleOnChange, handleSubmit
 
 
     return (
-        <div style={{ width: '50%', margin: '0 auto', marginTop: '20px', border: '1px solid #dee2e6', borderRadius: '8px',padding: '20px' }}>
-            <h1 style={{ textAlign: 'center' }}>Creá tu cuenta</h1>
+        <div className={styles.divContainer}>
+            <h1 className={styles.h1title}>Creá tu cuenta</h1>
             <Form onSubmit={handleSubmit} >
                 {message && (
                     <Alert variant={message.type === 'success' ? 'success' : 'danger'}>{message?.text}</Alert>
@@ -46,11 +47,11 @@ const RegisterForm = ({ register, message, loading, handleOnChange, handleSubmit
                     <FormControl type="password" name="password" value={register.password} onChange={handleOnChange} />
                 </FormGroup>
 
-                <Button type="submit" disabled={loading} style={{ width: '100%', marginTop: '10px' }}>
+                <Button type="submit" disabled={loading} className={styles.btn}>
                     {loading ? 'Enviando...' : 'Registrarse'}
                 </Button>
 
-                <Link to="/login" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+                <Link to="/login" className={styles.link}>
                     ¿Ya tenés una cuenta? Iniciá sesión
                 </Link>
             </Form>

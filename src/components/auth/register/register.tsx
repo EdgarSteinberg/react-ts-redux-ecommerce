@@ -1,6 +1,6 @@
 import { useState } from "react";
-import type { RegisterUser, RegisterPayload } from "../../types/users";
-import type { Message } from "../../types/message";
+import type { RegisterUser } from "../../../types/users";
+import type { Message } from "../../../types/message";
 import RegisterForm from "./registerForm";
 
 
@@ -41,11 +41,11 @@ const Register = () => {
 
         setLoading(true); // componente Loading
 
-        const payload: RegisterPayload = {
+        const payload: RegisterUser = {
             first_name: register.first_name,
             last_name: register.last_name,
             email: register.email,
-            age: Number(register.age),
+            age: register.age,
             password: register.password
         };
 
