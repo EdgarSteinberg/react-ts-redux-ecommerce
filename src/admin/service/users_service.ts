@@ -4,7 +4,7 @@ const API_URL = "http://localhost:8080/api/users";
 
 
 export const getAllUsers = async (): Promise<RegisterPayload[]> => {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, {credentials: 'include'});
 
     if (!response.ok) {
         throw new Error("Error al obtener los usuarios");
@@ -18,6 +18,7 @@ export const getAllUsers = async (): Promise<RegisterPayload[]> => {
 export const deleteUser = async (uid: string) => {
     const response = await fetch(`${API_URL}/${uid}`, {
         method: "DELETE",
+        credentials: 'include'
     });
 
     if (!response.ok) {

@@ -42,13 +42,12 @@ const CreateProduct = () => {
       setMessage({ type: "success", text: "Producto creado con éxito" });
 
       setData({
-        title: "", shortDescription: "", longDescription: "", price: '', stock:  '', brand: "", category: "", discount: '', tags: [], mainImage: []
+        title: "", shortDescription: "", longDescription: "", price: '', stock: '', brand: "", category: "", discount: '', tags: [], mainImage: []
       });
 
-    } catch (error) {
-      console.error(error);
-      setMessage({ type: "error", text: "Error al crear el producto" });
-
+    } catch (error: any) {
+      setMessage({ type: "error",text: error.message ? `${error.message}` : `Error al crear el producto`,
+      })
     } finally {
       setLoading(false);
     }

@@ -1,7 +1,10 @@
 const API_URL = "http://localhost:8080/api/products";
 
+// GET ALL PRODUCTS
 export const getProducts = async () => {
-  const res = await fetch(API_URL);
+  const res = await fetch(API_URL, {
+    credentials: "include"
+  });
 
   if (!res.ok) {
     throw new Error("Error al obtener los productos");
@@ -11,30 +14,73 @@ export const getProducts = async () => {
   return data.payload;
 };
 
-export const deleteProduct = async (pid: string) => {
+// GET PRODUCTS BY ID
+export const getProductById = async (pid: string) => {
   const response = await fetch(`${API_URL}/${pid}`, {
-    method: "DELETE",
-  });
+    credentials: "include"
+  })
 
   if (!response.ok) {
-    throw new Error("Error al eliminar producto");
+    throw new Error(`Error al obtener el producto con PID: ${pid}`)
   }
 
-  return response.json();
-};
+  const data = await response.json();
+  return data.payload;
+}
 
+
+// CREAR PRODUCTOS
 export const createProduct = async (formData: FormData) => {
   const response = await fetch(API_URL, {
     method: "POST",
     body: formData,
+    credentials: "include",
   });
 
+  const data = await response.json();
+
   if (!response.ok) {
-    throw new Error("Error al crear producto");
+    throw new Error(data.message || "Error al crear producto");
   }
 
-  return response.json();
+  return data;
 };
+
+
+// ELIMINAR PRODUCTOS
+export const deleteProduct = async (pid: string) => {
+  const response = await fetch(`${API_URL}/${pid}`, {
+    method: "DELETE",
+    credentials: "include"
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Error al eliminar el producto");
+  }
+
+  return data;
+};
+
+
+// ACTUALIZAR PRODUCTOS
+export const updateProduct = async (pid: string, formData: FormData) => {
+  const response = await fetch(`${API_URL}/${pid}`, {
+    method: "PUT",
+    body: formData,
+    credentials: "include"
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.message || "Error al actualizar producto");
+  }
+
+  return data;
+};
+
 
 
 /* export const updateProduct = async (pid: string, formData: FormData) => {
@@ -51,29 +97,4 @@ export const createProduct = async (formData: FormData) => {
   return response.json();
 };
  */
-export const updateProduct = async (pid: string, formData: FormData) => {
-  const response = await fetch(`${API_URL}/${pid}`, {
-    method: "PUT",
-    body: formData
-  });
 
-  if (!response.ok) {
-    const errorData = await response.json().catch(() => null);
-    throw new Error(errorData?.message || "Error al actualizar el producto");
-  }
-
-  return response.json();
-};
-
-
-
-export const getProductById = async (pid: string) => {
-  const response = await fetch(`${API_URL}/${pid}`)
-
-  if (!response.ok) {
-    throw new Error(`Error al obtener el producto con PID: ${pid}`)
-  }
-
-  const data = await response.json();
-  return data.payload;
-}

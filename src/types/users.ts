@@ -13,6 +13,7 @@ export interface RegisterPayload {
   email: string;
   age: number; // 👈 backend
   password: string;
+  role: string;
 }
 
 

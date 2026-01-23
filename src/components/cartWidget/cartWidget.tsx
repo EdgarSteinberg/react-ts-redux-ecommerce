@@ -5,7 +5,7 @@ import type { RootState } from "../../store";
 
 const CartWidget = () => {
     const cartItems = useSelector(
-        (state: RootState) => state.cartReducer.cartItems
+        (state: RootState) => state.cart.cartItems
     );
 
     const totalQuantity = cartItems.reduce(

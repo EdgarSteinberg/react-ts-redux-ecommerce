@@ -2,9 +2,10 @@ import { useState } from "react";
 import type { RegisterUser } from "../../../types/users";
 import type { Message } from "../../../types/message";
 import RegisterForm from "./registerForm";
-
+import { useNavigate } from "react-router-dom";
 
 const Register = () => {
+    const navigate = useNavigate();
     const [message, setMessage] = useState<Message | null>(null);
     const [loading, setLoading] = useState(false);
 
@@ -72,6 +73,7 @@ const Register = () => {
 
             setRegister(initialState);
 
+            navigate('/login')
         } catch (error) {
             setMessage({
                 type: 'error',

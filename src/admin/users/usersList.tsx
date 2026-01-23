@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import type { RegisterPayload } from "../../types/users";
 import Loading from "../../components/loading/loading";
 import type { Message } from "../../types/message";
-import { Alert, Button } from "react-bootstrap";
 import { getAllUsers, deleteUser } from "../service/users_service";
+import UserTable from "./userTable";
+
 
 
 const UsersList = () => {
@@ -47,26 +48,7 @@ const UsersList = () => {
 
     return (
         <>
-            {message && (
-                <Alert variant={message.type === "success" ? "success" : "danger"}>
-                    {message.text}
-                </Alert>
-            )}
-
-            <h1>Administración de Usuarios</h1>
-
-            {users.length > 0 ? (
-                users.map(user => (
-                    <div key={user._id}>
-                        <p>
-                            {user.first_name} {user.last_name} – {user.email}
-                        </p>
-                        <Button variant="danger" onClick={() => handleDelete(user._id)}> Eliminar</Button>
-                    </div>
-                ))
-            ) : (
-                <p>No hay usuarios para mostrar</p>
-            )}
+            <UserTable users={users} message={message} handleDelete={handleDelete} />
         </>
     );
 };

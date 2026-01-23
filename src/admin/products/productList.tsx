@@ -54,10 +54,10 @@ const ProductList = () => {
                 type: "success",
                 text: "Producto eliminado correctamente"
             });
-        } catch (error) {
+        } catch (error: any) {
             setMessage({
                 type: "error",
-                text: "Error al eliminar el producto"
+                text: error.message ? `${error.message}` : `Error al eliminar el producto`
             });
         }
     };

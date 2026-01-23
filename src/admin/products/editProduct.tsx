@@ -90,9 +90,9 @@ const EditProduct = () => {
                 stock: "", brand: "", category: "", discount: "", tags: [], mainImage: []
             });
 
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
-            setMessage({ type: "error", text: "Error al actualizar el producto" });
+            setMessage({ type: "error", text: error.message ? `${error.message}` : "Error al actualizar el producto" });
 
         } finally {
             setLoading(false);

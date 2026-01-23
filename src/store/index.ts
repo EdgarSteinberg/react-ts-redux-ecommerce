@@ -1,3 +1,83 @@
+
+
+import { configureStore } from '@reduxjs/toolkit';
+import cartReducer from '../features/cart/cartSlice';
+
+// 👉 Storage por defecto de redux-persist (usa localStorage del navegador)
+import storage from 'redux-persist/lib/storage';
+
+// 👉 Funciones clave de redux-persist
+// persistReducer: envuelve un reducer para hacerlo persistente
+// persistStore: crea el persistor que rehidrata el store al iniciar la app
+import {
+  persistReducer,
+  persistStore,
+  FLUSH,
+  REHYDRATE,
+  PAUSE,
+  PERSIST,
+  PURGE,
+  REGISTER,
+} from 'redux-persist';
+
+// 👉 Configuración de persistencia
+// key: nombre bajo el cual se guarda en localStorage
+// storage: dónde se persiste (localStorage)
+const persistConfig = {
+  key: 'cart',
+  storage,
+};
+
+// 👉 Reducer del carrito envuelto con persistencia
+// Todo lo que maneje este reducer se guarda y se restaura automáticamente
+const persistedCartReducer = persistReducer(
+  persistConfig,
+  cartReducer
+);
+
+// 👉 Store global de Redux
+export const store = configureStore({
+  reducer: {
+    cart: persistedCartReducer, // mejor nombre que cartReducer
+  },
+
+  // 👉 Middleware de Redux Toolkit
+  // Ignoramos las actions internas de redux-persist
+  // para evitar warnings de valores no serializables
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [
+          FLUSH,
+          REHYDRATE,
+          PAUSE,
+          PERSIST,
+          PURGE,
+          REGISTER,
+        ],
+      },
+    }),
+});
+
+// 👉 Persistor que se conecta con <PersistGate />
+// Se encarga de rehidratar el estado antes de renderizar la app
+export const persistor = persistStore(store);
+
+// 👉 Tipos para TypeScript
+// RootState: estado global del store
+// AppDispatch: tipo del dispatch
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store;
+
+
+
+
+
+
+
+
 /* import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../features/cart/cartSlice'
 
@@ -13,7 +93,7 @@ export type AppDispatch = typeof store.dispatch;//TS
 export default store; */
 
 
-
+/* 
 import { configureStore } from '@reduxjs/toolkit';
 import cartReducer from '../features/cart/cartSlice';
 
@@ -59,3 +139,5 @@ export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
 export default store
+ */
+

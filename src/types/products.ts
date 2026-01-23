@@ -10,6 +10,7 @@ export interface Product {
   discount?: number;
   tags?: string[];
   mainImage: string[];
+  owner?: string; // 👈 opcional
 }
 
 export interface ApiResponse<T> {

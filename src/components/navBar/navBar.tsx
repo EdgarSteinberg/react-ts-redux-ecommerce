@@ -3,10 +3,17 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import CartWidget from '../cartWidget/cartWidget';
+import { useNavigate } from 'react-router-dom';
+import { logout } from '../auth/logout/logout';
 
 const NavBar = () => {
-
+    const navigate = useNavigate();
     const arrayCategories = ["coleccionables", "comics", "consolas", "eventos", "gadgets", "hardware", "portátiles", "ropa-y-accesorios"]
+
+    const handleLogout = async () => {
+        await logout();
+        navigate("/login");
+    }
 
     return (
         <div >
@@ -26,13 +33,16 @@ const NavBar = () => {
 
                     </Nav>
                     <Nav className="me-auto">
-                        <Nav.Link as={Link} to={'/register'}>Registro</Nav.Link>
-                        <Nav.Link as={Link} to={'/login'}>Login</Nav.Link>
-                        <Nav.Link as={Link} to={'/admin/products'}>getProducts</Nav.Link>
-                        <Nav.Link as={Link} to={'/admin/products/new'}>postProduct</Nav.Link>
-                        <Nav.Link as={Link} to={'/admin/users'}>getUsers</Nav.Link>
+                        <Nav.Link as={Link} to="/register">Registrarse</Nav.Link>
+                        <Nav.Link as={Link} to="/login">Iniciar sesión</Nav.Link>
+                        <Nav.Link onClick={handleLogout} style={{ cursor: "pointer" }}>
+                            Cerrar sesión
+                        </Nav.Link>
+                        
+                        <Nav.Link as={Link} to="/admin/products">Productos</Nav.Link>
+                        <Nav.Link as={Link} to="/admin/products/new">Nuevo producto</Nav.Link>
+                        <Nav.Link as={Link} to="/admin/users">Usuarios</Nav.Link>
 
-                        <Nav.Link href="#pricing">Pricing</Nav.Link>
                     </Nav>
                 </Container>
             </Navbar>
