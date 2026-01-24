@@ -4,14 +4,14 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import CartWidget from '../cartWidget/cartWidget';
 import { useNavigate } from 'react-router-dom';
-import { logout } from '../auth/logout/logout';
+import { fechingLogout } from '../auth/service/logout';
 
 const NavBar = () => {
     const navigate = useNavigate();
     const arrayCategories = ["coleccionables", "comics", "consolas", "eventos", "gadgets", "hardware", "portátiles", "ropa-y-accesorios"]
 
     const handleLogout = async () => {
-        await logout();
+        await fechingLogout();
         navigate("/login");
     }
 

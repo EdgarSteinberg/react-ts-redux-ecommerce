@@ -3,6 +3,7 @@ import type { RegisterUser } from "../../../types/users";
 import type { Message } from "../../../types/message";
 import RegisterForm from "./registerForm";
 import { useNavigate } from "react-router-dom";
+import { fetchingRegister } from "../service/register";
 
 const Register = () => {
     const navigate = useNavigate();
@@ -51,20 +52,7 @@ const Register = () => {
         };
 
         try {
-            const response = await fetch("http://localhost:8080/api/users/register", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload),
-
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Error al registrarse');
-            }
+            await fetchingRegister(payload); //SERVICE REGISTER
 
             setMessage({
                 type: 'success',

@@ -2,6 +2,7 @@ import { useState } from "react";
 import type { Message } from "../../../types/message";
 import Loading from "../../loading/loading";
 import SendResetEmailForm from "./sendResetEmailForm";
+import { fechingSendResetEmail } from "../service/sendResetEmail";
 
 
 const SendResetEmail = () => {
@@ -31,21 +32,7 @@ const SendResetEmail = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(
-                "http://localhost:8080/api/users/send-reset-email",
-                {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    credentials: "include",
-                    body: JSON.stringify(email)
-                }
-            );
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || "Error al enviar el email");
-            }
+            await fechingSendResetEmail(email); // SERVICE FECHINGSENDEMAIL
 
             setMessage({
                 type: "success",
@@ -54,7 +41,6 @@ const SendResetEmail = () => {
 
             setEmail({ email: "" });
         } catch (error) {
-            console.error(error);
             setMessage({
                 type: "error",
                 text: error instanceof Error ? error.message : "Error al enviar el email"

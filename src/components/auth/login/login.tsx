@@ -1,8 +1,12 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Message } from "../../../types/message";
 import Loading from "../../loading/loading";
 import LoginForm from "./loginForm";
 import { useNavigate } from "react-router-dom";
+import type { RegisterUser } from "../../../types/users";
+import { Button } from "react-bootstrap";
+import { fechingLogout } from "../service/logout";
+import { loginUser, currentUser } from "../service/users";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -12,59 +16,21 @@ const Login = () => {
     const [user, setUser] = useState(initialState);
     const [message, setMessage] = useState<Message | null>(null);
     const [loading, setLoading] = useState(false);
+    const [dataUser, setDataUser] = useState<RegisterUser | null>(null);
+    const [checkingAuth, setCheckingAuth] = useState(true);
+
+
+    const handleLogout = async () => {
+        await fechingLogout();
+        setDataUser(null);
+    };
 
     const handleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-
         setUser(prev => ({ ...prev, [name]: value }));
     }
 
-    /*     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-            e.preventDefault();
-    
-            if (!user.email.trim() || !user.password.trim()) {
-                setMessage({
-                    type: 'error',
-                    text: 'Todos los campos son obligatorios'
-                })
-    
-                return;
-            }
-    
-            setLoading(true);
-            try {
-                const response = await fetch(`http://localhost:8080/api/users/login`, {
-                    method: 'POST',
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    credentials: 'include',
-                    body: JSON.stringify(user)
-                })
-                const data = await response.json();
-    
-                if (!response.ok) {
-                    throw new Error(data.message || 'Error al registrarse');
-                }
-                console.log(data.token);
-                setMessage({
-                    type: 'success',
-                    text: "Login Exitoso"
-                })
-                setUser(initialState);
-    
-                navigate('/')
-            } catch (error) {
-                console.log(error)
-    
-                setMessage({
-                    type: 'error',
-                    text: error instanceof Error ? error.message : 'Se produjo un error '
-                })
-            } finally {
-                setLoading(false);
-            }
-        } */
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
@@ -76,23 +42,11 @@ const Login = () => {
         setLoading(true);
 
         try {
-            const response = await fetch(`http://localhost:8080/api/users/login`, {
-                method: 'POST',
-                headers: { "Content-Type": "application/json" },
-                credentials: 'include',
-                body: JSON.stringify(user)
-            });
-
-            const data = await response.json();
-
-            if (!response.ok) {
-                throw new Error(data.message || 'Error al loguearse');
-            }
-
-            navigate('/'); 
+            await loginUser(user); // SERVICE
+            navigate('/');
 
         } catch (error) {
-            setLoading(false); 
+            setLoading(false);
             setMessage({
                 type: 'error',
                 text: error instanceof Error ? error.message : 'Se produjo un error'
@@ -100,12 +54,39 @@ const Login = () => {
         }
     };
 
+    useEffect(() => {
+        const getFechingCurrent = async () => {
+            try {
+                const data = await currentUser();
+                setDataUser(data ? data.user : null);
+            } catch {
+                setDataUser(null);
+            } finally {
+                setCheckingAuth(false);
+            }
+        };
+
+        getFechingCurrent();
+    }, []);
+
 
     if (loading) return <Loading />
+    if (checkingAuth) return <Loading />;
 
     return (
         <>
-            <LoginForm user={user} message={message} handleOnchage={handleOnchage} handleSubmit={handleSubmit} />
+            {
+                dataUser ? (
+                    <div>
+
+                        <p>{dataUser.first_name}</p>
+                        <Button onClick={handleLogout}>Cerrar sesión</Button>
+                    </div>
+                ) : (
+
+                    <LoginForm user={user} message={message} handleOnchage={handleOnchage} handleSubmit={handleSubmit} />
+                )
+            }
         </>
     )
 }

@@ -19,7 +19,7 @@ const ProductsContainer = () => {
                     
                 const response = await fetch(uri);
                 const data: ApiResponse<Product[]> = await response.json(); //uso ts
-                console.log(data.payload)
+      
                 setProducts(data.payload);
 
             } catch (error) {
