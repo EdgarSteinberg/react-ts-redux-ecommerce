@@ -21,7 +21,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
     const { count, increment, decrement } = useCounter(1, product.stock);
 
     const cartId = `69614fb4e1257780b08c2e6d`;
-    
+
     const handleAddToCart = async () => {
         dispatch(addItems({ product, quantity: count }));
         await addProductInCart(cartId, product._id, count);
@@ -61,16 +61,33 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     return (
         <div className={styles.divContainer}>
-            <Card style={{ display: 'flex', flexDirection: 'row', maxWidth: '70%', alignItems: "center", gap: '20px' }}>
+            <Card style={{ display: 'flex', flexDirection: 'row', maxWidth: '90%', alignItems: "center", gap: '20px' }}>
                 <div style={{ flex: 1 }}>
                     <Card.Img variant="top" src={getImageSrc(product.mainImage?.[0])} alt={product.title} className={styles.imgContainer} />
                 </div>
 
                 <div style={{ flex: 1 }}>
                     <Card.Body>
-                        <Card.Title>{product.title}</Card.Title>
-                        <Card.Subtitle >{product.longDescription} </Card.Subtitle >
-                        <Card.Text>Precio: ${product.price} </Card.Text>
+                        <Card.Title style={{ fontSize: '22px' }}>{product.longDescription}</Card.Title>
+                        {/*       <Card.Subtitle >{product.longDescription} </Card.Subtitle > */}
+                        <Card.Text style={{ fontSize: '36px' }}>$ {product.price} </Card.Text>
+                        <Card.Subtitle style={{ fontSize: '14px' }}>Lo que tenés que saber de este producto</Card.Subtitle>
+
+                        <ul>
+                            <li style={{ fontSize: '14px', marginTop: '8px' }}>Stock {product.stock}</li>
+                            <li>Marca {product.brand}</li>
+                            <li>Categoría {product.category}</li>
+                            {product.discount && (
+                                <li>Descuento: {product.discount}%</li>
+                            )}
+                            <li>
+                                Tags:
+                                {product.tags?.map((tag, index) => (
+                                    <span key={index}> {tag}</span>
+                                ))}
+                            </li>
+                        </ul>
+                        {/*    
                         <Card.Text>Stock {product.stock} </Card.Text>
                         <Card.Text>Marca: {product.brand}</Card.Text>
                         <Card.Text>Categoría: {product.category}</Card.Text>
@@ -83,19 +100,28 @@ const ProductItem = ({ product }: ProductItemProps) => {
                                 <span key={index}> {tag}</span>
                             ))}
                         </Card.Text>
-                        <Card.Text>Precio: ${product.price}</Card.Text>
+                        <Card.Text>Precio: ${product.price}</Card.Text> */}
 
-                        <Counter // componentes contador
-                            count={count}
-                            increment={increment}
-                            decrement={decrement}
-                        />
-
-                        <Button variant="success" onClick={handleAddToCart} style={{width: '100%'}}>comprar</Button>
                     </Card.Body>
                 </div>
+                <div style={{ flex: 1 , border: '1px solid black', borderRadius: '10px'}}>
+                    <p><strong style={{ color: 'green' }}>Llega gratis el lunes</strong> por ser tu primera compra</p>
+                    <p><strong style={{ color: 'green' }}>Retirá gratis</strong> entre el miércoles y el jueves en correo y otros puntos</p>
+
+                    <strong>Stock disponible</strong>
+                    <strong>Cantidad aca updatedQuantity</strong>
+                    <Counter // componentes contador
+                        count={count}
+                        increment={increment}
+                        decrement={decrement}
+                    />
+
+                    <Button onClick={handleAddToCart} style={{ width: '90%', background: '#2968c8' , borderColor: "#2968c8"}}>comprar</Button>
+                    <Button onClick={handleAddToCart} style={{ width: '90%', background: '#2968c8', marginTop: '10px' }}>Agregar al carrito</Button>
+                </div>
+
             </Card>
-        </div>
+        </div >
     );
 };
 

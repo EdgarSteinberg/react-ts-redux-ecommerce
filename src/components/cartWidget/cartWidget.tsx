@@ -1,5 +1,4 @@
 import { TiShoppingCart } from "react-icons/ti";
-import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 
@@ -12,7 +11,7 @@ const CartWidget = () => {
         (acc, item) => acc + item.quantity, 0);
 
     return (
-        <Link to="/cart" style={{ position: "relative", display: 'flex', alignItems: 'center' }}>
+        <>
             <TiShoppingCart size={24} />
             {totalQuantity > 0 && (
                 <span
@@ -30,7 +29,7 @@ const CartWidget = () => {
                     {totalQuantity}
                 </span>
             )}
-        </Link>
+       </>
     );
 };
 

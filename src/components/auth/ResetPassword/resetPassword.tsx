@@ -63,7 +63,7 @@ const ResetPassword = () => {
     return (
         <>
 
-            {token ? <p>Token OK</p> : <p>Token inválido</p>}
+            {/* {token ? <p>Token OK</p> : <p>Token inválido</p>} */}
 
             <ResetPasswordForm password={password} message={message} handleOnChange={handleOnchange} handleOnSubmit={handleOnSubmit} />
         </>

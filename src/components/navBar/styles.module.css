@@ -1,0 +1,6 @@
+
+
+.divContainer{
+    display: flex;
+    flex-wrap: wrap;
+}

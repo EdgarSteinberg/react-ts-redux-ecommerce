@@ -4,9 +4,11 @@ import Loading from "../../loading/loading";
 import LoginForm from "./loginForm";
 import { useNavigate } from "react-router-dom";
 import type { RegisterUser } from "../../../types/users";
-import { Button } from "react-bootstrap";
 import { fechingLogout } from "../service/logout";
 import { loginUser, currentUser } from "../service/users";
+import Card from 'react-bootstrap/Card';
+import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     const navigate = useNavigate();
@@ -77,10 +79,18 @@ const Login = () => {
         <>
             {
                 dataUser ? (
-                    <div>
-
-                        <p>{dataUser.first_name}</p>
-                        <Button onClick={handleLogout}>Cerrar sesión</Button>
+                    <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "70vh" }}>
+                        <Card style={{ width: '18rem' }}>
+                            <Card.Body>
+                                <Card.Title> <FaUser /> Hola {dataUser.email}</Card.Title>
+                                <Card.Subtitle className="mb-2 text-muted"> Sesión activa </Card.Subtitle>
+                                <Card.Text>
+                                    Ya iniciaste sesión. Podés volver a la tienda o cerrar tu sesión.
+                                </Card.Text>
+                                <Card.Link as={Link} to={'/'}>Tienda</Card.Link>
+                                <Card.Link as={Link} to={'/login'} onClick={handleLogout}>Cerrar sessión</Card.Link>
+                            </Card.Body>
+                        </Card>
                     </div>
                 ) : (
 
