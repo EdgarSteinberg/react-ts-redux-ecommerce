@@ -1,30 +1,39 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { Message } from "../../../types/message";
 import Loading from "../../loading/loading";
 import LoginForm from "./loginForm";
 import { useNavigate } from "react-router-dom";
-import type { RegisterUser } from "../../../types/users";
 import { fechingLogout } from "../service/logout";
-import { loginUser, currentUser } from "../service/users";
+import { loginUser, currentUser } from "../service/login";
 import Card from 'react-bootstrap/Card';
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
+
+import { setUserRedux } from "../../../features/auth/authSlice";
+import { useDispatch, useSelector } from "react-redux";
+import type { RootState } from "../../../store";
+
 const Login = () => {
+    const dispatch = useDispatch();
     const navigate = useNavigate();
 
+    const dataUser = useSelector((state: RootState) => state.auth.user);
     const initialState = { email: '', password: '' };
 
     const [user, setUser] = useState(initialState);
     const [message, setMessage] = useState<Message | null>(null);
     const [loading, setLoading] = useState(false);
-    const [dataUser, setDataUser] = useState<RegisterUser | null>(null);
-    const [checkingAuth, setCheckingAuth] = useState(true);
 
 
     const handleLogout = async () => {
-        await fechingLogout();
-        setDataUser(null);
+        try {
+            await fechingLogout();
+            dispatch(setUserRedux(null));
+            navigate('/login'); // opcional pero recomendado
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     const handleOnchage = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -45,6 +54,9 @@ const Login = () => {
 
         try {
             await loginUser(user); // SERVICE
+
+            const data = await currentUser();
+            dispatch(setUserRedux(data.user));
             navigate('/');
 
         } catch (error) {
@@ -56,24 +68,11 @@ const Login = () => {
         }
     };
 
-    useEffect(() => {
-        const getFechingCurrent = async () => {
-            try {
-                const data = await currentUser();
-                setDataUser(data ? data.user : null);
-            } catch {
-                setDataUser(null);
-            } finally {
-                setCheckingAuth(false);
-            }
-        };
 
-        getFechingCurrent();
-    }, []);
 
 
     if (loading) return <Loading />
-    if (checkingAuth) return <Loading />;
+
 
     return (
         <>

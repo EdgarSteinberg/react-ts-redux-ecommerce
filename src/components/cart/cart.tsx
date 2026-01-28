@@ -9,16 +9,16 @@ import type { MongoCart } from "../../types/cart/mongoCart";
 import { removeItem } from "../../features/cart/cartSlice";
 import CartItemCart from "./cartItemCard";
 
-
+import { useSelector } from "react-redux";
+import type { RootState } from "../../store";
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
 
-    /*  const total = useSelector((state: RootState) => state.cartReducer.total);
-     console.log(total) */
     const [cart, setCart] = useState<MongoCart | null>(null);
 
-    const cid = "69614fb4e1257780b08c2e6d";
+    const user = useSelector((state:RootState) => state.auth.user)
+    const cid = user?.cart;
 
     const deleteProduct = async (id: string) => {
         dispatch(removeItem(id));

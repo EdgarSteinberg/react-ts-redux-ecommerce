@@ -7,6 +7,9 @@ const CartWidget = () => {
         (state: RootState) => state.cart.cartItems
     );
 
+    const user = useSelector((state: RootState) => state.auth.user)
+    if (!user) return <TiShoppingCart size={24} />;
+    
     const totalQuantity = cartItems.reduce(
         (acc, item) => acc + item.quantity, 0);
 

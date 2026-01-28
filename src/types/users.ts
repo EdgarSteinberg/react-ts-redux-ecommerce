@@ -1,10 +1,13 @@
 export interface RegisterUser {
+  _id: string;
   first_name: string;
   last_name: string;
   email: string;
-  age: string;
-  password: string;
+  age: number;
+  cart: string;  
+  role: string;
 }
+
 
 export interface RegisterPayload {
   _id: string;

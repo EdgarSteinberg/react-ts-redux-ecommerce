@@ -10,9 +10,9 @@ export const fechingLogout = async () => {
         const data = await response.json();
 
         if (!response.ok) {
-            throw new Error("Error al cerrar sesión");
+            throw new Error(data?.message ?? "Error al cerrar sesión");
         }
-        
+
         return data;
     } catch (error) {
         console.error(error);

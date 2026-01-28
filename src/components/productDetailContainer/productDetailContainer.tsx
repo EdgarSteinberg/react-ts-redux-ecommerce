@@ -1,40 +1,42 @@
 import { useEffect, useState } from "react";
-import type { Product, ApiResponse } from "../../types/products";
+import type { Product } from "../../types/products";
 import { useParams } from "react-router-dom";
 import Loading from "../loading/loading";
 import ProductDetail from "./productDetail";
+import { getProductService } from "./service/products/products_service";
 
-
-const ProductItemContainer = () => {
+const ProductDetailContar = () => {
     const { pid } = useParams<{ pid: string }>();
-
     const [product, setProduct] = useState<Product | null>(null);
     const [loading, setLoading] = useState(true);
+
 
     useEffect(() => {
         if (!pid) return;
 
-        fetch(`http://localhost:8080/api/products/${pid}`)
-            .then(res => res.json())
-            .then((data: ApiResponse<Product>) => {
+        const loadProduct = async () => {
+            try {
+                const data = await getProductService(pid); // SERVICES
                 setProduct(data.payload);
-                setLoading(false);
-            })
-            .catch(error => {
-                console.log(error);
-                setLoading(false);
-            });
+            } catch (error) {
+                console.error(error);
+            } finally {
+                setLoading(false)
+            }
+        };
+        loadProduct();
     }, [pid]);
+
 
     return (
         <>
             {loading ? (
                 <Loading />
             ) : (
-                product && <ProductDetail product={product}/>
+                product && <ProductDetail product={product} />
             )}
         </>
     );
 };
 
-export default ProductItemContainer;
+export default ProductDetailContar;

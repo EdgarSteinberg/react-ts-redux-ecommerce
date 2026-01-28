@@ -2,6 +2,7 @@ import { createSlice, current } from "@reduxjs/toolkit";
 import type { Product } from "../../types/products";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { CartState } from "../../types/cart/cartState";
+import type { CartItem } from "../../types/cart/cartItem";
 
 const initialState: CartState = {
   cartItems: [],
@@ -28,7 +29,7 @@ const cartSlice = createSlice({
       state.total = state.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
       state.updatedAt = new Date().toLocaleString();
-    
+
       console.log(current(state).cartItems);
     },
 
@@ -36,21 +37,29 @@ const cartSlice = createSlice({
     removeItem: (state, action: PayloadAction<string>) => {
       const pid = action.payload;
 
-      state.cartItems = state.cartItems.filter( item => item._id !== pid);
+      state.cartItems = state.cartItems.filter(item => item._id !== pid);
 
-      state.total = state.cartItems.reduce( (acc, item) => acc + item.price * item.quantity, 0);
+      state.total = state.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
       state.updatedAt = new Date().toLocaleString();
     },
 
-    
+
     clearCart: (state) => {
       state.cartItems = [];
       state.total = 0;
       state.updatedAt = new Date().toLocaleString();
     },
+
+    setCart: (state, action: PayloadAction<CartItem[]>) => {
+      state.cartItems = action.payload;
+
+      state.total = action.payload.reduce((acc, item) => acc + item.price * item.quantity, 0);
+
+      state.updatedAt = new Date().toLocaleString();
+    }
   },
 });
 
-export const { addItems, removeItem, clearCart } = cartSlice.actions;
+export const { addItems, removeItem, clearCart, setCart } = cartSlice.actions;
 export default cartSlice.reducer;
