@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import type { AppDispatch } from "../../store";
 import styles from './styles.module.css';
 
-import type { ApiResponse } from "../../types/products";
 import type { MongoCart } from "../../types/cart/mongoCart";
 
 import { removeItem } from "../../features/cart/cartSlice";
@@ -11,13 +10,14 @@ import CartItemCart from "./cartItemCard";
 
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
+import { fetchDeleteProductInCart, fetchGetCart } from "./service/cart_service";
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const [cart, setCart] = useState<MongoCart | null>(null);
 
-    const user = useSelector((state:RootState) => state.auth.user)
+    const user = useSelector((state: RootState) => state.auth.user)
     const cid = user?.cart;
 
     const deleteProduct = async (id: string) => {
@@ -25,26 +25,30 @@ const Cart = () => {
         apiRemoveItem(id);
     };
 
+
     const apiRemoveItem = async (pid: string) => {
         try {
-            const response = await fetch(
-                `http://localhost:8080/api/carts/${cid}/product/${pid}`,
-                { method: "DELETE" }
-            );
-            const data = await response.json();
-            console.log(data.payload);
-            fetchCart()
-        } catch (error) {
-            console.error(error);
+            if (!cid) {
+                throw new Error("Falta el ID del carrito");
+            }
+
+            const data = await fetchDeleteProductInCart(cid, pid);
+            console.log("Producto eliminado:", data.payload);
+
+            fetchCart(); // refresca carrito
+        } catch (error: any) {
+            console.error("Error eliminando producto:", error.message || error);
         }
     };
 
+
     const fetchCart = async () => {
         try {
-            const response = await fetch(
-                `http://localhost:8080/api/carts/${cid}`
-            );
-            const data: ApiResponse<MongoCart> = await response.json();
+            if (!cid) {
+                throw new Error("Falta el ID del carrito");
+            }
+
+            const data = await fetchGetCart(cid);
             setCart(data.payload);
             console.table(data.payload);
         } catch (error) {
@@ -65,7 +69,7 @@ const Cart = () => {
 
             <CartItemCart cart={cart} deleteProduct={deleteProduct} />
 
-            <h2 className={styles.cardTitle} style={{color: 'green'}}>Total de la compra: ${total}</h2>
+            <h2 className={styles.cardTitle} style={{ color: 'green' }}>Total de la compra: ${total}</h2>
         </>
     );
 };

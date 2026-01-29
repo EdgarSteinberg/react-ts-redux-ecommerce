@@ -2,16 +2,16 @@ import { TiShoppingCart } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 
+
 const CartWidget = () => {
-    const cartItems = useSelector(
-        (state: RootState) => state.cart.cartItems
-    );
+
+    const cartItems = useSelector((state: RootState) => state.cart.cartItems);
 
     const user = useSelector((state: RootState) => state.auth.user)
     if (!user) return <TiShoppingCart size={24} />;
-    
-    const totalQuantity = cartItems.reduce(
-        (acc, item) => acc + item.quantity, 0);
+    /* console.log('userCartWidget', user.cart.products ) */
+
+    const totalQuantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
     return (
         <>
@@ -32,7 +32,7 @@ const CartWidget = () => {
                     {totalQuantity}
                 </span>
             )}
-       </>
+        </>
     );
 };
 

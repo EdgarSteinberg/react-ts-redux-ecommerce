@@ -13,6 +13,8 @@ import { Link } from "react-router-dom";
 import { setUserRedux } from "../../../features/auth/authSlice";
 import { useDispatch, useSelector } from "react-redux";
 import type { RootState } from "../../../store";
+import { fetchGetCart } from "../../cart/service/cart_service";
+import { setCartItems } from "../../../features/cart/cartSlice";
 
 const Login = () => {
     const dispatch = useDispatch();
@@ -55,8 +57,17 @@ const Login = () => {
         try {
             await loginUser(user); // SERVICE
 
-            const data = await currentUser();
+            const data = await currentUser(); //SERVICE
             dispatch(setUserRedux(data.user));
+
+            // 👉 ACÁ entra el carrito
+            if (data.user.cart) {
+                console.log(data.user.cart)
+                const cart = await fetchGetCart(data.user.cart); // SERVICE
+                dispatch(setCartItems(cart.payload.products));
+                console.log( cart.payload.products)
+
+            }
             navigate('/');
 
         } catch (error) {

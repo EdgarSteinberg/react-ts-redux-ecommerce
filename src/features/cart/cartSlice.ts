@@ -8,6 +8,7 @@ const initialState: CartState = {
   cartItems: [],
   total: 0,
   updatedAt: new Date().toLocaleString(),
+
 };
 
 const cartSlice = createSlice({
@@ -51,15 +52,21 @@ const cartSlice = createSlice({
       state.updatedAt = new Date().toLocaleString();
     },
 
-    setCart: (state, action: PayloadAction<CartItem[]>) => {
+    /* setCart: (state, action: PayloadAction<CartItem[]>) => {
       state.cartItems = action.payload;
 
       state.total = action.payload.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
       state.updatedAt = new Date().toLocaleString();
+    } */
+
+    setCartItems: (state, action: PayloadAction<CartItem[]>) => {
+      state.cartItems = action.payload;
+      state.total = action.payload.reduce((acc, item) => acc + item.price * item.quantity, 0);
+      state.updatedAt = new Date().toLocaleString();
     }
   },
 });
 
-export const { addItems, removeItem, clearCart, setCart } = cartSlice.actions;
+export const { addItems, removeItem, clearCart, setCartItems } = cartSlice.actions;
 export default cartSlice.reducer;

@@ -22,7 +22,8 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     const handleAddToCart = async () => {
         if (!user?.cart) {
-            alert("Tenés que iniciar sesión");
+            alert("Tenés que iniciar sesión")
+            navigate("/login");
             return;
         }
 
