@@ -1,6 +1,9 @@
+.logo {
+    max-height: 80px;
+    width: auto;
+}
 
-
-.divContainer{
+.divContainer {
     display: flex;
     flex-wrap: wrap;
 }

@@ -1,6 +1,7 @@
 import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import type { Message } from "../../../types/message";
 import styles from '../styles.module.css';
+import { Link } from "react-router-dom";
 
 type SendResetEmailProps = {
     message: Message | null;
@@ -33,7 +34,8 @@ const SendResetEmailForm = ({ email, handleOnSubmit, handleOnChange, message }: 
                             onChange={handleOnChange}
                         />
                     </FormGroup>
-                    <Button type="submit" className={styles.btn}>Enviar</Button>
+                    <Button type="submit" className={styles.cardDetailBtnC}>Enviar</Button>
+                    <Link to="/login" className={styles.link}>Volver al login</Link>
                 </Form>
             </div>
         </>

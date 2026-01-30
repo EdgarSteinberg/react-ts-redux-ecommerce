@@ -47,7 +47,7 @@ const RegisterForm = ({ register, message, loading, handleOnChange, handleSubmit
                     <FormControl type="password" name="password" value={register.password} onChange={handleOnChange} />
                 </FormGroup>
 
-                <Button type="submit" disabled={loading} className={styles.btn}>
+                <Button type="submit" disabled={loading} className={styles.cardDetailBtnC}>
                     {loading ? 'Enviando...' : 'Registrarse'}
                 </Button>
 

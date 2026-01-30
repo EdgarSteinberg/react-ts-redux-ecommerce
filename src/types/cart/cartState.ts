@@ -10,9 +10,3 @@ export interface CartState {
   updatedAt: string;
 }
 
-
-/* export interface MongoCart {
-  _id: string;
-  products: CartItem[];
-
-} */

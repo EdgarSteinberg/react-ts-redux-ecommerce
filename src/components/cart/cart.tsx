@@ -65,11 +65,11 @@ const Cart = () => {
 
     return (
         <>
-            <h1 className={styles.cardTitle}>Carrito 🛒</h1>
+            <h1 className={styles.cardTitle}>Tu Carrito 🛒</h1>
 
             <CartItemCart cart={cart} deleteProduct={deleteProduct} />
 
-            <h2 className={styles.cardTitle} style={{ color: 'green' }}>Total de la compra: ${total}</h2>
+            <h2 className={styles.cardTitle} style={{ color: '#00A650' }}>Total de la compra: ${total}</h2>
         </>
     );
 };

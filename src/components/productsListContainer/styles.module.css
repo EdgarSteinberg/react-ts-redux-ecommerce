@@ -3,9 +3,9 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    margin: 10px;
     gap: 10px;
-
+    background-color: rgb(221, 221, 221);
+    
 }
 
 .imgContainer {
@@ -17,4 +17,24 @@
 .description {
     height: 45px;
     overflow: hidden;
+    margin: 0;
+}
+
+.cardContainer{
+    width: 18rem;
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.cardPrice{
+    margin: 0;
+    color: #00A650;
+    background-color: #00A6501A;
+    font-weight: bold;
+    font-size: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+ 
 }

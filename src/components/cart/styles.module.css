@@ -1,31 +1,32 @@
-
-.img{
+.img {
     width: 100px;
 }
-.card{
+
+.card {
     margin-top: 10px;
 }
 
-.cardContainer{
+.cardContainer {
     display: flex;
-     align-items: center;
-     justify-content: space-between;
-    background-color: yellow;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #dee2e6;
 }
 
-.cardTitle{
+.cardTitle {
     text-align: center;
     margin-top: 10px;
- 
+
 }
 
-.cardText{
+.cardText {
     margin-top: 0;
 }
 
 .ellipsis {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
- 
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
+

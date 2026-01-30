@@ -1,14 +1,61 @@
-.divContainer{
+.divContainer {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     margin-top: 20px;
-   
+
 }
 
-.imgContainer{
-    
+.imgContainer {
+    background-color: #dee2e6;
     object-fit: contain;
- 
+    width: 500px;
+    height: 500px;
+}
+
+.app {
+  min-height: 70vh;
+}
+
+.cardContainer{
+    display: flex;
+    flex-direction: row;
+    max-width: 90%;
+    align-items: center;
+    gap: 20px;
+}
+
+.cardDetail{
+    flex: 1;
+    border: 1px solid #dee2e6;
+    border-radius: 10px;
+    min-height: 70vh;
+    padding: 10px;
+}
+
+.cardDetailP{
+    color:#00A650;
+    font-size: 16px;
+
+}
+
+.cardDetailBtnC{
+    width: 100%;
+    height: 48px;
+    background-color:#3483fa;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.cardDetailBtnA{
+    width: 100%;
+    height: 48px;
+    color:#3483fa;
+    background-color:#4189E626;
+
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
 }

@@ -6,6 +6,7 @@ export interface RegisterUser {
   age: number;
   cart: string;  
   role: string;
+  password: string;
 }
 
 
