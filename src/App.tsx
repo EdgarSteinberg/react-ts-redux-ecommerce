@@ -24,6 +24,7 @@ import { setUserRedux } from './features/auth/authSlice';
 import { currentUser } from './components/auth/service/login';
 import MainNavBar from './components/navBar/mainNavBar';
 import AdminNavBar from './components/navBar/adminNavBar';
+import Orders from './components/orders/orders';
 
 function App() {
   const dispatch = useDispatch()
@@ -57,6 +58,7 @@ function App() {
           <Route path='categories/:category' element={<ProductsListContainer />} />
           <Route path='/products/:pid' element={<ProductDetailContar />} />
           <Route path='/cart' element={<Cart />} />
+          <Route path='/orders' element={<Orders/>} />
 
           {/* rutas auth */}
           <Route path='/register' element={<Register />} />

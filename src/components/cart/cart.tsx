@@ -11,6 +11,9 @@ import CartItemCart from "./cartItemCard";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { fetchDeleteProductInCart, fetchGetCart } from "./service/cart_service";
+import { Button } from "react-bootstrap";
+import Card from 'react-bootstrap/Card';
+import { Link } from "react-router-dom";
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
@@ -61,16 +64,37 @@ const Cart = () => {
     }, [cid]);
 
     //👉 El precio no está en el item, está dentro de product.
-    const total = cart?.products.reduce((acc, item) => acc + item.quantity * item.product.price, 0) ?? 0;
+    // const total = cart?.products.reduce((acc, item) => acc + item.quantity * item.product.price, 0) ?? 0;
 
     return (
         <>
             <h1 className={styles.cardTitle}>Tu Carrito 🛒</h1>
 
-            <CartItemCart cart={cart} deleteProduct={deleteProduct} />
+            {!cart ? (
+                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
 
-            <h2 className={styles.cardTitle} style={{ color: '#00A650' }}>Total de la compra: ${total}</h2>
+                    <Card style={{ width: '18rem' }}>
+                        <Card.Body>
+                            <Card.Title>Tu carrito está esperando 🛒</Card.Title>
+                            <Card.Text>
+                                Iniciá sesión para ver tus productos y finalizar la compra.
+                            </Card.Text>
+                            <Link to="/login" style={{ textDecoration: "none" }}>
+                                <Button variant="primary" style={{ width: '100%' }}>
+                                    Iniciar sesión
+                                </Button>
+                            </Link>
+                        </Card.Body>
+                    </Card>
+
+                </div>
+            ) : cart.products.length > 0 ? (
+                <CartItemCart cart={cart} deleteProduct={deleteProduct} />
+            ) : (
+                <h1 style={{ textAlign: 'center' }}>El carrito no contiene productos</h1>
+            )}
         </>
+
     );
 };
 

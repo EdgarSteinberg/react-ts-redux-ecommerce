@@ -1,5 +1,6 @@
 .img {
-    width: 100px;
+    width: 50px;
+    object-fit: cover;
 }
 
 .card {
@@ -11,6 +12,7 @@
     align-items: center;
     justify-content: space-between;
     background-color: #dee2e6;
+    height: 60px;
 }
 
 .cardTitle {

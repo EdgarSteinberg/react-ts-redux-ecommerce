@@ -2,6 +2,7 @@ import Card from "react-bootstrap/Card";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from './styles.module.css';
 import type { MongoCart } from "../../types/cart/mongoCart";
+import Orders from "../orders/orders";
 
 
 type CartItemCardProps = {
@@ -12,29 +13,45 @@ type CartItemCardProps = {
 const CartItemCard = ({ cart, deleteProduct }: CartItemCardProps) => {
 
     return (
-        <>
-            {cart?.products.map(item => (
-                <div key={item.product._id}>
-                    <Card className={styles.card}>
-                        <Card.Header>{item.product.title}</Card.Header>
+        <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', gap: '0.5rem' }}>
+
+            {/* COLUMNA DE PRODUCTOS */}
+            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+
+                {cart?.products.map(item => (
+                    <Card key={item.product._id} className={styles.card}>
+
+                        {/* <Card.Header>{item.product.title}</Card.Header> */}
                         <Card.Body className={styles.cardContainer}>
                             <Card.Img variant="top" src={item.product.mainImage?.[0]} alt={item.product.title} className={styles.img} />
 
-                            <Card.Title  className={styles.ellipsis}>{item.product.shortDescription}</Card.Title>
-                            <Card.Text style={{ margin: '0',}}>Cantidad: {item.quantity}</Card.Text>
-                            <Card.Text style={{ margin: '0' }}>Precio unitario: $:{item.product.price}</Card.Text>
-                            <Card.Text style={{ margin: '0'}}>Total: ${item.quantity * item.product.price}</Card.Text>
+                            <Card.Title className={styles.ellipsis}>
+                                {item.product.title}
+                            </Card.Title>
 
-                            <FaRegTrashAlt color="red" size={18}
-                                style={{ cursor: "pointer", margin: '0 ' }}
+                            <Card.Text style={{ margin: 0 }}>
+                                Cantidad: {item.quantity}
+                            </Card.Text>
+
+                            <Card.Text style={{ margin: 0 }}>
+                                <strong>$ {item.product.price}</strong>
+                            </Card.Text>
+
+                            <FaRegTrashAlt color="red" style={{ cursor: "pointer" }}
                                 onClick={() => deleteProduct(item.product._id)}
                             />
-
                         </Card.Body>
                     </Card>
-                </div >
-            ))}
-        </>
+                ))}
+            </div>
+
+            {/* CHECKOUT */}
+            <div style={{ flex: 0.5, marginTop: '10px', border: '1px ' , borderRadius: ' 1px solid back' }}>
+                <Orders cart={cart}/>
+            </div>
+
+        </div>
+
     )
 }
 
