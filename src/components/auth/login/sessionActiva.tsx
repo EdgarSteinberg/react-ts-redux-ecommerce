@@ -1,21 +1,29 @@
 import Card from 'react-bootstrap/Card';
 import { FaUser } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { fechingLogout } from "../service/logout";
- 
-
-import type { RegisterUser } from '../../../types/users';
+import { useDispatch } from 'react-redux';
+import type { LoginUser } from '../../../types/users';
+import { Button } from 'react-bootstrap';
+import { setUserRedux } from '../../../features/auth/authSlice';
 
 type UserSessionProps = {
-    user : RegisterUser
+    user: LoginUser
 }
 
-const UserSessionCard = ({user}: UserSessionProps) => {
-     
+const SessionActiva = ({ user }: UserSessionProps) => {
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
 
-    const handleLogout = async () => {
-        await fechingLogout();
-       
+    
+      const handleLogout = async () => {
+        try {
+            await fechingLogout();
+            dispatch(setUserRedux(null));
+            navigate('/login'); // opcional pero recomendado
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -32,9 +40,11 @@ const UserSessionCard = ({user}: UserSessionProps) => {
                         <Card.Text>
                             Ya iniciaste sesión. Podés volver a la tienda o cerrar tu sesión.
                         </Card.Text>
-                        <Card.Link as={Link} to={'/'}>Tienda</Card.Link>
+                        <Card.Link as={Link} to={'/'}>
+                            <Button>Tienda</Button>
+                        </Card.Link>
                         <Card.Link as={Link} to={'/login'} onClick={handleLogout}>
-                            Cerrar sesión
+                            <Button>Cerrar sessión</Button>
                         </Card.Link>
                     </Card.Body>
                 </Card>
@@ -43,4 +53,4 @@ const UserSessionCard = ({user}: UserSessionProps) => {
     )
 }
 
-export default UserSessionCard;
+export default SessionActiva;

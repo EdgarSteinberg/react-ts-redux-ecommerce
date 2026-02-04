@@ -29,12 +29,12 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
                     className={styles.imgContainer}
                 />
                 <Card.Body style={{ width: '100%' }}>
-                    <Card.Title className={styles.description}>{product.title}</Card.Title>
+                    <Card.Title className={styles.title}>{product.title}</Card.Title>
                     <Card.Text className={styles.description}>
                         {product.shortDescription}
                     </Card.Text>
-                    <Card.Text ><strong className={styles.cardPrice}>$ {product.price}</strong></Card.Text>
-                  
+                    <Card.Text className={styles.cardPrice}> $ {product.price} </Card.Text>
+
                     <Link to={`/products/${product._id}`}>
                         <Button variant="warning" style={{ width: '100%' }}>
                             Ver más

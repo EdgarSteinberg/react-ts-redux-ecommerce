@@ -5,7 +5,7 @@
     justify-content: center;
     gap: 10px;
     background-color: rgb(221, 221, 221);
-    
+
 }
 
 .imgContainer {
@@ -14,27 +14,33 @@
 
 }
 
-.description {
+.title {
     height: 45px;
     overflow: hidden;
     margin: 0;
 }
 
-.cardContainer{
+
+.description {
+    height: 45px;
+    overflow: hidden;
+    margin: 0;
+    color: #818282;
+}
+
+.cardContainer {
     width: 18rem;
     display: flex;
     align-items: center;
     margin-top: 10px;
 }
 
-.cardPrice{
-    margin: 0;
-    color: #00A650;
-    background-color: #00A6501A;
-    font-weight: bold;
+.cardPrice {
+    /* color: #00A650; */
+    /*    background-color: #00A6501A; */
+    font-weight: 400;
     font-size: 18px;
-    display: flex;
-    align-items: center;
-    justify-content: end;
- 
+    padding: 4px 8px;
+    border-radius: 6px;
+    display: inline-block;
 }

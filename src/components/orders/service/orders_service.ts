@@ -17,7 +17,7 @@ export const createOrderService = async (orderData: CreateOrder) => {
         body: JSON.stringify(orderData),
     });
 
-    const data: ApiResponse<unknown> = await response.json();
+    const data: ApiResponse<GetOrderById> = await response.json();
 
     if (!response.ok) {
         throw new Error(data.message || "Error creating order");

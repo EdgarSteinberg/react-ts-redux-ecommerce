@@ -42,7 +42,7 @@ const LoginForm = ({ user, message, handleOnchage, handleSubmit }: LoginFormProp
                 </FormGroup>
 
                 <Button type="submit" className={styles.cardDetailBtnC}>Enviar</Button>
-
+                
                 <Link to="/register"  className={styles.link}>
                     ¿No tenés una cuenta? Creá una.
                 </Link>

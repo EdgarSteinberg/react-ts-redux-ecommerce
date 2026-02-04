@@ -4,10 +4,12 @@ import type { RegisterUser } from "../../types/users";
 
 interface AuthState {
   user: RegisterUser | null;
+  loading: boolean
 }
 
 const initialState: AuthState = {
-  user: null
+  user: null,
+  loading: true
 };
 
 const authSlice = createSlice({
@@ -18,9 +20,14 @@ const authSlice = createSlice({
     setUserRedux(state, action: PayloadAction<RegisterUser | null>) {
       console.log("ACTION PAYLOAD:", action.payload);
       state.user = action.payload;
+    },
+
+    setAuthLoading: (state, action) => {
+      state.loading = action.payload;
     }
+
   },
 });
 
-export const { setUserRedux } = authSlice.actions;
+export const { setUserRedux, setAuthLoading } = authSlice.actions;
 export default authSlice.reducer;

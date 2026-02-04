@@ -2,6 +2,10 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import type { AppDispatch } from "../../store";
 import styles from './styles.module.css';
+import { Link } from "react-router-dom";
+import { Button } from "react-bootstrap";
+import Card from 'react-bootstrap/Card';
+
 
 import type { MongoCart } from "../../types/cart/mongoCart";
 
@@ -11,14 +15,14 @@ import CartItemCart from "./cartItemCard";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { fetchDeleteProductInCart, fetchGetCart } from "./service/cart_service";
-import { Button } from "react-bootstrap";
-import Card from 'react-bootstrap/Card';
-import { Link } from "react-router-dom";
+import Loading from "../loading/loading";
+
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const [cart, setCart] = useState<MongoCart | null>(null);
+    const [loading, setLoading] = useState(false);
 
     const user = useSelector((state: RootState) => state.auth.user)
     const cid = user?.cart;
@@ -47,15 +51,18 @@ const Cart = () => {
 
     const fetchCart = async () => {
         try {
+            setLoading(true);
             if (!cid) {
                 throw new Error("Falta el ID del carrito");
             }
 
             const data = await fetchGetCart(cid);
             setCart(data.payload);
-            console.table(data.payload);
+            /*      console.table(data.payload); */
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false)
         }
     };
 
@@ -65,7 +72,7 @@ const Cart = () => {
 
     //👉 El precio no está en el item, está dentro de product.
     // const total = cart?.products.reduce((acc, item) => acc + item.quantity * item.product.price, 0) ?? 0;
-
+    if (loading) return <Loading />
     return (
         <>
             <h1 className={styles.cardTitle}>Tu Carrito 🛒</h1>

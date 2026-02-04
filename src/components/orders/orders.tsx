@@ -5,12 +5,16 @@ import type { RootState } from "../../store";
 import { createOrderService } from "./service/orders_service";
 import type { MongoCart } from "../../types/cart/mongoCart";
 import { BsArrowRight } from "react-icons/bs";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 type OrdersProps = {
     cart: MongoCart | null
 }
 
 const Orders = ({ cart }: OrdersProps) => {
+    const navigate = useNavigate();
+
     const [order, setOrder] = useState({
         first_name: "",
         email: "",
@@ -36,10 +40,14 @@ const Orders = ({ cart }: OrdersProps) => {
                 cart: user.cart,
             };
 
-            await createOrderService(orderData);
-            alert('order creada!')
+            const createdOrder = await createOrderService(orderData);
+            // 👆 ACÁ TENÉS EL ID
+            toast.success("Orden creada con éxito 🧾");
 
-            setOrder({ email: '', first_name: "" })
+            navigate(`/orders/${createdOrder._id}`);
+
+            setOrder({ email: '', first_name: "" });
+
         } catch (error) {
             console.error(error);
         }
@@ -72,8 +80,21 @@ const Orders = ({ cart }: OrdersProps) => {
                         placeholder="email"
                     />
                 </FormGroup>
-                <hr style={{width: '100%', color: 'white'}}/>
-                <Button type="submit" style={{ width: '100%', marginTop: '16px'}}>${total} CHECKOUT <BsArrowRight size={14}/></Button>
+                <hr style={{ height: '0.5px', backgroundColor: '#fff', border: 'none', opacity: 1, marginBottom: '10px' }} />
+
+                <div style={{ color: 'white', textAlign: 'right', fontSize: '14px' }}>
+                    <div>Subtotal: ${total}</div>
+                    <div style={{ opacity: 0.7 }}>Envío: Gratis</div>
+                </div>
+                <Button
+                    type="submit"
+                    style={{width: '100%',marginTop: '16px',display: 'flex',justifyContent: 'space-between',alignItems: 'center',fontWeight: 600}} >
+                    <span>$ {total}</span>
+                    <span style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                        CHECKOUT <BsArrowRight size={14} />
+                    </span>
+                </Button>
+
             </Form>
         </div>
     );

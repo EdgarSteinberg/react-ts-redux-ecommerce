@@ -7,7 +7,7 @@ import DetailCard from "./detailCard";
 import { postFetchCartAddProduct } from "./service/carts/carts_service";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
-
+import { toast } from "react-toastify";
 
 interface ProductItemProps { product: Product; }
 
@@ -19,10 +19,9 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     const user = useSelector((state: RootState) => state.auth.user);
 
-
     const handleAddToCart = async () => {
         if (!user?.cart) {
-            alert("Tenés que iniciar sesión")
+            toast.success("Tenés que iniciar sesión");
             navigate("/login");
             return;
         }
@@ -32,13 +31,6 @@ const ProductItem = ({ product }: ProductItemProps) => {
         navigate("/cart");
     };
 
-    /*  const handleAddToCart = async () => {
-         dispatch(addItems({ product, quantity: count }));
-         await postFetchCartAddProduct(cartId, product._id, count);
-         alert("Producto agregado al carrito");
-         navigate("/cart");
-     }; */
-
     // Devuelve la URL correcta de la imagen (externa o local)
     const getImageSrc = (image?: string) => {
         if (!image) return undefined;
@@ -47,7 +39,6 @@ const ProductItem = ({ product }: ProductItemProps) => {
             ? image
             : `http://localhost:8080/img/${image}`;
     };
-
 
     return (
         <>

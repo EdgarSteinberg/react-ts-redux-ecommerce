@@ -1,6 +1,8 @@
 //Css Bootsrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css'
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 //React Router Dom
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -20,11 +22,11 @@ import SendResetEmail from './components/auth/send_reset_email/sendResetEmail';
 import ResetPassword from './components/auth/ResetPassword/resetPassword';
 import { useEffect } from 'react';
 import { useDispatch } from "react-redux";
-import { setUserRedux } from './features/auth/authSlice';
+import { setUserRedux, setAuthLoading } from './features/auth/authSlice';
 import { currentUser } from './components/auth/service/login';
 import MainNavBar from './components/navBar/mainNavBar';
 import AdminNavBar from './components/navBar/adminNavBar';
-import Orders from './components/orders/orders';
+import OrdersId from './components/orders/ordersId';
 
 function App() {
   const dispatch = useDispatch()
@@ -36,6 +38,8 @@ function App() {
         dispatch(setUserRedux(data ? data.user : null));
       } catch {
         dispatch(setUserRedux(null));
+      } finally {
+        dispatch(setAuthLoading(false));
       }
     };
 
@@ -51,14 +55,16 @@ function App() {
       <BrowserRouter>
         <MainNavBar />
         <AdminNavBar />
-      {/*   <NavBar /> */}
+
+        <ToastContainer />
+        {/*   <NavBar /> */}
         <Routes>
           {/* rutas públicas */}
           <Route path='/' element={<ProductsListContainer />} />
           <Route path='categories/:category' element={<ProductsListContainer />} />
           <Route path='/products/:pid' element={<ProductDetailContar />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/orders' element={<Orders/>} />
+          <Route path='/orders/:oid' element={<OrdersId />} />
 
           {/* rutas auth */}
           <Route path='/register' element={<Register />} />
