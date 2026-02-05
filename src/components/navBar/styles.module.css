@@ -1,9 +1,15 @@
 .logo {
-    max-height: 80px;
+    max-height: 60px;
     width: auto;
 }
 
 .divContainer {
     display: flex;
     flex-wrap: wrap;
+}
+
+.mainNavBar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }

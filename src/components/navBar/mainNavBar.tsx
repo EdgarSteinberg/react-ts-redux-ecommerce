@@ -14,9 +14,9 @@ const MainNavBar = () => {
 
     return (
 
-        <Navbar bg="dark" variant="dark" expand="lg" >
+        <Navbar bg="dark" variant="dark" expand="lg" className={styles.mainNavBar}>
             <Container>
-                <Navbar.Brand as={Link} to="/"><img src={`/mern.webp`} alt="logo" className={styles.logo}/></Navbar.Brand>
+                <Navbar.Brand as={Link} to="/"><img src={`/mern.webp`} alt="logo" className={styles.logo} /></Navbar.Brand>
 
                 {/* Hamburguesa */}
                 <Navbar.Toggle aria-controls="navbar-main" />

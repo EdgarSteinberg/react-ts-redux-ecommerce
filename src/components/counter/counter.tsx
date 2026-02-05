@@ -13,10 +13,10 @@ const Counter = ({ count, increment, decrement }: CounterProps) => {
 
     return (
         <div className={styles.countContainer}>
-            <p style={{marginTop: '14px', marginRight: '10px'}}>Cantidad:</p>
-            <Button onClick={decrement}>-</Button>
+            <p style={{ marginTop: '14px', marginRight: '10px' }}>Cantidad:</p>
+            <Button onClick={decrement} className={styles.countBtn}>-</Button>
             <p className={styles.count}>{count}</p>
-            <Button onClick={increment}>+</Button>
+            <Button onClick={increment} className={styles.countBtn}>+</Button>
         </div>
     )
 }

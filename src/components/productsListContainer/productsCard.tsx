@@ -36,7 +36,7 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
                     <Card.Text className={styles.cardPrice}> $ {product.price} </Card.Text>
 
                     <Link to={`/products/${product._id}`}>
-                        <Button variant="warning" style={{ width: '100%' }}>
+                        <Button className={styles.cardBtn}>
                             Ver más
                         </Button>
                     </Link>

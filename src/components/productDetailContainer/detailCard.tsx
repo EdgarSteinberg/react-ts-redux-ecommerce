@@ -43,7 +43,7 @@ const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, i
                                 <li>
                                     Tags:
                                     {product.tags?.map((tag, index) => (
-                                        <span key={index}> {tag}</span>
+                                        <span key={index} className={styles.tags}> {tag}</span>
                                     ))}
                                 </li>
                             </ul>

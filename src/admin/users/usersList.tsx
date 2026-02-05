@@ -6,7 +6,6 @@ import { getAllUsers, deleteUser } from "../service/users_service";
 import UserTable from "./userTable";
 
 
-
 const UsersList = () => {
     const [users, setUsers] = useState<RegisterPayload[]>([]);
     const [loading, setLoading] = useState(false);

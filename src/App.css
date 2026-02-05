@@ -46,4 +46,6 @@
 .app {
   min-height: 100vh;
   font-family: 'Montserrat', sans-serif;
+    background-color: rgb(221, 221, 221);
+  
 }

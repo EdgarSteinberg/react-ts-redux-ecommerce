@@ -1,5 +1,4 @@
-
-.countContainer{
+.countContainer {
     display: flex;
     gap: 10px;
     margin: 10px;
@@ -8,7 +7,17 @@
     text-align: center;
 }
 
-.count{
+.count {
     text-align: center;
     margin-top: 16px;
+}
+
+.countBtn {
+    background-color: #212529;
+    color: white;
+}
+
+.countBtn:hover {
+    background-color: #21252990;
+    border-color: #1c1f23;
 }

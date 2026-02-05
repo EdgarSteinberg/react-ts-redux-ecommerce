@@ -1,61 +1,83 @@
 .divContainer {
     display: flex;
     justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    margin-top: 20px;
-
+    padding: 24px;
 }
 
 .imgContainer {
-    background-color: #dee2e6;
+    background-color: #f1f3f5;
     object-fit: contain;
-    width: 500px;
-    height: 500px;
+    width: 420px;
+    height: 420px;
+    border-radius: 8px;
+
+    min-height: 70vh;
+
 }
 
 .app {
-  min-height: 70vh;
+    max-height: 70vh;
+    overflow-y: auto;
+    padding-right: 8px;
 }
 
-.cardContainer{
+.cardContainer {
     display: flex;
     flex-direction: row;
-    max-width: 90%;
-    align-items: center;
-    gap: 20px;
+    max-width: 1200px;
+
+    width: 100%;
+    align-items: stretch;
+    gap: 24px;
 }
 
-.cardDetail{
+.cardDetail {
     flex: 1;
     border: 1px solid #dee2e6;
     border-radius: 10px;
     min-height: 70vh;
-    padding: 10px;
+    padding: 16px;
+    position: sticky;
+    top: 24px;
 }
 
-.cardDetailP{
-    color:#00A650;
+.cardDetailP {
+    color: #00A650;
     font-size: 16px;
-
 }
 
-.cardDetailBtnC{
+.cardDetailBtnC {
     width: 100%;
     height: 48px;
-    background-color:#3483fa;
+    /*  background-color: #3483fa; */
+    background-color: #212529;
     margin-top: 10px;
     font-size: 16px;
     font-weight: 600;
 }
 
-.cardDetailBtnA{
+.cardDetailBtnA {
     width: 100%;
     height: 48px;
-    color:#3483fa;
-    background-color:#4189E626;
-
+/*     color: #3483fa; */
+    /* background-color: #4189E626; */
+    background-color: #212529;
+    color: white;
     margin-top: 10px;
     font-size: 16px;
     font-weight: 600;
+}
+
+.cardDetailBtnA:hover,
+.cardDetailBtnC:hover {
+    background-color: #21252990;
+    border-color: #1c1f23;
+}
+
+.tags {
+    background: #e9ecef;
+    padding: 4px 8px;
+    border-radius: 6px;
+    margin-right: 6px;
+    font-size: 12px;
 }
