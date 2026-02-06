@@ -2,10 +2,6 @@ import { useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import type { AppDispatch } from "../../store";
 import styles from './styles.module.css';
-import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import Card from 'react-bootstrap/Card';
-
 
 import type { MongoCart } from "../../types/cart/mongoCart";
 
@@ -16,6 +12,7 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { fetchDeleteProductInCart, fetchGetCart } from "./service/cart_service";
 import Loading from "../loading/loading";
+import CartGuestCard from "./CartGuestCard";
 
 
 const Cart = () => {
@@ -70,36 +67,20 @@ const Cart = () => {
         fetchCart()
     }, [cid]);
 
-    //👉 El precio no está en el item, está dentro de product.
-    // const total = cart?.products.reduce((acc, item) => acc + item.quantity * item.product.price, 0) ?? 0;
     if (loading) return <Loading />
     return (
         <>
             <h1 className={styles.cardTitle}>Tu Carrito 🛒</h1>
 
             {!cart ? (
-                <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '20px' }}>
-
-                    <Card style={{ width: '18rem' }}>
-                        <Card.Body>
-                            <Card.Title>Tu carrito está esperando 🛒</Card.Title>
-                            <Card.Text>
-                                Iniciá sesión para ver tus productos y finalizar la compra.
-                            </Card.Text>
-                            <Link to="/login" style={{ textDecoration: "none" }}>
-                                <Button variant="primary" style={{ width: '100%' }}>
-                                    Iniciar sesión
-                                </Button>
-                            </Link>
-                        </Card.Body>
-                    </Card>
-
-                </div>
-            ) : cart.products.length > 0 ? (
-                <CartItemCart cart={cart} deleteProduct={deleteProduct} />
-            ) : (
-                <h1 style={{ textAlign: 'center' }}>El carrito no contiene productos</h1>
-            )}
+                <CartGuestCard />
+            )
+                : cart.products.length > 0 ? (
+                    <CartItemCart cart={cart} deleteProduct={deleteProduct} />
+                )
+                    : (
+                        <h1 className={styles.cardTitle}>El carrito no contiene productos</h1>
+                    )}
         </>
 
     );

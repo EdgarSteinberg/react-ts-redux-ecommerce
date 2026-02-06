@@ -17,9 +17,25 @@ const UsersList = () => {
             try {
                 const users = await getAllUsers(); // 👈 Service Users
                 setUsers(users);
-            } catch (error) {
-                console.error(error);
-                setMessage({ type: "error", text: "Error al obtener los usuarios" });
+            } catch (error: any) {
+           
+                if (error.status === 401) {
+                    setMessage({
+                        type: "error",
+                        text: "Debes iniciar sesión"
+                    });
+                } else if (error.status === 403) {
+                    setMessage({
+                        type: "error",
+                        text: "No tienes permisos para ver los usuarios"
+                    });
+                } else {
+                    setMessage({
+                        type: "error",
+                        text: "Error al obtener los usuarios"
+                    })
+                }
+
             } finally {
                 setLoading(false);
             }

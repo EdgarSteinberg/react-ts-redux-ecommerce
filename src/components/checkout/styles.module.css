@@ -1,0 +1,75 @@
+.formContainer {
+    background-color: blue;
+    padding: 7px;
+    border: 1px;
+    border-radius: 7px;
+}
+
+.formColorTitleP {
+    color: white;
+}
+
+.formHr {
+    height: 0.5;
+    background-color: #fff;
+    border: none;
+    opacity: 1;
+    margin-top: 10px;
+}
+
+.formSubTotal {
+    color: white;
+    text-align: right;
+    font-size: 14px;
+}
+
+.formEnvio {
+    opacity: 0.7;
+}
+
+.formBtn {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    width: 100%;
+    margin-top: 16px;
+}
+
+.formBtnSpan {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.CheckOutCardByIdTitle {
+    text-align: center;
+    margin-top: 14px;
+}
+
+.CheckOutCardByIdDivContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.CheckOutCardByIdContainer {
+    width: 24rem;
+    background-color: #212529;
+    color: white;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.CheckOutCardByIdLinkContainer {
+    display: flex;
+    gap: 10px;
+    margin-top: 14px;
+}
+
+.CheckOutCardByIdLink{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

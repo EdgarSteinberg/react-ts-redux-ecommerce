@@ -26,7 +26,8 @@ import { setUserRedux, setAuthLoading } from './features/auth/authSlice';
 import { currentUser } from './components/auth/service/login';
 import MainNavBar from './components/navBar/mainNavBar';
 import AdminNavBar from './components/navBar/adminNavBar';
-import OrdersId from './components/orders/ordersId';
+import CheckOutId from './components/checkout/checkOutId';
+import SessionActiva from './components/auth/login/sessionActiva';
 
 function App() {
   const dispatch = useDispatch()
@@ -64,11 +65,12 @@ function App() {
           <Route path='categories/:category' element={<ProductsListContainer />} />
           <Route path='/products/:pid' element={<ProductDetailContar />} />
           <Route path='/cart' element={<Cart />} />
-          <Route path='/orders/:oid' element={<OrdersId />} />
+          <Route path='/orders/:oid' element={<CheckOutId />} />
 
           {/* rutas auth */}
           <Route path='/register' element={<Register />} />
           <Route path='/login' element={<Login />} />
+          <Route path='/account' element={<SessionActiva />} />
           <Route path='/sendResetEmail' element={<SendResetEmail />} />
           <Route path='/reset-password' element={<ResetPassword />} />
 

@@ -39,13 +39,12 @@ const MainNavBar = () => {
                             <CartWidget />
                         </Nav.Link>
 
-                        <Nav.Link as={Link} to="/login" style={{ display: 'flex', alignItems: 'center', marginLeft: '16px' }}>
+
+                        <Nav.Link as={Link} to={user ? 'account' : '/login'} style={{ display: 'flex', alignItems: 'center', marginLeft: '16px' }}>
                             <FaUser size={20} color="white" />
-                            {user && (
-                                <span style={{ marginLeft: '6px' }}>
-                                    Hola {user.first_name}!
-                                </span>
-                            )}
+                            <span style={{ marginLeft: '6px' }}>
+                                {user ? `Hola ${user.first_name}` : 'Ingresar'}
+                            </span>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

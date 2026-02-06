@@ -10,6 +10,7 @@ export interface OrderProduct {
 }
 
 export interface OrderCartItem {
+  _id: string,
   product: OrderProduct;
   quantity: number;
 }

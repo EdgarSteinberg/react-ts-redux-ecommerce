@@ -1,5 +1,3 @@
-/* width: '50%', margin: '0 auto', marginTop: '20px', border: '1px solid #dee2e6', borderRadius: '8px', padding: '20px' */
-
 
 .divContainer {
     width: 50%;
@@ -45,4 +43,20 @@
 .cardDetailBtnC:hover {
     background-color: #21252990;
     border-color: #1c1f23;
+}
+
+.cardSessionActivoContainer{
+    min-height: 70vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+   
+}
+
+.cardSessionActivo{
+    width: 18rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+ 
 }

@@ -11,8 +11,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #dee2e6;
+    background-color: #f0f1f3;
     height: 60px;
+    border-radius: 9px;
 }
 
 .cardTitle {
@@ -32,3 +33,9 @@
 
 }
 
+.cartdGuestContainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+}

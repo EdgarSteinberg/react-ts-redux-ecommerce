@@ -14,7 +14,7 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
     return (
         <>
             {message && (
-                <Alert variant={message.type === "success" ? "success" : "danger"}>
+                <Alert variant={message.type === "success" ? "success" : "danger"} style={{ textAlign: 'center' }}>
                     {message.text}
                 </Alert>
             )}
@@ -49,7 +49,11 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
                     </tbody>
                 </Table>
             ) : (
-                <p>No hay usuarios para mostrar</p>
+                !message ? (
+                    <p>No hay usuarios para mostrar</p>
+                ) : (
+                    null
+                )
             )}
 
         </>

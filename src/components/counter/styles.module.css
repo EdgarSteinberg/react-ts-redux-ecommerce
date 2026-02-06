@@ -17,6 +17,12 @@
     color: white;
 }
 
+.countBtnDecrement {
+    background-color: #212529;
+    color: white;
+    width: 34px;
+}
+
 .countBtn:hover {
     background-color: #21252990;
     border-color: #1c1f23;

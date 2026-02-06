@@ -4,10 +4,13 @@ const API_URL = "http://localhost:8080/api/users";
 
 
 export const getAllUsers = async (): Promise<RegisterPayload[]> => {
-    const response = await fetch(API_URL, {credentials: 'include'});
+    const response = await fetch(API_URL, { credentials: 'include' });
 
     if (!response.ok) {
-        throw new Error("Error al obtener los usuarios");
+        // armamos un error con status
+        const error: any = new Error("Error al obtener los usuarios");
+        error.status = response.status;
+        throw error;
     }
 
     const data: UsersResponse = await response.json();

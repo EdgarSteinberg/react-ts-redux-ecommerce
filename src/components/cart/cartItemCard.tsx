@@ -2,7 +2,7 @@ import Card from "react-bootstrap/Card";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from './styles.module.css';
 import type { MongoCart } from "../../types/cart/mongoCart";
-import Orders from "../orders/orders";
+import CheckOut  from '../checkout/checkOut';
 
 
 type CartItemCardProps = {
@@ -47,7 +47,7 @@ const CartItemCard = ({ cart, deleteProduct }: CartItemCardProps) => {
 
             {/* CHECKOUT */}
             <div style={{ flex: 0.5, marginTop: '10px', border: '1px ' , borderRadius: ' 1px solid back' }}>
-                <Orders cart={cart}/>
+                <CheckOut cart={cart}/>
             </div>
 
         </div>
