@@ -40,12 +40,16 @@ const SessionActiva = () => {
                     <Card.Text>
                         Ya iniciaste sesión. Podés volver a la tienda o cerrar tu sesión.
                     </Card.Text>
-                    <Card.Link as={Link} to={'/'}>
+
+                    <Link to={'/'}>
                         <Button className={styles.cardDetailBtnC}>Tienda</Button>
-                    </Card.Link>
-                    <Card.Link as={Link} to={'/login'} onClick={handleLogout}>
+                    </Link>
+
+                    <Link to={'/login'} onClick={handleLogout}>
                         <Button className={styles.cardDetailBtnC}>Cerrar sessión</Button>
-                    </Card.Link>
+                    </Link>
+
+
                 </Card.Body>
             </Card>
         </div>

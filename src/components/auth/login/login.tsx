@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { Message } from "../../../types/message";
 import Loading from "../../loading/loading";
 import LoginForm from "./loginForm";
@@ -6,14 +6,17 @@ import { useNavigate } from "react-router-dom";
 import { loginUser, currentUser } from "../service/login";
 
 import { setUserRedux } from "../../../features/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { fetchGetCart } from "../../cart/service/cart_service";
 import { setCartItems } from "../../../features/cart/cartSlice";
+import type { RootState } from "../../../store";
 
 
 const Login = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
+
+    const user = useSelector((state: RootState) => state.auth.user)
 
     const initialState = { email: '', password: '' };
 
@@ -51,7 +54,7 @@ const Login = () => {
                 dispatch(setCartItems(cart.payload.products));
                 /*   console.log(cart.payload.products) */
             }
-            navigate('/');
+
 
         } catch (error) {
             setLoading(false);
@@ -64,6 +67,11 @@ const Login = () => {
         }
     };
 
+    useEffect(() => {
+        if (user) {
+            navigate('/', { replace: true });
+        }
+    }, [user, navigate]);
 
     if (loading) return <Loading />
 

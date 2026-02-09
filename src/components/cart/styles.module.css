@@ -39,3 +39,17 @@
     align-items: center;
     margin-top: 20px;
 }
+ 
+
+.cardItemContainer{
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    gap: 0.5rem;
+}
+
+.cardItem{
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+}

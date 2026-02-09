@@ -13,10 +13,10 @@ type CartItemCardProps = {
 const CartItemCard = ({ cart, deleteProduct }: CartItemCardProps) => {
 
     return (
-        <div style={{ display: 'flex', maxWidth: '1200px', margin: '0 auto', gap: '0.5rem' }}>
+        <div className={styles.cardItemContainer}>
 
             {/* COLUMNA DE PRODUCTOS */}
-            <div style={{ display: 'flex', flexDirection: 'column', flex: 1 }}>
+            <div className={styles.cardItem}>
 
                 {cart?.products.map(item => (
                     <Card key={item.product._id} className={styles.card}>

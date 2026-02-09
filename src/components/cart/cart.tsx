@@ -12,14 +12,14 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../../store";
 import { fetchDeleteProductInCart, fetchGetCart } from "./service/cart_service";
 import Loading from "../loading/loading";
-import CartGuestCard from "./CartGuestCard";
+import CartGuestCard from "./cartGuestCard";
 
 
 const Cart = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     const [cart, setCart] = useState<MongoCart | null>(null);
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
 
     const user = useSelector((state: RootState) => state.auth.user)
     const cid = user?.cart;
@@ -62,9 +62,9 @@ const Cart = () => {
             setLoading(false)
         }
     };
-
     useEffect(() => {
-        fetchCart()
+        if (!cid) return;
+        fetchCart();
     }, [cid]);
 
     if (loading) return <Loading />
