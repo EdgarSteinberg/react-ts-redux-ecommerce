@@ -37,7 +37,7 @@ const CheckOutForm = ({ handleSubmit, handleOnChange, order, total }: CheckoutPr
                             name="email"
                             value={order.email}
                             onChange={handleOnChange}
-                            placeholder="email"
+                            placeholder="Email"
                         />
                     </FormGroup>
 

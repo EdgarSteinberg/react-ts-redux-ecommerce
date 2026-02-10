@@ -75,10 +75,10 @@ const OrdersId = () => {
 
                     <div className={styles.CheckOutCardByIdLinkContainer}>
                         <Link to={'/'} className={styles.CheckOutCardByIdLink}  >
-                            <Button variant="primary">Volver a la tienda</Button>
+                            <Button  className={styles.orderDetailBtn}>Volver a la tienda</Button>
                         </Link>
                         <Link to={'/orders'} className={styles.CheckOutCardByIdLink}>
-                            <Button variant="primary">Ver mis órdenes</Button>
+                            <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button>
                         </Link>
                     </div>
                 </div>

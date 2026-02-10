@@ -1,14 +1,21 @@
-import { createSlice, current } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 import type { Product } from "../../types/products";
 import type { PayloadAction } from "@reduxjs/toolkit";
 import type { CartState } from "../../types/cart/cartState";
 import type { CartItem } from "../../types/cart/cartItem";
 
-const initialState: CartState = {
+/* const initialState: CartState = {
   cartItems: [],
   total: 0,
   updatedAt: new Date().toLocaleString(),
 
+}; */
+const cartFromStorage = localStorage.getItem("Cart");
+
+const initialState: CartState = {
+  cartItems: cartFromStorage ? JSON.parse(cartFromStorage) : [],
+  total: cartFromStorage ? JSON.parse(cartFromStorage).reduce((acc: number, item: any) => acc + item.price * item.quantity, 0) : 0,
+  updatedAt: new Date().toLocaleString(),
 };
 
 const cartSlice = createSlice({
@@ -31,7 +38,9 @@ const cartSlice = createSlice({
 
       state.updatedAt = new Date().toLocaleString();
 
-      console.log(current(state).cartItems);
+      /* console.log(current(state).cartItems); */
+
+      localStorage.setItem('Cart', JSON.stringify(state.cartItems));
     },
 
 
@@ -52,13 +61,6 @@ const cartSlice = createSlice({
       state.updatedAt = new Date().toLocaleString();
     },
 
-    /* setCart: (state, action: PayloadAction<CartItem[]>) => {
-      state.cartItems = action.payload;
-
-      state.total = action.payload.reduce((acc, item) => acc + item.price * item.quantity, 0);
-
-      state.updatedAt = new Date().toLocaleString();
-    } */
 
     setCartItems: (state, action: PayloadAction<CartItem[]>) => {
       state.cartItems = action.payload;

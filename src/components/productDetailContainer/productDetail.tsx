@@ -19,7 +19,7 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
     const user = useSelector((state: RootState) => state.auth.user);
 
-    const handleAddToCart = async () => {
+    const handleAddToCart = async (redirect: "cart" | "shop") => {
         if (!user?.cart) {
             toast.success("Tenés que iniciar sesión");
             navigate("/login");
@@ -28,7 +28,13 @@ const ProductItem = ({ product }: ProductItemProps) => {
 
         dispatch(addItems({ product, quantity: count }));
         await postFetchCartAddProduct(user.cart, product._id, count);
-        navigate("/cart");
+
+        if (redirect === "cart") {
+            navigate("/cart");
+            return;
+        }
+
+        toast.success("🛒 Producto agregado al carrito");
     };
 
     // Devuelve la URL correcta de la imagen (externa o local)

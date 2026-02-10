@@ -7,7 +7,7 @@ import { FaCartPlus } from "react-icons/fa6";
 
 type DetailCardProps = {
     product: Product;
-    handleAddToCart: () => void;
+    handleAddToCart: (redirect: "cart" | "shop") => void;
     getImageSrc: (image?: string) => string | undefined;
     count: number;
     increment: () => void;
@@ -38,8 +38,9 @@ const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, i
                                 <li>Marca {product.brand}</li>
                                 <li>Categoría {product.category}</li>
                                 {product.discount && (
-                                    <li>Descuento: {product.discount}%</li>
+                                    <li> <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>Descuento: <strong className={styles.discount}>{product.discount}%</strong></div></li>
                                 )}
+
                                 <li>
                                     Tags:
                                     {product.tags?.map((tag, index) => (
@@ -66,8 +67,8 @@ const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, i
                             />
                         </strong>
 
-                        <Button onClick={handleAddToCart} className={styles.cardDetailBtnC}>Comprar</Button>
-                        <Button onClick={handleAddToCart} className={styles.cardDetailBtnA}><strong style={{marginRight: '8px'}}><FaCartPlus size={20}/></strong>Agregar al carrito</Button>
+                        <Button onClick={() => handleAddToCart("cart")} className={styles.cardDetailBtnC}>Comprar</Button>
+                        <Button onClick={() => handleAddToCart("shop")} className={styles.cardDetailBtnA}><strong style={{ marginRight: '8px' }}><FaCartPlus size={20} /></strong>Agregar al carrito</Button>
                     </div>
 
                 </Card>

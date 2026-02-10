@@ -19,6 +19,7 @@ const ProductList = () => {
                 setLoading(true);
                 const data = await getProducts();
                 setProducts(data);
+                console.log(data)
             } catch (err) {
                 console.error(err);
                 setError("No se pudieron cargar los productos");
