@@ -52,6 +52,9 @@ const cartSlice = createSlice({
       state.total = state.cartItems.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
       state.updatedAt = new Date().toLocaleString();
+
+      localStorage.setItem('Cart', JSON.stringify(state.cartItems));
+
     },
 
 
