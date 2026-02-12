@@ -43,3 +43,19 @@ export const getOrderService = async (oid: string): Promise<GetOrderById> => {
 
     return data.payload;
 };
+
+
+export const getUserOrder = async () => {
+    const response = await fetch(`${API_URL}/my-orders`, {
+        method: "GET",
+        credentials: "include"
+    });
+
+    const data: ApiResponse<GetOrderById[]> = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.message || "Error fetching orders");
+    }
+
+    return data.payload;
+};

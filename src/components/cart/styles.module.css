@@ -53,3 +53,63 @@
     flex-direction: column;
     flex: 1;
 }
+
+/* CHECKOUT */
+.checkout{
+    flex: 0.5;
+    margin-top: 10px;
+    border: 1px;
+    border-radius: 1px solid black;
+}
+
+@media (max-width: 1200px) {
+  .cardItemContainer {
+    max-width: 100%;
+    padding: 0 16px;
+  }
+}
+
+
+@media (max-width: 992px) {
+  .cardItemContainer {
+    flex-direction: column;
+  }
+
+  .checkout {
+    width: 100%;
+    margin-top: 16px;
+  }
+}
+
+
+@media (max-width: 768px) {
+  .cardContainer {
+    height: auto;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  .img {
+    width: 40px;
+  }
+
+  .ellipsis {
+    font-size: 14px;
+    max-width: 120px;
+  }
+}
+
+
+@media (max-width: 576px) {
+  .cardContainer {
+    flex-wrap: wrap;
+  }
+
+  .ellipsis {
+    white-space: normal;
+  }
+
+  .cardContainer strong {
+    font-size: 14px;
+  }
+}

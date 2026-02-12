@@ -1,11 +1,13 @@
 import { useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import type { RootState } from "../../store";
 import { createOrderService } from "./service/orders_service";
 import type { MongoCart } from "../../types/cart/mongoCart";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import CheckOutForm from "./checkOutForm";
+import { clearCart } from "../../features/cart/cartSlice";
+
 
 type OrdersProps = {
     cart: MongoCart | null
@@ -16,6 +18,7 @@ type CheckoutOrder = {
 };
 const Orders = ({ cart }: OrdersProps) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const [order, setOrder] = useState<CheckoutOrder>({
         first_name: "",
@@ -46,10 +49,12 @@ const Orders = ({ cart }: OrdersProps) => {
             // 👆 ACÁ TENÉS EL ID
             toast.success("Orden creada con éxito 🧾");
 
-            navigate(`/orders/${createdOrder._id}`);
-
+            
             setOrder({ email: '', first_name: "" });
-
+            
+            dispatch(clearCart());
+            localStorage.setItem('Cart', JSON.stringify([]));
+            navigate(`/orders/${createdOrder._id}`);
         } catch (error) {
             console.error(error);
         }

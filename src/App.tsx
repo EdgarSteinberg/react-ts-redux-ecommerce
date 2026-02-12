@@ -28,6 +28,7 @@ import MainNavBar from './components/navBar/mainNavBar';
 import AdminNavBar from './components/navBar/adminNavBar';
 import CheckOutId from './components/checkout/checkOutId';
 import SessionActiva from './components/auth/login/sessionActiva';
+import MyOrders from './components/checkout/myOrders';
 
 function App() {
   const dispatch = useDispatch()
@@ -66,6 +67,7 @@ function App() {
           <Route path='/products/:pid' element={<ProductDetailContar />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/orders/:oid' element={<CheckOutId />} />
+          <Route path='/my-orders' element={<MyOrders/>} />
 
           {/* rutas auth */}
           <Route path='/register' element={<Register />} />

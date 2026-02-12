@@ -62,6 +62,7 @@ const cartSlice = createSlice({
       state.cartItems = [];
       state.total = 0;
       state.updatedAt = new Date().toLocaleString();
+
     },
 
 

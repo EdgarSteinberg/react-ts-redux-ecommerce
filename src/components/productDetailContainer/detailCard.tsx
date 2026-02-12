@@ -29,7 +29,7 @@ const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, i
 
                     <div style={{ flex: 1 }}>
                         <Card.Body className={styles.app}>
-                            <Card.Title style={{ fontSize: '22px' }}>{product.longDescription}</Card.Title>
+                            <Card.Title className={styles.cardDetailTitle} >{product.longDescription}</Card.Title>
                             <Card.Text style={{ fontSize: '36px' }}>$ {product.price} </Card.Text>
                             <Card.Subtitle style={{ fontSize: '14px', marginBottom: '14px' }}>Lo que tenés que saber de este producto</Card.Subtitle>
 
