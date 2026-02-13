@@ -46,8 +46,14 @@ const CreateProduct = () => {
       });
 
     } catch (error: any) {
-      setMessage({ type: "error",text: error.message ? `${error.message}` : `Error al crear el producto`,
-      })
+      
+      if (error.status === 401) {
+        setMessage({ type: 'error', text: 'Debes iniciar sesión' })
+      } else if (error.status === 403) {
+        setMessage({ type: 'error', text: 'No tienes permisos para crear este producto' })
+      } else {
+        setMessage({ type: "error", text: error.message ? `${error.message}` : `Error al crear el producto` })
+      }
     } finally {
       setLoading(false);
     }

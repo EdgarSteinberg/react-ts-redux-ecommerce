@@ -37,11 +37,13 @@ export const createProduct = async (formData: FormData) => {
     credentials: "include",
   });
 
-  const data = await response.json();
-
   if (!response.ok) {
-    throw new Error(data.message || "Error al crear producto");
+    const error: any = new Error(`Error al crear el producto`);
+    error.status = response.status
+    throw error;
   }
+
+  const data = await response.json();
 
   return data;
 };
@@ -72,29 +74,15 @@ export const updateProduct = async (pid: string, formData: FormData) => {
     credentials: "include"
   });
 
-  const data = await response.json();
 
   if (!response.ok) {
-    throw new Error(data.message || "Error al actualizar producto");
+    const error: any = new Error(`Error al actualizar producto`);
+    error.status = response.status
+    throw error;
+
   }
+  const data = await response.json();
 
   return data;
 };
-
-
-
-/* export const updateProduct = async (pid: string, formData: FormData) => {
-  const response = await fetch(`${API_URL}/${pid}`, {
-    method: "PUT",
-    body: formData
-    // NO headers Content-Type
-  });
-
-  if (!response.ok) {
-    throw new Error("Error al actualizar el producto");
-  }
-
-  return response.json();
-};
- */
 

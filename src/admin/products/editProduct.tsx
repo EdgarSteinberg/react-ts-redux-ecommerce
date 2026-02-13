@@ -91,9 +91,14 @@ const EditProduct = () => {
             });
 
         } catch (error: any) {
-            console.error(error);
-            setMessage({ type: "error", text: error.message ? `${error.message}` : "Error al actualizar el producto" });
-
+            
+            if (error.status === 401) {
+                setMessage({ type: "error", text: "Debes iniciar sesión" });
+            } else if (error.status === 403) {
+                setMessage({ type: "error", text: "No tienes permisos para actualizar este producto" })
+            } else {
+                setMessage({ type: "error", text: error.message ? `${error.message}` : "Error al actualizar el producto" });
+            }
         } finally {
             setLoading(false);
         }

@@ -18,8 +18,8 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
             <div style={{ width: '80%', margin: '0 auto', border: '1px solid #dee2e6', borderRadius: '8px' }}>
 
                 {message && (
-                    <Alert variant={message.type === "success" ? "success" : "danger"}>
-                        {message.text}
+                    <Alert variant={message.type === "success" ? "success" : "danger"} style={{textAlign: 'center'}}>
+                        {message.text} 
                     </Alert>
                 )}
 
