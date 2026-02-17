@@ -1,6 +1,6 @@
 import { Form, FormGroup, FormControl, FormLabel, Button, Alert, Spinner } from "react-bootstrap";
 import type { ProductFormData } from "../../hooks/useProductForm";
-
+import styles from './styles.module.css';
 
 type ProductFormDataProps = {
     data: ProductFormData;
@@ -18,8 +18,8 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
             <div style={{ width: '80%', margin: '0 auto', border: '1px solid #dee2e6', borderRadius: '8px' }}>
 
                 {message && (
-                    <Alert variant={message.type === "success" ? "success" : "danger"} style={{textAlign: 'center'}}>
-                        {message.text} 
+                    <Alert variant={message.type === "success" ? "success" : "danger"} style={{ textAlign: 'center' }}>
+                        {message.text}
                     </Alert>
                 )}
 
@@ -46,21 +46,23 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
                     >
                         <Form onSubmit={handleOnSubmit}>
 
+                            <div>
+                                <FormGroup>
+                                    <FormLabel>Título</FormLabel>
+                                    <FormControl name="title" value={data.title} onChange={handleOnChange} />
+                                </FormGroup>
 
-                            <FormGroup>
-                                <FormLabel>Título</FormLabel>
-                                <FormControl name="title" value={data.title} onChange={handleOnChange} />
-                            </FormGroup>
+                                <FormGroup>
+                                    <FormLabel>Descripción corta</FormLabel>
+                                    <FormControl
+                                        as="textarea"
+                                        name="shortDescription"
+                                        value={data.shortDescription}
+                                        onChange={handleOnChange}
+                                    />
+                                </FormGroup>
 
-                            <FormGroup>
-                                <FormLabel>Descripción corta</FormLabel>
-                                <FormControl
-                                    as="textarea"
-                                    name="shortDescription"
-                                    value={data.shortDescription}
-                                    onChange={handleOnChange}
-                                />
-                            </FormGroup>
+                            </div>
 
                             <FormGroup>
                                 <FormLabel>Descripción larga</FormLabel>
@@ -142,7 +144,7 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
                                     onChange={handleImageChange} />
                             </FormGroup>
 
-                            <Button type="submit" disabled={loading} style={{ width: '100%', marginTop: '10px' }}>
+                            <Button type="submit" disabled={loading} className={styles.btn}>
                                 {loading ? <><Spinner size="sm" /> Creando...</> : "Enviar"}
                             </Button>
                         </Form>

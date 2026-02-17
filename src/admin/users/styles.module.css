@@ -1,0 +1,61 @@
+/*   style={{
+                    height: "calc(95vh - 120px)", // define “la pantalla”
+                    display: "flex",
+                    flexDirection: "column",
+                    margin: "0 auto",
+                    maxWidth: "1200px"
+                }}
+ */
+/*   style={{
+                        flex: 1,
+                        overflowY: "auto",
+                        border: "1px solid #dee2e6",
+                        borderRadius: "8px"
+                    }} */
+
+th,
+td {
+    text-align: center;
+}
+
+.definePantalla {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.cardContainer {
+    flex: 1;
+    overflow: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+@media screen and (max-width: 1200px) {
+    .cardContainer {
+        padding: 10px;
+    }
+
+}
+
+.btn {
+    width: 40%;
+    height: 48px;
+    /*  background-color:#3483fa; */
+    background-color: #212529;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none !important;
+}
+
+.btn:hover {
+    background-color: #21252990;
+    border-color: #1c1f23;
+}

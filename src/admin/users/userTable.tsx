@@ -1,9 +1,11 @@
 import Table from 'react-bootstrap/Table';
-import { Alert } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import type { Message } from '../../types/message';
 import type { RegisterPayload } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
-
+import styles from './styles.module.css';
+import Card from 'react-bootstrap/Card';
+import { Link } from 'react-router-dom';
 
 type usersProps = {
     message: Message | null,
@@ -21,57 +23,68 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
             )}
 
             <h1 style={{ textAlign: 'center' }}>Administración de Usuarios</h1>
-            <div
-                style={{
-                    height: "calc(95vh - 120px)", // define “la pantalla”
-                    display: "flex",
-                    flexDirection: "column",
-                    margin: "0 auto",
-                    maxWidth: "1200px"
-                }}
-            >
-                <div
-                    style={{
-                        flex: 1,
-                        overflowY: "auto",
-                        border: "1px solid #dee2e6",
-                        borderRadius: "8px"
-                    }}
-                >
+            <div className={styles.definePantalla}  >
+                <div className={styles.cardContainer}>
                     {users.length > 0 ? (
+                        <>
+                            <div className="d-none d-md-block">
+                                <Table responsive="md">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>Email</th>
+                                            <th>Role</th>
+                                            <th>Acciones</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {users.map((user, index) => (
+                                            <tr key={user._id}>
+                                                <td>{index + 1}</td>
+                                                <td>{user.first_name}</td>
+                                                <td>{user.last_name}</td>
+                                                <td>{user.email}</td>
+                                                <td>{user.role}</td>
+                                                <td>
+                                                    <FaRegTrashAlt color="red" onClick={() => handleDelete(user._id)} />
+                                                </td>
+                                            </tr>
+                                        ))}
+                                    </tbody>
+                                </Table>
+                            </div>
+                            <div className="d-md-none">
+                                {
+                                    users.map((user) => (
+                                        <Card key={user._id} className="mb-3">
+                                            <Card.Body>
+                                                <Card.Title>{user.first_name} {user.last_name}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>
+                                                <Card.Text>  {user.role}</Card.Text>
+                                                <div className="mt-auto text-end">
+                                                    <FaRegTrashAlt
+                                                        color="red"
+                                                        style={{ cursor: "pointer" }}
+                                                        onClick={() => handleDelete(user._id)}
+                                                    />
+                                                </div>
+                                            </Card.Body>
+                                        </Card>
 
-                        <Table striped bordered hover >
-                            <thead>
-                                <tr>
-                                    <th>#</th>
-                                    <th>Nombre</th>
-                                    <th>Apellido</th>
-                                    <th>Email</th>
-                                    <th>Role</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {users.map((user, index) => (
-                                    <tr key={user._id}>
-                                        <td>{index + 1}</td>
-                                        <td>{user.first_name}</td>
-                                        <td>{user.last_name}</td>
-                                        <td>{user.email}</td>
-                                        <td>{user.role}</td>
-                                        <td>
-                                            <FaRegTrashAlt color="red" onClick={() => handleDelete(user._id)} />
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </Table>
-
+                                    ))
+                                }
+                            </div>
+                        </>
                     ) : (
                         !message ? (
                             <p>No hay usuarios para mostrar</p>
                         ) : (
-                            null
+                            <Link to={'/login'}>
+                                <Button className={styles.btn}>Iniciar Sesión</Button>
+                            </Link>
+
                         )
                     )}
                 </div>

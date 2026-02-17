@@ -23,7 +23,7 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
     return (
         <div>
             {message && (
-                <Alert variant={message.type === "success" ? "success" : "danger"}>
+                <Alert variant={message.type === "success" ? "success" : "danger"} style={{textAlign: 'center'}}>
                     {message.text}
                 </Alert>
             )}
@@ -69,7 +69,7 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
                                     <tr key={pr._id} style={{ fontWeight: 'bold' }}>
                                         <td>
                                             <img src={pr.mainImage?.[0]} alt={pr.title}
-                                                style={{ width: 40, height: 40, objectFit: "cover", borderRadius: 6 }} />
+                                                style={{ width: 50, height: 40, objectFit: "cover", borderRadius: 6 }} />
                                         </td>
                                         <td>{pr.title}</td>
                                         <td>{pr.shortDescription}</td>
