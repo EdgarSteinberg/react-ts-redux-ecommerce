@@ -1,5 +1,5 @@
-import { Button } from "react-bootstrap";
 import styles from './styles.module.css'
+import AppButton from "../appButton/appbutton";
 
 interface CounterProps {
     count: number;
@@ -10,13 +10,19 @@ interface CounterProps {
 
 const Counter = ({ count, increment, decrement }: CounterProps) => {
 
-
+    const width = '34px'
     return (
         <div className={styles.countContainer}>
-            <p style={{ marginTop: '14px', marginRight: '10px' }}>Cantidad:</p>
-            <Button onClick={decrement} className={styles.countBtnDecrement}>-</Button>
+            <p className={styles.parrafo}>Cantidad:</p>
+            <AppButton type={'button'} width={width} onClick={decrement}>
+                -
+            </AppButton>
+            {/*  <Button onClick={decrement} className={styles.countBtnDecrement}>-</Button> */}
             <p className={styles.count}>{count}</p>
-            <Button onClick={increment} className={styles.countBtn}>+</Button>
+            {/* <Button onClick={increment} className={styles.countBtn}>+</Button> */}
+            <AppButton type={'button'} width={width} onClick={increment}>
+                +
+            </AppButton>
         </div>
     )
 }

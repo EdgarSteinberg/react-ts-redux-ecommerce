@@ -1,9 +1,10 @@
-import Button from 'react-bootstrap/Button';
+
 import Card from 'react-bootstrap/Card';
 import Counter from "../counter/counter";
 import styles from './styles.module.css'
 import type { Product } from '../../types/products';
 import { FaCartPlus } from "react-icons/fa6";
+import AppButton from '../appButton/appbutton';
 
 type DetailCardProps = {
     product: Product;
@@ -16,7 +17,7 @@ type DetailCardProps = {
 
 
 const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, increment }: DetailCardProps) => {
-
+    const width = '100%';
 
     return (
         <>
@@ -67,8 +68,19 @@ const DetailCard = ({ product, handleAddToCart, getImageSrc, count, decrement, i
                             />
                         </strong>
 
-                        <Button onClick={() => handleAddToCart("cart")} className={styles.cardDetailBtnC}>Comprar</Button>
-                        <Button onClick={() => handleAddToCart("shop")} className={styles.cardDetailBtnA}><strong style={{ marginRight: '8px' }}><FaCartPlus size={20} /></strong>Agregar al carrito</Button>
+                        <AppButton onClick={() => handleAddToCart("cart")} width={width}>
+                            Comprar
+                        </AppButton>
+
+                        <br />
+
+                        <AppButton onClick={() => handleAddToCart("shop")} width={width}>
+                            <strong style={{ marginRight: '8px' }}><FaCartPlus size={20} /></strong>Agregar al carrito
+                        </AppButton>
+
+
+                        {/* <Button onClick={() => handleAddToCart("cart")} className={styles.cardDetailBtnC}>Comprar</Button> */}
+                        {/* <Button onClick={() => handleAddToCart("shop")} className={styles.cardDetailBtnA}><strong style={{ marginRight: '8px' }}><FaCartPlus size={20} /></strong>Agregar al carrito</Button> */}
                     </div>
 
                 </Card>

@@ -1,14 +1,15 @@
 import type { Product } from "../../types/products";
-import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { Link } from "react-router-dom";
 import styles from './styles.module.css'
+import AppButton from "../appButton/appbutton";
 
 interface ProductsCardProps {
     product: Product;
 }
 
 const ProductsCard = ({ product }: ProductsCardProps) => {
+    const width = '100%';
 
     const getImageSrc = (image?: string) => {
         if (!image) return undefined;
@@ -35,10 +36,13 @@ const ProductsCard = ({ product }: ProductsCardProps) => {
                     </Card.Text>
                     <Card.Text className={styles.cardPrice}> $ {product.price} </Card.Text>
 
-                    <Link to={`/products/${product._id}`}>
-                        <Button className={styles.cardBtn}>
+                    <Link to={`/products/${product._id}`} style={{textDecoration: 'none'}}>
+                        {/* <Button className={styles.cardBtn}>
                             Ver más
-                        </Button>
+                        </Button> */}
+                        <AppButton type={'button'} width={width}>
+                            Ver más
+                        </AppButton>
                     </Link>
                 </Card.Body>
             </Card>

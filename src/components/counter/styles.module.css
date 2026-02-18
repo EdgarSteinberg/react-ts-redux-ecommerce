@@ -12,7 +12,12 @@
     margin-top: 16px;
 }
 
-.countBtn {
+.parrafo {
+    margin-top: 14px;
+    margin-right: 10px;
+}
+
+/* .countBtn {
     background-color: #212529;
     color: white;
 }
@@ -26,4 +31,4 @@
 .countBtn:hover {
     background-color: #21252990;
     border-color: #1c1f23;
-}
+} */

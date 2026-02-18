@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom";
-import { Button } from "react-bootstrap";
 import Card from 'react-bootstrap/Card';
 import styles from './styles.module.css';
+import AppButton from "../appButton/appbutton";
 
 const CartGuestCard = () => {
-
+    const width = '100%';
     return (
         <>
             <div className={styles.cartdGuestContainer}>
@@ -16,9 +16,12 @@ const CartGuestCard = () => {
                             Iniciá sesión para ver tus productos y finalizar la compra.
                         </Card.Text>
                         <Link to="/login" style={{ textDecoration: "none" }}>
-                            <Button variant="primary" style={{ width: '100%' }}>
+                            {/* <Button variant="primary" style={{ width: '100%' }}>
                                 Iniciar sesión
-                            </Button>
+                            </Button> */}
+                            <AppButton type="button" width={width}>
+                                Iniciar sesión
+                            </AppButton>
                         </Link>
                     </Card.Body>
                 </Card>
