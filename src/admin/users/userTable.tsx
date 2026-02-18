@@ -1,11 +1,12 @@
 import Table from 'react-bootstrap/Table';
-import { Alert, Button } from "react-bootstrap";
+import { Alert } from "react-bootstrap";
 import type { Message } from '../../types/message';
 import type { RegisterPayload } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from './styles.module.css';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
+import AppButton from '../../components/appButton/appbutton';
 
 type usersProps = {
     message: Message | null,
@@ -13,7 +14,7 @@ type usersProps = {
     handleDelete: (id: string) => void;
 }
 const UserTable = ({ message, users, handleDelete }: usersProps) => {
-
+    const width = '40%'
     return (
         <>
             {message && (
@@ -81,8 +82,11 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
                         !message ? (
                             <p>No hay usuarios para mostrar</p>
                         ) : (
-                            <Link to={'/login'}>
-                                <Button className={styles.btn}>Iniciar Sesión</Button>
+                            <Link to={'/login'} style={{ textDecoration: "none" }}>
+                                {/*  <Button className={styles.btn}>Iniciar Sesión</Button> */}
+                                <AppButton type="button" width={width}>
+                                    Iniciar Sesión
+                                </AppButton>
                             </Link>
 
                         )

@@ -1,6 +1,7 @@
 import { Form, FormGroup, FormControl, FormLabel, Button, Alert, Spinner } from "react-bootstrap";
 import type { ProductFormData } from "../../hooks/useProductForm";
 import styles from './styles.module.css';
+import AppButton from "../../components/appButton/appbutton";
 
 type ProductFormDataProps = {
     data: ProductFormData;
@@ -13,6 +14,9 @@ type ProductFormDataProps = {
 };
 
 const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange, handleOnSubmit, setData }: ProductFormDataProps) => {
+
+    const width = '100%'
+
     return (
         <div style={{ backgroundColor: 'rgb(221, 221, 221)' }}>
             <div style={{ width: '80%', margin: '0 auto', border: '1px solid #dee2e6', borderRadius: '8px' }}>
@@ -143,10 +147,13 @@ const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange
                                     multiple
                                     onChange={handleImageChange} />
                             </FormGroup>
-
-                            <Button type="submit" disabled={loading} className={styles.btn}>
+                            <br></br>
+                            {/*      <Button type="submit" disabled={loading} className={styles.btn}>
                                 {loading ? <><Spinner size="sm" /> Creando...</> : "Enviar"}
-                            </Button>
+                            </Button> */}
+                            <AppButton type={'submit'} width={width}>
+                                Enviar
+                            </AppButton>
                         </Form>
                     </div>
                 </div>
