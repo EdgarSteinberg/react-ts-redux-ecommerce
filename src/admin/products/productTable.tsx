@@ -3,7 +3,7 @@ import { Alert } from "react-bootstrap";
 import type { Product } from '../../types/products';
 import { Link } from 'react-router-dom';
 import { FaRegTrashAlt, FaEdit } from "react-icons/fa";
-
+import styles from './styles.module.css';
 
 type Message = {
     type: "success" | "error";
@@ -23,31 +23,16 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
     return (
         <div>
             {message && (
-                <Alert variant={message.type === "success" ? "success" : "danger"} style={{textAlign: 'center'}}>
+                <Alert variant={message.type === "success" ? "success" : "danger"} className={styles.alertCenter}>
                     {message.text}
                 </Alert>
             )}
             {products.length > 0 ? (
-                <div
-                    style={{
-                        height: "calc(95vh - 120px)", // define “la pantalla”
-                        display: "flex",
-                        flexDirection: "column",
-                        margin: "0 auto",
-                        maxWidth: "1200px"
-                    }}
-                >
+                <div className={styles.definoPantalla}>
                     <h2 className="text-center mb-2">Panel de gestión de productos</h2>
 
-                    <div
-                        style={{
-                            flex: 1,
-                            overflowY: "auto",
-                            border: "1px solid #dee2e6",
-                            borderRadius: "8px",
-
-                        }}
-                    >
+                    <div className={styles.scroll}>
+                        
                         <Table striped bordered hover size="sm">
                             <thead style={{ position: "sticky", top: 0, background: "#fff", zIndex: 1 }}>
                                 <tr className="text-center">

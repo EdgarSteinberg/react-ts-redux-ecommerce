@@ -1,8 +1,9 @@
-import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { Alert, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import type { RegisterUser } from "../../../types/users";
 import type { Message } from "../../../types/message";
 import { Link } from "react-router-dom";
 import styles from '../styles.module.css';
+import AppButton from "../../appButton/appbutton";
 
 type RegisterFormProps = {
     register: RegisterUser;
@@ -12,15 +13,15 @@ type RegisterFormProps = {
     handleSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const RegisterForm = ({ register, message, loading, handleOnChange, handleSubmit }: RegisterFormProps) => {
-
+const RegisterForm = ({ register, message, handleOnChange, handleSubmit }: RegisterFormProps) => {
+    const width = '100%'
 
     return (
         <div className={styles.divContainer}>
             <h1 className={styles.h1title}>Creá tu cuenta</h1>
             <Form onSubmit={handleSubmit} >
                 {message && (
-                    <Alert variant={message.type === 'success' ? 'success' : 'danger'}>{message?.text}</Alert>
+                    <Alert variant={message.type === 'success' ? 'success' : 'danger'} className={styles.alertCenter}>{message?.text}</Alert>
                 )}
                 <FormGroup>
                     <FormLabel>Nombre</FormLabel>
@@ -47,10 +48,13 @@ const RegisterForm = ({ register, message, loading, handleOnChange, handleSubmit
                     <FormControl type="password" name="password" value={register.password} onChange={handleOnChange} />
                 </FormGroup>
 
-                <Button type="submit" disabled={loading} className={styles.cardDetailBtnC}>
+                {/* <Button type="submit" disabled={loading} className={styles.cardDetailBtnC}>
                     {loading ? 'Enviando...' : 'Registrarse'}
-                </Button>
-
+                </Button> */}
+                <br></br>
+                <AppButton type={"submit"} width={width}>
+                    Registrarse
+                </AppButton>
                 <Link to="/login" className={styles.link}>
                     ¿Ya tenés una cuenta? Iniciá sesión
                 </Link>

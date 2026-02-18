@@ -1,7 +1,7 @@
-import { Form, FormGroup, FormControl, FormLabel, Button, Alert, Spinner } from "react-bootstrap";
+import { Form, FormGroup, FormControl, FormLabel, Alert } from "react-bootstrap";
 import type { ProductFormData } from "../../hooks/useProductForm";
-import styles from './styles.module.css';
 import AppButton from "../../components/appButton/appbutton";
+import styles from './styles.module.css';
 
 type ProductFormDataProps = {
     data: ProductFormData;
@@ -13,41 +13,25 @@ type ProductFormDataProps = {
     handleOnSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
 };
 
-const ProductForm = ({ data, loading, message, handleOnChange, handleImageChange, handleOnSubmit, setData }: ProductFormDataProps) => {
+const ProductForm = ({ data, message, handleOnChange, handleImageChange, handleOnSubmit, setData }: ProductFormDataProps) => {
 
     const width = '100%'
 
     return (
-        <div style={{ backgroundColor: 'rgb(221, 221, 221)' }}>
-            <div style={{ width: '80%', margin: '0 auto', border: '1px solid #dee2e6', borderRadius: '8px' }}>
+        <div  className={styles.backGroundColor}>
+            <div className={styles.divContainer}>
 
                 {message && (
-                    <Alert variant={message.type === "success" ? "success" : "danger"} style={{ textAlign: 'center' }}>
+                    <Alert variant={message.type === "success" ? "success" : "danger"} className={styles.alertCenter}>
                         {message.text}
                     </Alert>
                 )}
 
-                <div
-                    style={{
-                        height: "calc(95vh - 120px)", // define “la pantalla”
-                        display: "flex",
-                        flexDirection: "column",
-                        margin: "0 auto",
-                        maxWidth: "1200px"
-                    }}
-                >
-                    <h2 className="text-center">
-                        {data.title ? `Editando: ${data.title}` : "Nuevo producto"}
-                    </h2>
-                    <div
-                        style={{
-                            flex: 1,
-                            overflowY: "auto",
-                            border: "1px solid #dee2e6",
-                            borderRadius: "8px",
+                <div className={styles.definoPantalla}>
 
-                        }}
-                    >
+                    <h2 className="text-center">{data.title ? `Editando: ${data.title}` : "Nuevo producto"}</h2>
+
+                    <div className={styles.scroll} >
                         <Form onSubmit={handleOnSubmit}>
 
                             <div>

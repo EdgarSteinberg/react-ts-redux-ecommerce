@@ -1,8 +1,9 @@
-import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { Alert, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import type { Message } from "../../../types/message";
 import type { LoginUser } from "../../../types/login";
 import { Link } from "react-router-dom";
 import styles from '../styles.module.css';
+import AppButton from "../../appButton/appbutton";
 
 type LoginFormProp = {
     message: Message | null,
@@ -12,14 +13,14 @@ type LoginFormProp = {
 }
 
 const LoginForm = ({ user, message, handleOnchage, handleSubmit }: LoginFormProp) => {
-
+    const width = '100%'
     return (
         <div className={styles.divContainer}>
             <h1 className={styles.h1title}>Iniciar sesión</h1>
             <Form onSubmit={handleSubmit}>
                 {
                     message && (
-                        <Alert variant={message.type == 'success' ? 'success' : 'danger'}>
+                        <Alert variant={message.type == 'success' ? 'success' : 'danger'} className={styles.alertCenter}>
                             {message.text}
                         </Alert>
                     )
@@ -40,10 +41,12 @@ const LoginForm = ({ user, message, handleOnchage, handleSubmit }: LoginFormProp
                         onChange={handleOnchage}
                     />
                 </FormGroup>
-
-                <Button type="submit" className={styles.cardDetailBtnC}>Enviar</Button>
-                
-                <Link to="/register"  className={styles.link}>
+                <br></br>
+                {/* <Button type="submit" className={styles.cardDetailBtnC}>Enviar</Button> */}
+                <AppButton type={"submit"} width={width}>
+                    Enviar
+                </AppButton>
+                <Link to="/register" className={styles.link}>
                     ¿No tenés una cuenta? Creá una.
                 </Link>
 

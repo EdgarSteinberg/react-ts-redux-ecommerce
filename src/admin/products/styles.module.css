@@ -1,19 +1,49 @@
-.btn {
-    width: 100%;
-    height: 48px;
-    /*  background-color:#3483fa; */
-    background-color: #212529;
-    margin-top: 20px;
-    font-size: 16px;
-    font-weight: 600;
-  
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    text-decoration: none !important;
+/* style={{ backgroundColor: 'rgb(221, 221, 221)' }} */
+.backGroundColor {
+    background-color: rgb(221, 221, 221);
 }
 
-.btn:hover {
-    background-color: #21252990;
-    border-color: #1c1f23;
+/* tyle={{ width: '80%', margin: '0 auto', border: '1px solid #dee2e6', borderRadius: '8px' }} */
+.divContainer {
+    width: 80%;
+    margin: 0 auto;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+
+/*        style={{
+                        height: "calc(95vh - 120px)", // define “la pantalla”
+                        display: "flex",
+                        flexDirection: "column",
+                        margin: "0 auto",
+                        maxWidth: "1200px"
+                    }}
+ */
+
+.definoPantalla {
+    height: calc(95vh - 120px);
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+/* 
+                        style={{
+                            flex: 1,
+                            overflowY: "auto",
+                            border: "1px solid #dee2e6",
+                            borderRadius: "8px",
+
+                        }} */
+.scroll {
+    flex: 1;
+    overflow-y: auto;
+    border: 1px solid #dee2e6;
+    border-radius: 8px;
+}
+
+.alertCenter {
+    text-align: center;
 }
