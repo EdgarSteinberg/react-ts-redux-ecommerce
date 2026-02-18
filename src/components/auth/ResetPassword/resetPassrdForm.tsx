@@ -1,6 +1,7 @@
-import { Alert, Button, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
+import { Alert, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
 import type { Message } from "../../../types/message";
 import styles from '../styles.module.css'
+import AppButton from "../../appButton/appbutton";
 
 type PasswordState = { password: string };
 
@@ -11,13 +12,14 @@ type resetPasswordProps = {
     password: PasswordState
 }
 const ResetPasswordForm = ({ message, handleOnChange, handleOnSubmit, password }: resetPasswordProps) => {
+    const width = '100%'
 
     return (
         <div className={styles.divContainer}>
             <h1 className={styles.h1title}>Restablecer contraseña</h1>
             {
                 message && (
-                    <Alert variant={message.type === 'success' ? 'success' : 'danger'}>{message?.text}</Alert>
+                    <Alert variant={message.type === 'success' ? 'success' : 'danger'} className={styles.alertCenter}>{message?.text}</Alert>
                 )
             }
 
@@ -32,7 +34,10 @@ const ResetPasswordForm = ({ message, handleOnChange, handleOnSubmit, password }
                     />
                 </FormGroup>
 
-                <Button type="submit" className={styles.btn}>Enviar</Button>
+                <AppButton type={"submit"} width={width}>
+                    Enviar
+                </AppButton>
+                {/*    <Button type="submit" className={styles.btn}>Enviar</Button> */}
             </Form>
         </div>
     )

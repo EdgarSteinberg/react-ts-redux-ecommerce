@@ -3,10 +3,10 @@ import { FaUser } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { fechingLogout } from "../service/logout";
 import { useDispatch, useSelector } from 'react-redux';
-import { Button } from 'react-bootstrap';
 import { setUserRedux } from '../../../features/auth/authSlice';
 import type { RootState } from '../../../store';
 import styles from '../styles.module.css';
+import AppButton from '../../appButton/appbutton';
 
 const SessionActiva = () => {
     const dispatch = useDispatch();
@@ -26,7 +26,7 @@ const SessionActiva = () => {
             console.error(error);
         }
     };
-
+    const width = '100%'
     return (
         <div className={styles.cardSessionActivoContainer}>
             <Card className={styles.cardSessionActivo}>
@@ -41,12 +41,18 @@ const SessionActiva = () => {
                         Ya iniciaste sesión. Podés volver a la tienda o cerrar tu sesión.
                     </Card.Text>
 
-                    <Link to={'/'}>
-                        <Button className={styles.cardDetailBtnC}>Tienda</Button>
+                    <Link to={'/'} className={styles.link}>
+                        <AppButton width={width}>
+                            Tienda
+                        </AppButton>
+                        {/* <Button className={styles.cardDetailBtnC}>Tienda</Button> */}
                     </Link>
 
-                    <Link to={'/login'} onClick={handleLogout}>
-                        <Button className={styles.cardDetailBtnC}>Cerrar sessión</Button>
+                    <Link to={'/login'} onClick={handleLogout} className={styles.link}>
+                        {/* <Button className={styles.cardDetailBtnC}>Cerrar sessión</Button> */}
+                        <AppButton width={width}>
+                            Cerrar sessión
+                        </AppButton>
                     </Link>
 
 

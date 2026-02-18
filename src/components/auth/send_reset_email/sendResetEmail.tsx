@@ -22,10 +22,7 @@ const SendResetEmail = () => {
 
         // validación antes de prender el loader
         if (!email.email.trim()) {
-            setMessage({
-                type: "error",
-                text: "El email es obligatorio"
-            });
+            setMessage({ type: "error", text: "El email es obligatorio" });
             return;
         }
 
@@ -34,17 +31,11 @@ const SendResetEmail = () => {
         try {
             await fechingSendResetEmail(email); // SERVICE FECHINGSENDEMAIL
 
-            setMessage({
-                type: "success",
-                text: "Si el correo existe, se envió un enlace de restablecimiento"
-            });
+            setMessage({ type: "success", text: "Si el correo existe, se envió un enlace de restablecimiento" });
 
             setEmail({ email: "" });
         } catch (error) {
-            setMessage({
-                type: "error",
-                text: error instanceof Error ? error.message : "Error al enviar el email"
-            });
+            setMessage({ type: "error", text: error instanceof Error ? error.message : "Error al enviar el email" });
         } finally {
             setLoading(false);
         }
