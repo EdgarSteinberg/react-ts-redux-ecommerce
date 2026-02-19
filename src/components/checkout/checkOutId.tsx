@@ -41,7 +41,7 @@ const OrdersId = () => {
         <>
             <h2 className={styles.CheckOutCardByIdTitle}>Resumen de tu compra</h2>
             {order && (
-                <CheckOutCard order={order}/>
+                <CheckOutCard order={order} variant="list"/>
             )
             }
         </>

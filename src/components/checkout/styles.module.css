@@ -54,6 +54,13 @@
     flex-direction: column;
 }
 
+.CheckOutCardByIdDivContainerDetail {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
 .CheckOutCardByIdContainer {
     width: 24rem;
     background-color: #212529;
@@ -69,26 +76,25 @@
     text-decoration: none;
 }
 
-.CheckOutCardByIdLink{
+.CheckOutCardByIdLink {
     display: flex;
     justify-content: center;
     align-items: center;
     text-decoration: none;
 }
- 
 
-/* .orderDetailBtn {
-    width: 100%;
-    height: 48px;
- 
-    background-color: #212529;
-    margin-top: 10px;
-    font-size: 16px;
-    font-weight: 600;
-    
+.ordersGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
 }
 
-.orderDetailBtn:hover {
-    background-color: #21252990;
-    border-color: #1c1f23;
-} */
+
+
+@media screen and (max-width: 430px) {
+    .CheckOutCardByIdContainer {
+        width: 18rem;
+
+    }
+}

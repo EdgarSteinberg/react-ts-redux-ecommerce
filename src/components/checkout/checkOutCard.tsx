@@ -7,14 +7,15 @@ import AppButton from '../appButton/appbutton';
 
 type checkoutCardProps = {
     order: GetOrderById
-
+    variant?: "detail" | "list";
 }
-const CheckOutCard = ({ order }: checkoutCardProps) => {
+const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
     const width = '100%';
 
     return (
         <>
-            <div className={styles.CheckOutCardByIdDivContainer}>
+
+            <div className={variant === 'list' ? styles.CheckOutCardByIdDivContainer : styles.CheckOutCardByIdDivContainerDetail}>
                 <Card className={styles.CheckOutCardByIdContainer} >
 
                     <Card.Header>Orden #{order.code}</Card.Header>
@@ -47,20 +48,25 @@ const CheckOutCard = ({ order }: checkoutCardProps) => {
                     </Card.Body>
                 </Card>
 
-                <div className={styles.CheckOutCardByIdLinkContainer}>
-                    <Link to={'/'} className={styles.CheckOutCardByIdLink}  >
-                        {/* <Button className={styles.orderDetailBtn}>Volver a la tienda</Button> */}
-                        <AppButton type={'button'} width={width}>
-                            Volver a la tienda
-                        </AppButton>
-                    </Link>
-                    <Link to={'/my-orders'} className={styles.CheckOutCardByIdLink}>
-                        {/* <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button> */}
-                        <AppButton type={'button'} width={width}>
-                            Ver mis órdenes
-                        </AppButton>
-                    </Link>
-                </div>
+                {
+                    variant === 'list' && (
+                        <div className={styles.CheckOutCardByIdLinkContainer}>
+                            <Link to={'/'} className={styles.CheckOutCardByIdLink}  >
+                                {/* <Button className={styles.orderDetailBtn}>Volver a la tienda</Button> */}
+                                <AppButton type={'button'} width={width}>
+                                    Volver a la tienda
+                                </AppButton>
+                            </Link>
+                            <Link to={'/my-orders'} className={styles.CheckOutCardByIdLink}>
+                                {/* <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button> */}
+                                <AppButton type={'button'} width={width}>
+                                    Ver mis órdenes
+                                </AppButton>
+                            </Link>
+                        </div>
+                    )
+                }
+
             </div>
         </>
     )
