@@ -36,10 +36,16 @@ const Orders = ({ cart }: OrdersProps) => {
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
+        if (!order.first_name.trim() || !order.email.trim()) {
+            toast.error('Todos los campos son obligatorios');
+            return;
+        }
+
         try {
             if (!user) {
                 throw new Error("Usuario no autenticado");
             }
+
             const orderData = {
                 email: order.email,
                 cart: user.cart,
@@ -49,14 +55,21 @@ const Orders = ({ cart }: OrdersProps) => {
             // 👆 ACÁ TENÉS EL ID
             toast.success("Orden creada con éxito 🧾");
 
-            
+
             setOrder({ email: '', first_name: "" });
-            
+
             dispatch(clearCart());
             localStorage.setItem('Cart', JSON.stringify([]));
             navigate(`/orders/${createdOrder._id}`);
-        } catch (error) {
+        } catch (error: any) {
             console.error(error);
+
+            const message =
+                error instanceof Error
+                    ? error.message
+                    : "Error al generar la orden";
+
+            toast.error(message);
         }
     };
 

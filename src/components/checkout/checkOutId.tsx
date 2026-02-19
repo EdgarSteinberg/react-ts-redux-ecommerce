@@ -22,7 +22,7 @@ const OrdersId = () => {
             try {
                 const data = await getOrderService(oid);
                 setOrder(data);
-                console.log(data)
+             /*    console.log(data) */
                 // 🔁 sincronizar user
                 const dataUser = await currentUser();
                 dispatch(setUserRedux(dataUser.user));

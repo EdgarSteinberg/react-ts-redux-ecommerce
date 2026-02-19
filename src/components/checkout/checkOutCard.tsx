@@ -1,16 +1,16 @@
 import styles from './styles.module.css'
 import Card from 'react-bootstrap/Card';
-import { Button } from "react-bootstrap";
 import type { GetOrderById } from '../../types/orders';
 import { Link } from 'react-router-dom';
+import AppButton from '../appButton/appbutton';
 
 
 type checkoutCardProps = {
     order: GetOrderById
- 
+
 }
 const CheckOutCard = ({ order }: checkoutCardProps) => {
-
+    const width = '100%';
 
     return (
         <>
@@ -49,10 +49,16 @@ const CheckOutCard = ({ order }: checkoutCardProps) => {
 
                 <div className={styles.CheckOutCardByIdLinkContainer}>
                     <Link to={'/'} className={styles.CheckOutCardByIdLink}  >
-                        <Button className={styles.orderDetailBtn}>Volver a la tienda</Button>
+                        {/* <Button className={styles.orderDetailBtn}>Volver a la tienda</Button> */}
+                        <AppButton type={'button'} width={width}>
+                            Volver a la tienda
+                        </AppButton>
                     </Link>
                     <Link to={'/my-orders'} className={styles.CheckOutCardByIdLink}>
-                        <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button>
+                        {/* <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button> */}
+                        <AppButton type={'button'} width={width}>
+                            Ver mis órdenes
+                        </AppButton>
                     </Link>
                 </div>
             </div>

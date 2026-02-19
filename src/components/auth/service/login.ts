@@ -26,15 +26,13 @@ export const currentUser = async () => {
         credentials: 'include'
     });
 
-    if (response.status === 401) {
-        return null;
+     if (!response.ok) {
+        const error: any = new Error('Error al obtener el usuario')
+        error.status = response.status;
+        throw error
     }
 
     const data = await response.json();
-
-    if (!response.ok) {
-        throw new Error(data.message || 'Error inesperado');
-    }
-
+ 
     return data;
 };

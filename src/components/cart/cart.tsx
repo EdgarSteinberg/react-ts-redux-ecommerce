@@ -40,10 +40,9 @@ const Cart = () => {
             if (!cid) {
                 throw new Error("Falta el ID del carrito");
             }
-
-            const data = await fetchDeleteProductInCart(cid, pid);
-            console.log("Producto eliminado:", data.payload);
-
+            /* const data = await fetchDeleteProductInCart(cid, pid);
+               console.log("Producto eliminado:", data.payload); */
+            await fetchDeleteProductInCart(cid, pid);
             fetchCart(); // refresca carrito
         } catch (error: any) {
             console.error("Error eliminando producto:", error.message || error);

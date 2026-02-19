@@ -18,7 +18,7 @@ const authSlice = createSlice({
   reducers: {
 
     setUserRedux(state, action: PayloadAction<RegisterUser | null>) {
-      console.log("ACTION PAYLOAD:", action.payload);
+      /* console.log("ACTION PAYLOAD:", action.payload); */
       state.user = action.payload;
     },
 

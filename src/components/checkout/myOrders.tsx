@@ -29,10 +29,10 @@ const MyOrders = () => {
                 <>
                     <h2 style={{ textAlign: 'center' }}>Mis órdenes</h2>
                     {orders.map(order => (
-                        <div style={{display: 'flex', flexWrap: 'wrap', maxWidth: 'auto'}}>
+                       
 
                             <CheckOutCard key={order._id} order={order} />
-                        </div>
+                      
                     ))}
                 </>
             )}
