@@ -6,6 +6,7 @@ export const postFetchCartAddProduct = async (cid: string, pid: string, quantity
         `http://localhost:8080/api/carts/${cid}/product/${pid}`,
         {
             method: "POST",
+            credentials: 'include',
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ quantity }),
         }

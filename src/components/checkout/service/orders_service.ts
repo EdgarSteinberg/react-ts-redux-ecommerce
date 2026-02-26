@@ -11,6 +11,7 @@ type ApiResponse<T> = {
 export const createOrderService = async (orderData: CreateOrder) => {
     const response = await fetch(API_URL, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -29,10 +30,10 @@ export const createOrderService = async (orderData: CreateOrder) => {
 export const getOrderService = async (oid: string): Promise<GetOrderById> => {
     const response = await fetch(`${API_URL}/${oid}`, {
         method: "GET",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
-        credentials: "include",
     });
 
     const data: ApiResponse<GetOrderById> = await response.json();

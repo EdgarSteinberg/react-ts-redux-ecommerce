@@ -19,6 +19,7 @@ const Cart = () => {
     const [loading, setLoading] = useState(true);
 
     const user = useSelector((state: RootState) => state.auth.user)
+
     const cid = user?.cart;
 
     /*   const deleteProduct = async (id: string) => {

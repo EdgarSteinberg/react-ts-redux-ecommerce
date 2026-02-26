@@ -6,6 +6,7 @@ const API_URL = `http://localhost:8080/api/carts`;
 export const fetchDeleteProductInCart = async (cid: string, pid: string) => {
     const response = await fetch(`${API_URL}/${cid}/product/${pid}`, {
         method: 'DELETE',
+        credentials: "include"
     });
 
     const data = await response.json();
@@ -21,6 +22,7 @@ export const fetchDeleteProductInCart = async (cid: string, pid: string) => {
 export const fetchGetCart = async (cid: string) => {
     const response = await fetch(`${API_URL}/${cid}`, {
         method: "GET",
+        credentials: "include"
     })
 
     const data = await response.json();
