@@ -111,37 +111,40 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
                                         <img
                                             src={pr.mainImage?.[0]}
                                             alt={pr.title}
-                                            style={{
-                                                width: 90,
-                                                height: 80,
-                                                objectFit: "cover",
-                                                borderRadius: 8
-                                            }}
+                                            style={{ width: 90, height: 80, objectFit: "cover", borderRadius: 8 }}
                                         />
                                         <div className="flex-grow-1">
                                             <h6 className="mb-1">{pr.title}</h6>
                                             <p className="mb-1 fw-bold">${pr.price}</p>
                                             <small>Stock: {pr.stock}</small>
-                                            <br />
+                                             <br />
                                             <small>
-                                                {pr.category} • {pr.brand}
+                                                Nombre • {pr.longDescription} 
                                             </small>
                                             <br />
                                             <small>
-                                                {pr.owner === "admin" ? "Admin" : "Premium"}
+                                                Categoria • {pr.category} • {pr.brand}
+                                            </small>
+                                             <br />
+                                            <small>
+                                                Precio • ${pr.price} 
+                                            </small>
+                                             <br />
+                                            <small>
+                                                Tags • {pr.tags?.join(',')}
+                                            </small>
+                                            <br />
+                                            <small>
+                                                Owner • {pr.owner === "admin" ? "Admin" : "Premium"}
                                             </small>
                                         </div>
                                     </div>
 
-                                    <div className="d-flex justify-content-end gap-3 px-3 pb-3">
+                                    <div className="d-flex justify-content-end align-items-center gap-3 px-3 pb-3">
                                         <Link to={`/admin/products/${pr._id}/edit`}>
                                             <FaEdit color="blue" />
                                         </Link>
-                                        <FaRegTrashAlt
-                                            color="red"
-                                            style={{ cursor: "pointer" }}
-                                            onClick={() => handleDelete(pr._id)}
-                                        />
+                                        <FaRegTrashAlt color="red" style={{ cursor: "pointer" }} onClick={() => handleDelete(pr._id)} />
                                     </div>
                                 </Card>
                             ))}
