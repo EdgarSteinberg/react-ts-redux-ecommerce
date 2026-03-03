@@ -60,7 +60,7 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
                             <Link to={'/my-orders'} className={styles.CheckOutCardByIdLink}>
                                 {/* <Button className={styles.orderDetailBtn}>Ver mis órdenes</Button> */}
                                 <AppButton type={'button'} width={width}>
-                                    Ver mis órdenes
+                                    Ver mis compras
                                 </AppButton>
                             </Link>
                         </div>
