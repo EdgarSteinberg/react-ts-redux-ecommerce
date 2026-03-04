@@ -30,3 +30,24 @@ export const deleteUser = async (uid: string) => {
 
     return response.json();
 };
+
+
+export const updatedUserRole = async (uid: string) => {
+    const response = await fetch(`${API_URL}/premium/${uid}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include'
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        const error: any = new Error(data?.message || `Error fetching`);
+        error.status = response.status;
+        throw error;
+    }
+
+    return data.payload;
+}

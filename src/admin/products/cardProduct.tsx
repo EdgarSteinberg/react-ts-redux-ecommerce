@@ -13,8 +13,8 @@ const CardProduct = ({ products, handleDelete }: CardProductsProps) => {
     return (
         <div className="d-xl-none d-flex gap-3 justify-content-center align-items-center flex-wrap mx-auto" style={{ maxWidth: "1100px" }}>
             {products.map(pr => (
-                <div style={{ width: '16rem' }}>
-                    <Card key={pr._id} className="mb-3 shadow-sm d-flex justify-content-center align-items-center">
+                <div style={{ width: '16rem' }} key={pr._id}>
+                    <Card className="mb-3 shadow-sm d-flex justify-content-center align-items-center">
 
                         <Card.Img
                             src={pr.mainImage?.[0]}

@@ -1,5 +1,5 @@
 import Table from 'react-bootstrap/Table';
-import { Alert } from "react-bootstrap";
+import { Alert, Button } from "react-bootstrap";
 import type { Message } from '../../types/message';
 import type { RegisterPayload } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
@@ -7,13 +7,15 @@ import styles from './styles.module.css';
 import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import AppButton from '../../components/appButton/appbutton';
+import { FaCrown } from "react-icons/fa";
 
 type usersProps = {
     message: Message | null,
     users: RegisterPayload[]; // 👈 array
     handleDelete: (id: string) => void;
+    handleUserRolePremium: (id: string) => void;
 }
-const UserTable = ({ message, users, handleDelete }: usersProps) => {
+const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: usersProps) => {
     const width = '40%'
     return (
         <>
@@ -50,7 +52,12 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
                                                 <td>{user.role}</td>
                                                 <td>
                                                     <FaRegTrashAlt color="red" onClick={() => handleDelete(user._id)} />
+                                                    <Button onClick={() => handleUserRolePremium(user._id)}>
+                                                        {user.role === 'user' ? 'Hacer Premium' : 'Quitar Premium'}
+                                                          <FaCrown />
+                                                    </Button>
                                                 </td>
+                                                
                                             </tr>
                                         ))}
                                     </tbody>
@@ -71,6 +78,9 @@ const UserTable = ({ message, users, handleDelete }: usersProps) => {
                                                         onClick={() => handleDelete(user._id)}
                                                     />
                                                 </div>
+                                                <Button onClick={() => handleUserRolePremium(user._id)}>
+                                                    {user.role === 'user' ? 'Hacer Premium' : 'Quitar Premium'}
+                                                </Button>
                                             </Card.Body>
                                         </Card>
 

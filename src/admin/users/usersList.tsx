@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import type { RegisterPayload } from "../../types/users";
 import Loading from "../../components/loading/loading";
 import type { Message } from "../../types/message";
-import { getAllUsers, deleteUser } from "../service/users_service";
+import { getAllUsers, deleteUser, updatedUserRole } from "../service/users_service";
 import UserTable from "./userTable";
 
 
@@ -14,11 +14,11 @@ const UsersList = () => {
     useEffect(() => {
         const fetchingUsers = async () => {
             setLoading(true);
-            
+
             try {
                 const users = await getAllUsers(); // 👈 Service Users
                 setUsers(users);
-          
+
             } catch (error: any) {
 
                 if (error.status === 401) {
@@ -51,11 +51,29 @@ const UsersList = () => {
         }
     };
 
+    const handleUserRolePremium = async (uid: string) => {
+        try {
+            const updatedUser = await updatedUserRole(uid);
+
+            setUsers(prev => prev.map(user => user._id === uid ? updatedUser : user
+                )
+            );
+
+            setMessage({ type: "success", text: "Role modificado!" });
+
+        } catch (error: any) {
+            setMessage({
+                type: "error",
+                text: error?.message || "Error al modificar el role del usuario"
+            });
+        }
+    };
+
     if (loading) return <Loading />;
 
     return (
         <>
-            <UserTable users={users} message={message} handleDelete={handleDelete} />
+            <UserTable users={users} message={message} handleDelete={handleDelete} handleUserRolePremium={handleUserRolePremium}/>
         </>
     );
 };
