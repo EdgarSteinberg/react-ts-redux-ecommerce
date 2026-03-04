@@ -8,6 +8,8 @@ import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import AppButton from '../../components/appButton/appbutton';
 import { FaCrown } from "react-icons/fa";
+import { useSelector } from 'react-redux';
+import type { RootState } from '../../store';
 
 type usersProps = {
     message: Message | null,
@@ -16,7 +18,9 @@ type usersProps = {
     handleUserRolePremium: (id: string) => void;
 }
 const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: usersProps) => {
-    const width = '40%'
+    const { user } = useSelector((state: RootState) => state.auth);
+    const width = '40%';
+
     return (
         <>
             {message && (
@@ -43,21 +47,43 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {users.map((user, index) => (
-                                            <tr key={user._id}>
+                                        {users.map((userItem, index) => (
+                                            <tr key={userItem._id}>
                                                 <td>{index + 1}</td>
-                                                <td>{user.first_name}</td>
-                                                <td>{user.last_name}</td>
-                                                <td>{user.email}</td>
-                                                <td>{user.role}</td>
+                                                <td>{userItem.first_name}</td>
+                                                <td>{userItem.last_name}</td>
+                                                <td>{userItem.email}</td>
+                                                <td>{userItem.role}</td>
+
                                                 <td>
-                                                    <FaRegTrashAlt color="red" onClick={() => handleDelete(user._id)} />
-                                                    <Button onClick={() => handleUserRolePremium(user._id)}>
-                                                        {user.role === 'user' ? 'Hacer Premium' : 'Quitar Premium'}
-                                                          <FaCrown />
-                                                    </Button>
+                                                    <div className="flex items-center gap-3">
+
+                                                        {/* Eliminar */}
+                                                        <FaRegTrashAlt
+                                                            color="red"
+                                                            className="cursor-pointer hover:opacity-70 transition"
+                                                            onClick={() => handleDelete(userItem._id)}
+                                                            title="Eliminar usuario"
+                                                        />
+
+                                                        {/* Cambiar role */}
+                                                        {user?.role === 'admin' && userItem.role !== 'admin' && (
+                                                            <Button
+                                                                onClick={() => handleUserRolePremium(userItem._id)}
+                                                                className={`flex items-center gap-2 ${userItem.role === 'user'
+                                                                    ? 'bg-green-600 hover:bg-green-700'
+                                                                    : 'bg-gray-500 hover:bg-gray-600'
+                                                                    } text-white px-3 py-1 rounded`}
+                                                            >
+                                                                {userItem.role === 'user' ? 'Premium' : 'User'}
+                                                                <FaCrown />
+                                                            </Button>
+                                                        )}
+
+                                                    </div>
                                                 </td>
-                                                
+
+
                                             </tr>
                                         ))}
                                     </tbody>
@@ -65,22 +91,32 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                             </div>
                             <div className="d-md-none">
                                 {
-                                    users.map((user) => (
-                                        <Card key={user._id} className="mb-3">
+                                    users.map((userItem) => (
+                                        <Card key={userItem._id} className="mb-3">
                                             <Card.Body>
-                                                <Card.Title>{user.first_name} {user.last_name}</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">{user.email}</Card.Subtitle>
-                                                <Card.Text>  {user.role}</Card.Text>
+                                                <Card.Title>{userItem.first_name} {userItem.last_name}</Card.Title>
+                                                <Card.Subtitle className="mb-2 text-muted">{userItem.email}</Card.Subtitle>
+                                                <Card.Text>  {userItem.role}</Card.Text>
                                                 <div className="mt-auto text-end">
                                                     <FaRegTrashAlt
                                                         color="red"
                                                         style={{ cursor: "pointer" }}
-                                                        onClick={() => handleDelete(user._id)}
+                                                        onClick={() => handleDelete(userItem._id)}
                                                     />
                                                 </div>
-                                                <Button onClick={() => handleUserRolePremium(user._id)}>
-                                                    {user.role === 'user' ? 'Hacer Premium' : 'Quitar Premium'}
-                                                </Button>
+                                                {/* Cambiar role */}
+                                                {user?.role === 'admin' && userItem.role !== 'admin' && (
+                                                    <Button
+                                                        onClick={() => handleUserRolePremium(userItem._id)}
+                                                        className={`flex items-center gap-2 ${userItem.role === 'user'
+                                                            ? 'bg-green-600 hover:bg-green-700'
+                                                            : 'bg-gray-500 hover:bg-gray-600'
+                                                            } text-white px-3 py-1 rounded`}
+                                                    >
+                                                        {userItem.role === 'user' ? 'Premium' : 'User'}
+                                                        <FaCrown />
+                                                    </Button>
+                                                )}
                                             </Card.Body>
                                         </Card>
 
