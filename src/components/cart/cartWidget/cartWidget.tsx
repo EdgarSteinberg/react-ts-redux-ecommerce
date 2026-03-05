@@ -1,7 +1,7 @@
 import { TiShoppingCart } from "react-icons/ti";
 import { useSelector } from "react-redux";
 import type { RootState } from "../../../store";
-
+import styles from '../styles.module.css';
 
 const CartWidget = () => {
 
@@ -15,7 +15,7 @@ const CartWidget = () => {
 
     return (
         <>
-            <TiShoppingCart size={24} />
+            {/* <TiShoppingCart size={24} />
             {totalQuantity > 0 && (
                 <span
                     style={{
@@ -31,7 +31,18 @@ const CartWidget = () => {
                 >
                     {totalQuantity}
                 </span>
-            )}
+            )} */}
+            <>
+                <div className={styles.cartContainer}>
+                    <TiShoppingCart size={24} />
+
+                    {totalQuantity > 0 && (
+                        <span className={styles.cartBadge}>
+                            {totalQuantity}
+                        </span>
+                    )}
+                </div>
+            </>
         </>
     );
 };
