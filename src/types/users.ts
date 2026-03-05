@@ -18,6 +18,7 @@ export interface RegisterPayload {
   age: number; // 👈 backend
   password: string;
   role: string;
+  last_connection: Date;
 }
 
 

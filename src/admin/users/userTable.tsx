@@ -4,12 +4,12 @@ import type { Message } from '../../types/message';
 import type { RegisterPayload } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from './styles.module.css';
-import Card from 'react-bootstrap/Card';
 import { Link } from 'react-router-dom';
 import AppButton from '../../components/appButton/appbutton';
 import { FaCrown } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
+import UserTableCard from './userTableCard';
 
 type usersProps = {
     message: Message | null,
@@ -17,6 +17,7 @@ type usersProps = {
     handleDelete: (id: string) => void;
     handleUserRolePremium: (id: string) => void;
 }
+
 const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: usersProps) => {
     const { user } = useSelector((state: RootState) => state.auth);
     const width = '40%';
@@ -43,6 +44,7 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                             <th>Apellido</th>
                                             <th>Email</th>
                                             <th>Role</th>
+                                            <th>Ultima Conexión</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -54,7 +56,11 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                                 <td>{userItem.last_name}</td>
                                                 <td>{userItem.email}</td>
                                                 <td>{userItem.role}</td>
-
+                                                <td>
+                                                    {userItem.last_connection
+                                                        ? new Date(userItem.last_connection).toLocaleString("es-AR")
+                                                        : "Nunca"}
+                                                </td>
                                                 <td>
                                                     <div className="flex items-center gap-3">
 
@@ -63,6 +69,7 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                                             color="red"
                                                             className="cursor-pointer hover:opacity-70 transition"
                                                             onClick={() => handleDelete(userItem._id)}
+                                                            style={{ cursor: "pointer", marginRight: '10px' }}
                                                             title="Eliminar usuario"
                                                         />
 
@@ -89,39 +96,10 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                     </tbody>
                                 </Table>
                             </div>
+                            
+                            {/* CARD MOBILE */}
                             <div className="d-md-none">
-                                {
-                                    users.map((userItem) => (
-                                        <Card key={userItem._id} className="mb-3">
-                                            <Card.Body>
-                                                <Card.Title>{userItem.first_name} {userItem.last_name}</Card.Title>
-                                                <Card.Subtitle className="mb-2 text-muted">{userItem.email}</Card.Subtitle>
-                                                <Card.Text>  {userItem.role}</Card.Text>
-                                                <div className="mt-auto text-end">
-                                                    <FaRegTrashAlt
-                                                        color="red"
-                                                        style={{ cursor: "pointer" }}
-                                                        onClick={() => handleDelete(userItem._id)}
-                                                    />
-                                                </div>
-                                                {/* Cambiar role */}
-                                                {user?.role === 'admin' && userItem.role !== 'admin' && (
-                                                    <Button
-                                                        onClick={() => handleUserRolePremium(userItem._id)}
-                                                        className={`flex items-center gap-2 ${userItem.role === 'user'
-                                                            ? 'bg-green-600 hover:bg-green-700'
-                                                            : 'bg-gray-500 hover:bg-gray-600'
-                                                            } text-white px-3 py-1 rounded`}
-                                                    >
-                                                        {userItem.role === 'user' ? 'Premium' : 'User'}
-                                                        <FaCrown />
-                                                    </Button>
-                                                )}
-                                            </Card.Body>
-                                        </Card>
-
-                                    ))
-                                }
+                              <UserTableCard user={user} users={users} handleDelete={handleDelete} handleUserRolePremium={handleUserRolePremium}/>
                             </div>
                         </>
                     ) : (
