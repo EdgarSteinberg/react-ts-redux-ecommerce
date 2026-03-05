@@ -10,6 +10,7 @@ import { FaCrown } from "react-icons/fa";
 import { useSelector } from 'react-redux';
 import type { RootState } from '../../store';
 import UserTableCard from './userTableCard';
+import UserStatusBadge from './userStatusBadge';
 
 type usersProps = {
     message: Message | null,
@@ -45,11 +46,13 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                             <th>Email</th>
                                             <th>Role</th>
                                             <th>Ultima Conexión</th>
+                                            <th>Status</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         {users.map((userItem, index) => (
+
                                             <tr key={userItem._id}>
                                                 <td>{index + 1}</td>
                                                 <td>{userItem.first_name}</td>
@@ -61,6 +64,7 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                                         ? new Date(userItem.last_connection).toLocaleString("es-AR")
                                                         : "Nunca"}
                                                 </td>
+                                                <td><UserStatusBadge lastConnection={userItem.last_connection} /></td>
                                                 <td>
                                                     <div className="flex items-center gap-3">
 
@@ -96,10 +100,10 @@ const UserTable = ({ message, users, handleDelete, handleUserRolePremium }: user
                                     </tbody>
                                 </Table>
                             </div>
-                            
+
                             {/* CARD MOBILE */}
                             <div className="d-md-none">
-                              <UserTableCard user={user} users={users} handleDelete={handleDelete} handleUserRolePremium={handleUserRolePremium}/>
+                                <UserTableCard user={user} users={users} handleDelete={handleDelete} handleUserRolePremium={handleUserRolePremium} />
                             </div>
                         </>
                     ) : (
