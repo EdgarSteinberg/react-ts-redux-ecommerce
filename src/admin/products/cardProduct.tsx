@@ -13,28 +13,27 @@ const CardProduct = ({ products, handleDelete }: CardProductsProps) => {
     return (
         <div className="d-xl-none d-flex gap-3 justify-content-center align-items-center flex-wrap mx-auto" style={{ maxWidth: "1100px" }}>
             {products.map(pr => (
-                <div style={{ width: '16rem' }} key={pr._id} >
-                    <Card className="mb-3 shadow-sm d-flex justify-content-center align-items-center">
+                <div style={{ width: "17rem" }} key={pr._id}>
+                    <Card className="mb-3 shadow-sm h-100 d-flex flex-column align-items-center">
 
                         <Card.Img
                             src={pr.mainImage?.[0]}
                             alt={pr.title}
-                            style={{
-                                width: 100,
-                                height: 100,
-                                objectFit: "cover"
-                            }}
+                            style={{ width: 100, height: 100, objectFit: "cover", marginTop: 10 }}
                         />
 
-                        <Card.Body style={{ minWidth: "16rem" }}>
-                            <Card.Title>{pr.title}</Card.Title>
+                        <Card.Body className="d-flex flex-column text-center" style={{ padding: "6px" }}>
 
-                            <Card.Text>
+                            <Card.Title style={{ minHeight: "40px" }}>
+                                {pr.title}
+                            </Card.Title>
+
+                            <Card.Text className="flex-grow-1">
                                 <strong>Precio:</strong> ${pr.price} <br />
                                 <strong>Stock:</strong> {pr.stock} <br />
                                 <strong>Categoría:</strong> {pr.category} <br />
                                 <strong>Marca:</strong> {pr.brand} <br />
-                                <strong>Tags:</strong> {pr.tags?.join(', ')} <br />
+                                <strong>Tags:</strong> {pr.tags?.join(", ")} <br />
                                 <strong>Owner:</strong>{" "}
                                 {pr.owner === "admin" ? "Admin" : "Premium"}
                             </Card.Text>
@@ -46,12 +45,12 @@ const CardProduct = ({ products, handleDelete }: CardProductsProps) => {
 
                                 <FaRegTrashAlt
                                     color="red"
-                                    style={{ cursor: "pointer", marginTop: '5px' }}
+                                    style={{ cursor: "pointer" }}
                                     onClick={() => handleDelete(pr._id)}
                                 />
                             </div>
-                        </Card.Body>
 
+                        </Card.Body>
                     </Card>
                 </div>
             ))}
