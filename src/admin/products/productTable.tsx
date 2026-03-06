@@ -31,7 +31,7 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
                 </Alert>
             )}
 
-            <div className={styles.definoPantalla}>
+            <div  className={styles.definoPantalla}  >
                 <h2 className="text-center mb-3">Panel de gestión de productos</h2>
 
                 {products.length === 0 && (
@@ -88,7 +88,7 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
                                             <td>{pr.brand}</td>
                                             <td>{pr.tags?.join(", ")}</td>
                                             <td>{pr.owner === "admin" ? "Admin" : "Premium"}</td>
-                                            <td>
+                                            <td >
                                                 <Link to={`/admin/products/${pr._id}/edit`}>
                                                     <FaEdit color="blue" />
                                                 </Link>{" "}
@@ -104,8 +104,9 @@ const ProductTable = ({ message, products, handleDelete }: ProductTableProps) =>
                             </Table>
                         </div>
 
-                        <CardProduct products={products} handleDelete={handleDelete}/>
+                        <CardProduct products={products} handleDelete={handleDelete} />
                     </>
+                    
                 )}
             </div>
         </div>

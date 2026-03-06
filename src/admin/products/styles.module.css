@@ -22,11 +22,16 @@
  */
 
 .definoPantalla {
-    height: calc(95vh - 120px);
+    min-height: calc(95vh - 120px);
     display: flex;
     flex-direction: column;
     margin: 0 auto;
     max-width: 1200px;
+}
+
+.scroll {
+    max-height: calc(95vh - 200px);
+    overflow-y: auto;
 }
 
 /* 

@@ -13,7 +13,7 @@ const CardProduct = ({ products, handleDelete }: CardProductsProps) => {
     return (
         <div className="d-xl-none d-flex gap-3 justify-content-center align-items-center flex-wrap mx-auto" style={{ maxWidth: "1100px" }}>
             {products.map(pr => (
-                <div style={{ width: '16rem' }} key={pr._id}>
+                <div style={{ width: '16rem' }} key={pr._id} >
                     <Card className="mb-3 shadow-sm d-flex justify-content-center align-items-center">
 
                         <Card.Img
@@ -39,14 +39,14 @@ const CardProduct = ({ products, handleDelete }: CardProductsProps) => {
                                 {pr.owner === "admin" ? "Admin" : "Premium"}
                             </Card.Text>
 
-                            <div className="d-flex justify-content-end gap-3">
+                            <div className="d-flex justify-content-center align-items-center gap-3">
                                 <Link to={`/admin/products/${pr._id}/edit`}>
                                     <FaEdit color="blue" />
                                 </Link>
 
                                 <FaRegTrashAlt
                                     color="red"
-                                    style={{ cursor: "pointer" }}
+                                    style={{ cursor: "pointer", marginTop: '5px' }}
                                     onClick={() => handleDelete(pr._id)}
                                 />
                             </div>
