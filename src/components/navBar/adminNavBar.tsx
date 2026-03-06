@@ -7,14 +7,16 @@ const AdminNavBar = () => {
     const DOCS_URL = "http://localhost:8080/api/docs";
 
     return (
-        <Navbar bg="secondary" variant="dark" expand="sm">
-            <Container>
-                <Navbar.Brand>Admin</Navbar.Brand>
+        <Navbar bg="secondary" variant="dark" expand="sm" style={{ padding: 0 }}>
+            <Container className="px-3 px-sm-6 px-lg-0">
+                <Navbar.Brand style={{ fontSize: "16px", padding: 0 }}>
+                    Admin
+                </Navbar.Brand>
 
-                <Navbar.Toggle />
+                <Navbar.Toggle style={{ padding: "8px", fontSize: "14px" }} />
 
                 <Navbar.Collapse>
-                    <Nav>
+                    <Nav className="ms-auto">
                         <Nav.Link as={Link} to="/admin/products">Productos</Nav.Link>
                         <Nav.Link as={Link} to="/admin/products/new">Nuevo</Nav.Link>
                         <Nav.Link as={Link} to="/admin/users">Usuarios</Nav.Link>
