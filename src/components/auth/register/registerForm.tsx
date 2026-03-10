@@ -1,12 +1,12 @@
 import { Alert, Form, FormControl, FormGroup, FormLabel } from "react-bootstrap";
-import type { RegisterUser } from "../../../types/users";
+import type { RegisterFormData } from "../../../types/users";
 import type { Message } from "../../../types/message";
 import { Link } from "react-router-dom";
 import styles from '../styles.module.css';
 import AppButton from "../../appButton/appbutton";
 
 type RegisterFormProps = {
-    register: RegisterUser;
+    register: RegisterFormData;
     message: Message | null;
     loading: boolean;
     handleOnChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
@@ -40,7 +40,7 @@ const RegisterForm = ({ register, message, handleOnChange, handleSubmit }: Regis
 
                 <FormGroup>
                     <FormLabel>Edad</FormLabel>
-                    <FormControl name="age" value={register.age} onChange={handleOnChange} />
+                    <FormControl type="number" name="age" value={register.age} onChange={handleOnChange} />
                 </FormGroup>
 
                 <FormGroup>
@@ -48,9 +48,6 @@ const RegisterForm = ({ register, message, handleOnChange, handleSubmit }: Regis
                     <FormControl type="password" name="password" value={register.password} onChange={handleOnChange} />
                 </FormGroup>
 
-                {/* <Button type="submit" disabled={loading} className={styles.cardDetailBtnC}>
-                    {loading ? 'Enviando...' : 'Registrarse'}
-                </Button> */}
                 <br></br>
                 <AppButton type={"submit"} width={width}>
                     Registrarse

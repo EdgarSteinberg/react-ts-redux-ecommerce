@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RegisterUser } from "../../../types/users";
+import type { RegisterFormData, RegisterUser } from "../../../types/users";
 import type { Message } from "../../../types/message";
 import RegisterForm from "./registerForm";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ const Register = () => {
     const [message, setMessage] = useState<Message | null>(null);
     const [loading, setLoading] = useState(false);
 
-    const initialState: RegisterUser = {
+    const initialState: RegisterFormData = {
         first_name: '',
         last_name: '',
         email: '',
@@ -43,11 +43,13 @@ const Register = () => {
 
         setLoading(true); // componente Loading
 
+        const ageNumber = Number(register.age);
+
         const payload: RegisterUser = {
             first_name: register.first_name,
             last_name: register.last_name,
             email: register.email,
-            age: register.age,
+            age: ageNumber,
             password: register.password
         };
 

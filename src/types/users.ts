@@ -1,4 +1,4 @@
-export interface RegisterUser {
+export interface user {
   _id: string;
   first_name: string;
   last_name: string;
@@ -9,6 +9,13 @@ export interface RegisterUser {
   password: string;
 }
 
+export interface RegisterUser {
+  first_name: string;
+  last_name: string;
+  email: string;
+  age: number;
+  password: string;
+}
 
 export interface RegisterPayload {
   _id: string;
@@ -21,6 +28,14 @@ export interface RegisterPayload {
   last_connection: Date;
 }
 
+
+export interface RegisterFormData {
+  first_name: string;
+  last_name: string;
+  email: string;
+  age: string;      // input HTML → string
+  password: string;
+}
 
 export interface UsersResponse {
   payload: RegisterPayload[];
