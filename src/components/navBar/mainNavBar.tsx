@@ -47,6 +47,13 @@ const MainNavBar = () => {
                                 {user ? `Hola ${user.first_name}` : 'Ingresar'}
                             </span>
                         </Nav.Link>
+
+                        {
+                            user && (
+
+                                <Nav.Link as={Link} to={'/my-orders'}>Mis Compras</Nav.Link>
+                            )
+                        }
                     </Nav>
                 </Navbar.Collapse>
             </Container>
