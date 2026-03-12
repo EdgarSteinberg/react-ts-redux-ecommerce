@@ -1,7 +1,7 @@
 import Table from 'react-bootstrap/Table';
 import { Alert, Button } from "react-bootstrap";
 import type { Message } from '../../types/message';
-import type { RegisterPayload } from "../../types/users";
+import type { RegisterPayload, user } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
 import styles from './styles.module.css';
 import { Link } from 'react-router-dom';
@@ -14,6 +14,7 @@ import UserStatusBadge from './userStatusBadge';
 
 type usersProps = {
     message: Message | null,
+    user: user | null,
     users: RegisterPayload[]; // 👈 array
     handleDelete: (id: string) => void;
     handleUserRolePremium: (id: string) => void;

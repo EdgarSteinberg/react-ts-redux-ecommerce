@@ -1,6 +1,6 @@
 import { Button } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
-import type { RegisterPayload } from "../../types/users";
+import type { RegisterPayload, user } from "../../types/users";
 import { FaRegTrashAlt } from "react-icons/fa";
 import { FaCrown } from "react-icons/fa";
 import UserStatusBadge from "./userStatusBadge";
@@ -9,7 +9,7 @@ type UserTableCardProps = {
     handleDelete: (id: string) => void;
     handleUserRolePremium: (id: string) => void;
     users: RegisterPayload[];
-    user: RegisterPayload | null;
+    user: user | null;
 };
 
 const UserTableCard = ({ handleDelete, handleUserRolePremium, users, user, }: UserTableCardProps) => {
