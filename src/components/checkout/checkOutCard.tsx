@@ -5,13 +5,14 @@ import { Link } from 'react-router-dom';
 import AppButton from '../appButton/appbutton';
 
 
+
 type checkoutCardProps = {
     order: GetOrderById
     variant?: "detail" | "list";
 }
 const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
     const width = '100%';
-
+    console.log(order);
     return (
         <>
 
@@ -19,12 +20,12 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
                 <Card className={styles.CheckOutCardByIdContainer} >
 
                     <Card.Header>Orden #{order.code}</Card.Header>
-
                     <Card.Subtitle >
                         Fecha: {new Date(order.purchaseDateTime).toLocaleString()}
                     </Card.Subtitle>
 
                     <Card.Body>
+                        {/* Comprados */}
                         <Card.Title>
                             Nombre: {order.purchaser.first_name}
                         </Card.Title>
@@ -32,12 +33,17 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
                             Email: {order.purchaser.email}
                         </Card.Title>
 
+                        {/*Items */}
                         {order.cart.map((item) => (
-                            <Card.Text key={item._id}>
-                                🛒 {item.product.title} x {item.quantity}
-                            </Card.Text>
-                        ))}
+                            <div style={{display: 'flex', gap: '10px'}}> 
+                                <Card.Text key={item._id}>
+                                    🛒 {item.product.title} x {item.quantity}
+                                </Card.Text>
+                                <Card.Img variant='top' src={item.product.mainImage} alt={item.product.title} style={{ width: "80px", height: "80px", objectFit: "cover" }} />
+                            </div>
 
+                        ))}
+                        {/* Total */}
                         <Card.Text>
                             <strong>Monto:</strong>{" "}
                             {order.amount.toLocaleString("es-AR", {

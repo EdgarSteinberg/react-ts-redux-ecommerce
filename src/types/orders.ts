@@ -7,6 +7,7 @@ export interface CreateOrder {
 export interface OrderProduct {
   title: string;
   price: number;
+   mainImage: string;
 }
 
 export interface OrderCartItem {
@@ -30,5 +31,6 @@ export interface GetOrderById {
   purchaser: OrderPurchaser;
   cart: OrderCartItem[];
   purchaseDateTime: string;
+  mainImage: string;
 }
 
