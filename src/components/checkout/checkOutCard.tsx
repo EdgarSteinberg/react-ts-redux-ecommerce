@@ -35,8 +35,8 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
 
                         {/*Items */}
                         {order.cart.map((item) => (
-                            <div style={{display: 'flex', gap: '10px'}}> 
-                                <Card.Text key={item._id}>
+                            <div style={{display: 'flex', gap: '20px', alignItems: 'center', textAlign: 'center', marginTop: '6px'}}> 
+                                <Card.Text key={item._id} style={{marginTop: '10px'}}>
                                     🛒 {item.product.title} x {item.quantity}
                                 </Card.Text>
                                 <Card.Img variant='top' src={item.product.mainImage} alt={item.product.title} style={{ width: "80px", height: "80px", objectFit: "cover" }} />
@@ -44,7 +44,7 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
 
                         ))}
                         {/* Total */}
-                        <Card.Text>
+                        <Card.Text style={{textAlign: 'center'}}>
                             <strong>Monto:</strong>{" "}
                             {order.amount.toLocaleString("es-AR", {
                                 style: "currency",
