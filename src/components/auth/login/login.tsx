@@ -45,7 +45,7 @@ const Login = () => {
             await loginUser(userData); // SERVICE
 
             const data = await currentUser(); //SERVICE
-            
+
             dispatch(setUserRedux(data.user));
 
             // 👉 ACÁ entra el carrito
@@ -61,7 +61,7 @@ const Login = () => {
             setLoading(false);
 
             if (error.status === 401) {
-                setMessage({ type: 'error', text: 'Debes iniciar sesión' });
+                setMessage({ type: 'error', text: error.message });
                 return;
             }
             setMessage({
@@ -80,7 +80,7 @@ const Login = () => {
         }
     }, [user, navigate]);
 
-    
+
     if (loading) return <Loading />
 
     return (
