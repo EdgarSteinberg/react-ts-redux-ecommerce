@@ -12,7 +12,7 @@ type checkoutCardProps = {
 }
 const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
     const width = '100%';
-    console.log(order);
+  
     return (
         <>
 
@@ -35,14 +35,15 @@ const CheckOutCard = ({ order, variant }: checkoutCardProps) => {
 
                         {/*Items */}
                         {order.cart.map((item) => (
-                            <div style={{display: 'flex', gap: '20px', alignItems: 'center', textAlign: 'center', marginTop: '6px'}}> 
-                                <Card.Text key={item._id} style={{marginTop: '10px'}}>
+                            <div key={item._id}  className={styles.orderCard}> 
+                                <Card.Text className={styles.orderCardText}>
                                     🛒 {item.product.title} x {item.quantity}
                                 </Card.Text>
-                                <Card.Img variant='top' src={item.product.mainImage} alt={item.product.title} style={{ width: "80px", height: "80px", objectFit: "cover" }} />
+                                <Card.Img variant='top' src={item.product.mainImage} alt={item.product.title} className={styles.orderCardImg} />
                             </div>
 
                         ))}
+
                         {/* Total */}
                         <Card.Text style={{textAlign: 'center'}}>
                             <strong>Monto:</strong>{" "}
