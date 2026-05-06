@@ -1,7 +1,7 @@
 import type { RegisterUser } from "../../../types/users";
 
 export const fetchingRegister = async (payload: RegisterUser) => {
-    
+
     const response = await fetch("http://localhost:8080/api/users/register", {
         method: "POST",
         headers: {
@@ -13,9 +13,17 @@ export const fetchingRegister = async (payload: RegisterUser) => {
 
     const data = await response.json();
 
+    /*   if (!response.ok) {
+          throw new Error(data.message || 'Error al registrarse');
+      }
+   */
     if (!response.ok) {
+        if (data.errors) {
+            throw new Error(data.errors.map((e: any) => e.message).join(", "));
+        }
+
         throw new Error(data.message || 'Error al registrarse');
     }
-
+    
     return data;
 } 

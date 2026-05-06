@@ -33,7 +33,7 @@ const ResetPasswordForm = ({ message, handleOnChange, handleOnSubmit, password }
                         onChange={handleOnChange}
                     />
                 </FormGroup>
-
+                <br></br>
                 <AppButton type={"submit"} width={width}>
                     Enviar
                 </AppButton>
