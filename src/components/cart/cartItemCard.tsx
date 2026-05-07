@@ -29,11 +29,11 @@ const CartItemCard = ({ cart, deleteProduct }: CartItemCardProps) => {
                                 {item.product.title}
                             </Card.Title>
 
-                            <Card.Text style={{ margin: 0 }}>
+                            <Card.Text className={styles.ellipsis}>
                                 Cantidad: {item.quantity}
                             </Card.Text>
 
-                            <Card.Text style={{ margin: 0 }}>
+                            <Card.Text className={styles.ellipsis}>
                                 <strong>$ {item.product.price}</strong>
                             </Card.Text>
 
