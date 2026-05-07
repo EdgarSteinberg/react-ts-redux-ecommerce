@@ -131,3 +131,14 @@
     font-size: 14px;
   }
 }
+
+@media (max-width: 405px) {
+  .cardItemContainer {
+    text-align: center;
+   
+  }
+  .cardContainer {
+    display: flex;
+    flex-direction: column;
+  }
+}

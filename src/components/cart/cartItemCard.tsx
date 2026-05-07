@@ -46,7 +46,7 @@ const CartItemCard = ({ cart, deleteProduct }: CartItemCardProps) => {
             </div>
 
             {/* CHECKOUT */}
-            <div className={styles.checkout}/* style={{ flex: 0.5, marginTop: '10px', border: '1px ', borderRadius: ' 1px solid back' }} */>
+            <div className={styles.checkout}>
                 <CheckOut cart={cart} />
             </div>
 
