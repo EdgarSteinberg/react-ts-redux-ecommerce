@@ -130,6 +130,8 @@
   .cardContainer strong {
     font-size: 14px;
   }
+
+  
 }
 
 @media (max-width: 405px) {
@@ -140,5 +142,9 @@
   .cardContainer {
     display: flex;
     flex-direction: column;
+  }
+
+    .img {
+    width: 100px;
   }
 }
